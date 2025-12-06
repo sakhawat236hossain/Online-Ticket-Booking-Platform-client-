@@ -4,6 +4,8 @@ import Home from "../pages/Home/Home";
 import AllTickets from "../tickets/AllTickets/AllTickets";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import AboutUs from "../pages/AboutUs/AboutUs";
+import Login from "../pages/AuthenticationbPges/Login/Login";
+import Register from "../pages/AuthenticationbPges/Register/Register";
 
 export const router =createBrowserRouter([
     {
@@ -25,6 +27,14 @@ export const router =createBrowserRouter([
             {
             path:"/aboutUs",
             element:<AboutUs></AboutUs>
+            },
+            {
+            path:"/login",
+            element:<Login></Login>
+            },
+            {
+            path:"/register",
+            element:<Register></Register>
             },
         ]
     }

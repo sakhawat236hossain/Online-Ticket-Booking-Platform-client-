@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { IoLogIn, IoLogOut } from "react-icons/io5";
+import { IoLogIn, IoLogOut, IoPersonAdd } from "react-icons/io5";
 import { FaBus } from "react-icons/fa";
 import profile from "../../../assets/profile.png";
 
@@ -46,7 +46,7 @@ const NavBar = () => {
             }`
           }
         >
-          About 
+          About
         </NavLink>
       </li>
       <li>
@@ -82,8 +82,7 @@ const NavBar = () => {
   );
 
   return (
-    <nav className="navbar py-3 px-5 z-10 shadow-sm glass-card flex items-center justify-between bg-white">
-
+   <nav className="navbar sticky top-0 py-3 px-5 z-50 shadow-sm glass-card flex items-center justify-between bg-white">
       {/* LEFT */}
       <div className="flex items-center gap-4">
         {/* MOBILE MENU */}
@@ -132,10 +131,8 @@ const NavBar = () => {
 
       {/* RIGHT SIDE */}
       <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3">
-
         {/* PROFILE DROPDOWN + HOVER USERNAME TOOLTIP */}
         <div className="dropdown dropdown-end relative group">
-
           {/* PROFILE IMAGE */}
           <div
             tabIndex={0}
@@ -165,7 +162,6 @@ const NavBar = () => {
 
           {/* DROPDOWN MENU */}
           <ul className="dropdown-content absolute right-0 mt-3 w-52 p-2 bg-white rounded-md shadow-lg">
-
             <div className="pb-3 border-b border-gray-200">
               <li className="text-sm font-bold">Sakhawat Hossain</li>
               <li className="text-xs text-gray-500">user@mail.com</li>
@@ -184,7 +180,7 @@ const NavBar = () => {
                 to="/register"
                 className="w-full px-3 py-1 text-sm rounded-md bg-[#E56F61] text-white border border-[#E56F61] hover:bg-white hover:text-[#E56F61] flex items-center justify-center gap-1"
               >
-                <IoLogIn /> Register
+                <IoPersonAdd /> Register
               </Link>
             </div>
 
@@ -212,7 +208,6 @@ const NavBar = () => {
             <IoLogIn /> Register
           </Link>
         </div>
-
       </div>
     </nav>
   );
