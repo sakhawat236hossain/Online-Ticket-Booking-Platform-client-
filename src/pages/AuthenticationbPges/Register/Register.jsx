@@ -14,7 +14,7 @@ const Register = () => {
   } = useForm();
 
   const formSubmit = async (data) => {
-  console.log("Form Data:", data);
+//   console.log("Form Data:", data);
   try {
     const result = await createUser(data.email, data.password);
     const user = result.user;

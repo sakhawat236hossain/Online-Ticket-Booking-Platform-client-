@@ -160,14 +160,14 @@ const NavBar = () => {
               transition-all duration-200
             "
           >
-            Sakhawat Hossain
+            {user?.displayName || "Guest User"}
           </div>
 
           {/* DROPDOWN MENU */}
           <ul className="dropdown-content absolute right-0 mt-3 w-52 p-2 bg-white rounded-md shadow-lg">
             <div className="pb-3 border-b border-gray-200">
-              <li className="text-sm font-bold">Sakhawat Hossain</li>
-              <li className="text-xs text-gray-500">{user.email}</li>
+              <li className="text-sm font-bold">{user?.displayName}</li>
+              <li className="text-xs text-gray-500">{user?.email}</li>
             </div>
 
             {/* MOBILE → LOGIN + REGISTER */}
