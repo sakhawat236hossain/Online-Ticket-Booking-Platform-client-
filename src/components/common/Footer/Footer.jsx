@@ -101,7 +101,7 @@ const Footer = () => {
             Payment Methods
           </h3>
           <div className="flex items-center gap-4 mt-2">
-            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-800 hover:bg-[#635bff] transition-colors duration-300 shadow-md">
+            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-800 hover:bg-[#E56F61] transition-colors duration-300 shadow-md">
               <FaCcStripe className="text-white text-3xl md:text-4xl" />
             </div>
             {/*  payment icon */}

@@ -1,7 +1,8 @@
 import { Link, NavLink } from "react-router-dom";
-import { IoLogIn, IoLogOut, IoPersonAdd } from "react-icons/io5";
-import { FaBus } from "react-icons/fa";
+import { IoLogIn} from "react-icons/io5";
+import { FaBus, FaUser } from "react-icons/fa";
 import profile from "../../../assets/profile.png";
+import { BiSolidLogOut } from "react-icons/bi";
 
 const NavBar = () => {
   const links = (
@@ -82,7 +83,7 @@ const NavBar = () => {
   );
 
   return (
-   <nav className="navbar sticky top-0 py-3 px-5 z-50 shadow-sm glass-card flex items-center justify-between bg-white">
+    <nav className="navbar sticky top-0 py-3 px-5 z-50 shadow-sm glass-card flex items-center justify-between bg-white">
       {/* LEFT */}
       <div className="flex items-center gap-4">
         {/* MOBILE MENU */}
@@ -180,13 +181,13 @@ const NavBar = () => {
                 to="/register"
                 className="w-full px-3 py-1 text-sm rounded-md bg-[#E56F61] text-white border border-[#E56F61] hover:bg-white hover:text-[#E56F61] flex items-center justify-center gap-1"
               >
-                <IoPersonAdd /> Register
+                <FaUser /> Register
               </Link>
             </div>
 
             <li className="mt-2">
               <button className="w-full px-3 py-1 text-sm rounded-md bg-[#E56F61] text-white border border-[#E56F61] hover:bg-white hover:text-[#E56F61] flex items-center justify-center gap-1">
-                <IoLogOut /> Logout
+                <BiSolidLogOut/> Logout
               </button>
             </li>
           </ul>
@@ -205,7 +206,7 @@ const NavBar = () => {
             to="/register"
             className="px-3 py-1 text-sm rounded-md bg-[#E56F61] text-white border border-[#E56F61] hover:bg-white hover:text-[#E56F61] flex items-center justify-center gap-1"
           >
-            <IoLogIn /> Register
+            <FaUser /> Register
           </Link>
         </div>
       </div>

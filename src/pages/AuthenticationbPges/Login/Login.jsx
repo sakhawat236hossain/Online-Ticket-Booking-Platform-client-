@@ -61,7 +61,10 @@ const LoginForm = () => {
           >
             <IoLogIn /> Login
           </button>
-
+          {/* Social Login */}
+          <div className="mt-2">
+            <SocialLogin />
+          </div>
           {/* Register Link */}
           <p className="text-sm text-center text-gray-500">
             Don't have an account?
@@ -72,11 +75,6 @@ const LoginForm = () => {
               Register
             </Link>
           </p>
-
-          {/* Social Login */}
-          <div className="mt-2">
-            <SocialLogin />
-          </div>
         </form>
       </div>
     </div>
