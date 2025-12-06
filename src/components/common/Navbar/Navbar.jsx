@@ -3,8 +3,10 @@ import { IoLogIn} from "react-icons/io5";
 import { FaBus, FaUser } from "react-icons/fa";
 import profile from "../../../assets/profile.png";
 import { BiSolidLogOut } from "react-icons/bi";
+import UseAuth from "../../../Hooks/UseAuth";
 
 const NavBar = () => {
+    const {user}=UseAuth()
   const links = (
     <>
       <li>
@@ -165,7 +167,7 @@ const NavBar = () => {
           <ul className="dropdown-content absolute right-0 mt-3 w-52 p-2 bg-white rounded-md shadow-lg">
             <div className="pb-3 border-b border-gray-200">
               <li className="text-sm font-bold">Sakhawat Hossain</li>
-              <li className="text-xs text-gray-500">user@mail.com</li>
+              <li className="text-xs text-gray-500">{user.email}</li>
             </div>
 
             {/* MOBILE → LOGIN + REGISTER */}
