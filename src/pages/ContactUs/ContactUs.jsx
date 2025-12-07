@@ -1,6 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { RiSendPlane2Fill } from "react-icons/ri";
 
 const ContactUs = () => {
@@ -131,7 +132,7 @@ const ContactUs = () => {
               rel="noopener noreferrer"
               className="text-blue-400 hover:text-blue-600 transition-colors"
             >
-              <FaTwitter size={24} />
+              <FaXTwitter size={24} />
             </a>
             <a
               href="https://www.instagram.com/mhmdshwthsyn/?hl=en"
