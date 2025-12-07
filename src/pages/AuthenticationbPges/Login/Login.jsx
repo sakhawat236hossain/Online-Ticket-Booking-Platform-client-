@@ -1,15 +1,49 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoEyeOff, IoLogIn } from "react-icons/io5";
-import SocialLogin from "../Social/SocialLogin";
 import { FaEye } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import SocialLogin from "../Social/SocialLogin";
+import UseAuth from "../../../Hooks/UseAuth";
+import toast from "react-hot-toast";
 
-const LoginForm = () => {
+const Login = () => {
+  const { signInUser} = UseAuth(); 
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleLogin = async (data) => {
+    const { email, password } = data;
+
+    try {
+      const result = await signInUser(email, password);
+      const user = result.user;
+
+   
+
+      toast.success(`Welcome back, ${user.displayName || "User"}!`);
+      navigate("/"); 
+    } catch (error) {
+      console.log(error);
+      if (error.code === "auth/user-not-found") {
+        toast.error("User not found!");
+      } else if (error.code === "auth/wrong-password") {
+        toast.error("Wrong password!");
+      } else {
+        toast.error("Login failed!");
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 p-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
-        {/* Title */}
         <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
           Welcome Back!
         </h2>
@@ -17,26 +51,29 @@ const LoginForm = () => {
           Please login to your account to continue
         </p>
 
-        {/* Form */}
-        <form className="flex flex-col gap-5">
+        <form className="flex flex-col gap-5" onSubmit={handleSubmit(handleLogin)}>
           {/* Email */}
-          <div className="flex flex-col mb-4">
+          <div className="flex flex-col">
             <label className="text-sm font-medium mb-1">Email</label>
             <input
               type="email"
               placeholder="Enter your email"
               className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E56F61] transition"
-              required
+              {...register("email", { required: "Email is required" })}
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+            )}
           </div>
 
-          <div className="relative flex flex-col mb-4">
+          {/* Password */}
+          <div className="relative flex flex-col">
             <label className="text-sm font-medium mb-1">Password</label>
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#E56F61] transition"
-              required
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E56F61] transition"
+              {...register("password", { required: "Password is required" })}
             />
             <button
               type="button"
@@ -45,40 +82,48 @@ const LoginForm = () => {
             >
               {showPassword ? <FaEye /> : <IoEyeOff />}
             </button>
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+            )}
           </div>
 
-          {/* Forget Password */}
+          {/* Forgot Password */}
           <div className="text-left">
-            <Link className="text-sm text-[#E56F61] hover:underline">
+            <Link to="/forgot-password" className="text-sm text-[#E56F61] hover:underline">
               Forgot Password?
             </Link>
           </div>
 
-          {/* Login Button */}
+          {/* Submit */}
           <button
             type="submit"
             className="w-full cursor-pointer flex items-center justify-center gap-2 px-4 py-2 bg-[#E56F61] text-white rounded-lg hover:bg-white hover:text-[#E56F61] border border-[#E56F61] font-semibold transition-colors"
           >
             <IoLogIn /> Login
           </button>
-          {/* Social Login */}
-          <div className="mt-2">
-            <SocialLogin />
-          </div>
-          {/* Register Link */}
-          <p className="text-sm text-center text-gray-500">
-            Don't have an account?
-            <Link
-              to="/register"
-              className="text-[#E56F61] hover:underline font-medium"
-            >
-              Register
-            </Link>
-          </p>
         </form>
+
+        {/* Social Login */}
+        <div className="my-3 flex items-center">
+          <div className="flex-1 h-px bg-gray-300"></div>
+          <p className="px-3 text-gray-400 text-sm">Or login with</p>
+          <div className="flex-1 h-px bg-gray-300"></div>
+        </div>
+        <SocialLogin />
+
+        {/* Register Link */}
+        <p className="mt-3 text-center text-gray-500 text-sm">
+          Don't have an account?
+          <Link
+            to="/register"
+            className="text-[#E56F61] hover:underline font-medium ml-1"
+          >
+            Register
+          </Link>
+        </p>
       </div>
     </div>
   );
 };
 
-export default LoginForm;
+export default Login;
