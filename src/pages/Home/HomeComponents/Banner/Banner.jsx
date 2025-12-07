@@ -28,7 +28,7 @@ const Banner = () => {
   const handleSeeAll = () => navigate("/allTickets");
 
   return (
-    <div className="relative w-full mt-6 mb-10">
+    <div className="relative w-full mt-2 mb-10">
       <div className="relative max-w-7xl mx-auto overflow-hidden rounded-2xl shadow-xl">
         <div
           className="flex transition-transform duration-700 ease-in-out"
