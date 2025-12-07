@@ -57,7 +57,7 @@ const LoginForm = () => {
           {/* Login Button */}
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#E56F61] text-white rounded-lg hover:bg-white hover:text-[#E56F61] border border-[#E56F61] font-semibold transition-colors"
+            className="w-full cursor-pointer flex items-center justify-center gap-2 px-4 py-2 bg-[#E56F61] text-white rounded-lg hover:bg-white hover:text-[#E56F61] border border-[#E56F61] font-semibold transition-colors"
           >
             <IoLogIn /> Login
           </button>

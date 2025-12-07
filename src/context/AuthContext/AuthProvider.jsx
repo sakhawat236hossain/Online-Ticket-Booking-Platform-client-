@@ -9,7 +9,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import AuthContext from "./AuthContext";
-import { auth } from "../../Firebase/firebase";
+import { auth } from "../../Firebase/Firebase.init";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -60,6 +60,7 @@ const updateUserProfile = (profile)=>{
     signInUser,
     googleLogin,
     logOutUser,
+    setUser,
     updateUserProfile,
   };
 return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
