@@ -13,7 +13,7 @@ const routes = [
 
 const PopularRoutes = () => {
   return (
-    <div className="py-20 bg-gray-100">
+    <div className="py-5 bg-gray-100">
       <div className="max-w-6xl mx-auto px-4">
 
         {/* Section Title */}
