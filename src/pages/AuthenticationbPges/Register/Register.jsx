@@ -7,10 +7,13 @@ import UseAuth from "../../../Hooks/UseAuth";
 
 import toast from "react-hot-toast";
 import { uploadImageToImgBB } from "../../../Utils";
+import Spinner from "../../../components/common/Spinner/Spinner";
+import { useLocation } from "react-router";
 
 const Register = () => {
-  const { createUser, updateUserProfile, setUser } = UseAuth();
+  const { createUser, updateUserProfile, setUser, loading } = UseAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const {
     register,
@@ -19,36 +22,39 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
- const formSubmit = async (data) => {
-  const { email, password, name, profileImage } = data;
-  const imgFile = profileImage[0];
+  const formSubmit = async (data) => {
+    const { email, password, name, profileImage } = data;
+    const imgFile = profileImage[0];
 
-  try {
-    //  Upload image
-    const photoURL = await uploadImageToImgBB(imgFile);
+    try {
+      //  Upload image
+      const photoURL = await uploadImageToImgBB(imgFile);
 
-    //  Create user
-    const result = await createUser(email, password);
-    const user = result.user;
+      //  Create user
+      const result = await createUser(email, password);
+      const user = result.user;
 
-    //  Update profile
-    await updateUserProfile({
-      displayName: name,
-      photoURL: photoURL || "", 
-    });
+      //  Update profile
+      await updateUserProfile({
+        displayName: name,
+        photoURL: photoURL || "",
+      });
 
-    setUser({ ...user, displayName: name, photoURL: photoURL || "" });
+      setUser({ ...user, displayName: name, photoURL: photoURL || "" });
 
-    toast.success("Registration successful! ");
+      toast.success("Registration successful! ");
 
-    reset();
-    navigate("/"); 
-  } catch (error) {
-    console.log("Error:", error);
-    toast.error("Registration failed!");
+      reset();
+      navigate(location?.state || "/");
+    } catch (error) {
+      console.log("Error:", error);
+      toast.error("Registration failed!");
+    }
+  };
+
+  if (loading) {
+    return <Spinner></Spinner>;
   }
-};
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 p-4">

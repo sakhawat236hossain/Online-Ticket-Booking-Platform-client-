@@ -6,6 +6,7 @@ import ContactUs from "../pages/ContactUs/ContactUs";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import Login from "../pages/AuthenticationbPges/Login/Login";
 import Register from "../pages/AuthenticationbPges/Register/Register";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router =createBrowserRouter([
     {
@@ -18,7 +19,7 @@ export const router =createBrowserRouter([
             },
             {
             path:"/allTickets",
-            element:<AllTickets></AllTickets>
+            element:<PrivateRoute><AllTickets></AllTickets></PrivateRoute>
             },
             {
             path:"/ContactUs",

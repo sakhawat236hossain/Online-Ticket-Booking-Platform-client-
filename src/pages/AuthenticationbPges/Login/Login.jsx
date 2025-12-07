@@ -6,11 +6,14 @@ import { useForm } from "react-hook-form";
 import SocialLogin from "../Social/SocialLogin";
 import UseAuth from "../../../Hooks/UseAuth";
 import toast from "react-hot-toast";
+import Spinner from "../../../components/common/Spinner/Spinner";
+import { useLocation } from "react-router";
 
 const Login = () => {
-  const { signInUser} = UseAuth(); 
+  const { signInUser,loading} = UseAuth(); 
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const location = useLocation();
 
   const {
     register,
@@ -28,7 +31,7 @@ const Login = () => {
    
 
       toast.success(`Welcome back, ${user.displayName || "User"}!`);
-      navigate("/"); 
+       navigate(location?.state || '/');
     } catch (error) {
       console.log(error);
       if (error.code === "auth/user-not-found") {
@@ -40,6 +43,10 @@ const Login = () => {
       }
     }
   };
+
+if(loading){
+    return <Spinner></Spinner>
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 p-4">
