@@ -1,6 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import { IoLogIn } from "react-icons/io5";
-import { FaBus, FaUser } from "react-icons/fa";
+import { FaBus, FaUser, FaHome, FaTicketAlt, FaInfoCircle, FaPhoneAlt, FaTachometerAlt } from "react-icons/fa";
 import profile from "../../../assets/profile.png";
 import { BiSolidLogOut } from "react-icons/bi";
 import UseAuth from "../../../Hooks/UseAuth";
@@ -8,82 +8,101 @@ import toast from "react-hot-toast";
 
 const NavBar = () => {
   const { user, logOutUser } = UseAuth();
-  const links = (
-    <>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            `px-3 py-1 rounded-md font-medium text-sm ${
-              isActive
-                ? "bg-[#E56F61] text-white"
-                : "text-gray-700 hover:bg-gray-100"
-            }`
-          }
-        >
-          Home
-        </NavLink>
-      </li>
+const links = (
+  <>
+    {/* Home */}
+    <li>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `flex items-center gap-2 px-3 py-2 rounded-md font-medium text-sm transition-all duration-200
+          ${
+            isActive
+              ? "bg-[#E56F61] text-white shadow-sm"
+              : "text-gray-700 hover:bg-gray-100 hover:text-[#E56F61]"
+          }`
+        }
+      >
+        <FaHome className="text-lg" />
+        Home
+      </NavLink>
+    </li>
 
-      <li>
-        <NavLink
-          to="/allTickets"
-          className={({ isActive }) =>
-            `px-3 py-1 rounded-md font-medium text-sm ${
-              isActive
-                ? "bg-[#E56F61] text-white"
-                : "text-gray-700 hover:bg-gray-100"
-            }`
-          }
-        >
-          All Tickets
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/aboutUs"
-          className={({ isActive }) =>
-            `px-3 py-1 rounded-md font-medium text-sm ${
-              isActive
-                ? "bg-[#E56F61] text-white"
-                : "text-gray-700 hover:bg-gray-100"
-            }`
-          }
-        >
-          About
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/ContactUs"
-          className={({ isActive }) =>
-            `px-3 py-1 rounded-md font-medium text-sm ${
-              isActive
-                ? "bg-[#E56F61] text-white"
-                : "text-gray-700 hover:bg-gray-100"
-            }`
-          }
-        >
-          Contact Us
-        </NavLink>
-      </li>
+    {/* All Tickets */}
+    <li>
+      <NavLink
+        to="/allTickets"
+        className={({ isActive }) =>
+          `flex items-center gap-2 px-3 py-2 rounded-md font-medium text-sm transition-all duration-200
+          ${
+            isActive
+              ? "bg-[#E56F61] text-white shadow-sm"
+              : "text-gray-700 hover:bg-gray-100 hover:text-[#E56F61]"
+          }`
+        }
+      >
+        <FaTicketAlt className="text-lg" />
+        All Tickets
+      </NavLink>
+    </li>
 
-      {/* <li>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) =>
-            `px-3 py-1 rounded-md font-medium text-sm ${
-              isActive
-                ? "bg-[#E56F61] text-white"
-                : "text-gray-700 hover:bg-gray-100"
-            }`
-          }
-        >
-          Dashboard
-        </NavLink>
-      </li> */}
-    </>
-  );
+    {/* About */}
+    <li>
+      <NavLink
+        to="/aboutUs"
+        className={({ isActive }) =>
+          `flex items-center gap-2 px-3 py-2 rounded-md font-medium text-sm transition-all duration-200
+          ${
+            isActive
+              ? "bg-[#E56F61] text-white shadow-sm"
+              : "text-gray-700 hover:bg-gray-100 hover:text-[#E56F61]"
+          }`
+        }
+      >
+        <FaInfoCircle className="text-lg" />
+        About
+      </NavLink>
+    </li>
+
+    {/* Contact */}
+    <li>
+      <NavLink
+        to="/ContactUs"
+        className={({ isActive }) =>
+          `flex items-center gap-2 px-3 py-2 rounded-md font-medium text-sm transition-all duration-200
+          ${
+            isActive
+              ? "bg-[#E56F61] text-white shadow-sm"
+              : "text-gray-700 hover:bg-gray-100 hover:text-[#E56F61]"
+          }`
+        }
+      >
+        <FaPhoneAlt className="text-lg" />
+        Contact Us
+      </NavLink>
+    </li>
+
+    {/* Dashboard */}
+    <li>
+      <NavLink
+        to="/dashboard"
+        className={({ isActive }) =>
+          `flex items-center gap-2 px-3 py-2 rounded-md font-medium text-sm transition-all duration-200
+          ${
+            isActive
+              ? "bg-[#E56F61] text-white shadow-sm"
+              : "text-gray-700 hover:bg-gray-100 hover:text-[#E56F61]"
+          }`
+        }
+      >
+        <FaTachometerAlt className="text-lg" />
+        Dashboard
+      </NavLink>
+    </li>
+  </>
+);
+
+
 
 
   // logOutUser
