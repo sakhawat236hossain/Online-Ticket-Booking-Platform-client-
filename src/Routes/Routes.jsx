@@ -6,8 +6,8 @@ import ContactUs from "../pages/ContactUs/ContactUs";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import Login from "../pages/AuthenticationbPges/Login/Login";
 import Register from "../pages/AuthenticationbPges/Register/Register";
-import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import DashboardLayout from "../layouts/DashboardLayout";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -46,11 +46,9 @@ export const router = createBrowserRouter([
       //  Dashboard Route
       {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
+        element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
-          // এখানে Dashboard pages গুলো add করবে
-          // { path: "profile", element: <Profile /> }
-          // { path: "bookings", element: <Bookings /> }
+          
         ],
       },
     ],
