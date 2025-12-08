@@ -196,7 +196,11 @@ const NavBar = () => {
                 </div>
               )}
 
-              {/* LOGOUT */}
+             
+           
+              {
+                user?.email &&    <li className="mt-2">
+                   {/* LOGOUT */}
               <li className="mt-2">
                 <button
                   onClick={handleLogOut}
@@ -205,6 +209,14 @@ const NavBar = () => {
                   <BiSolidLogOut /> Logout
                 </button>
               </li>
+                <Link
+                  to="/profile"
+                  className="w-full mt-2 px-3 py-1 text-sm rounded-md bg-[#E56F61] text-white border border-[#E56F61] hover:bg-white hover:text-[#E56F61] flex justify-center gap-1"
+                >
+                  <BiSolidLogOut /> My Profile
+                </Link>
+              </li>
+              }
             </ul>
           </div>
 

@@ -8,6 +8,7 @@ import Login from "../pages/AuthenticationbPges/Login/Login";
 import Register from "../pages/AuthenticationbPges/Register/Register";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import Profile from "../pages/Dashboard/Profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ export const router = createBrowserRouter([
         element: <AboutUs></AboutUs>,
       },
       {
+        path: '/profile',
+        element: <Profile></Profile>,
+      },
+      {
         path: '/login',
         element: <Login></Login>,
       },
@@ -48,7 +53,10 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
-          
+          {
+            index: true,
+            element: <Profile></Profile>
+          }
         ],
       },
     ],
