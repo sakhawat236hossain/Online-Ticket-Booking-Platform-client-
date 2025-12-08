@@ -1,2 +1,25 @@
 @import "tailwindcss";
 @plugin "daisyui";
+
+
+/* For Footer Titles */
+.footer-title {
+  @apply text-white text-lg font-semibold mb-3 border-b border-gray-700 pb-1;
+}
+
+/* For Footer Link List */
+.footer-list {
+  @apply space-y-2 text-sm mt-2;
+}
+
+/* Hover Links */
+.footer-link {
+  @apply hover:text-[#E56F61] transition-colors;
+}
+
+/* Payment Icon Wrapper */
+.footer-pay-icon {
+  @apply w-12 h-12 flex items-center justify-center 
+         rounded-full bg-gray-800 hover:bg-[#E56F61] 
+         transition-colors duration-300 shadow-md;
+}

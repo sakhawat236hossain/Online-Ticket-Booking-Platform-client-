@@ -10,8 +10,9 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 pt-10 pb-5 px-5">
-      {/* Top Area */}
+      {/* Top Section */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+
         {/* Logo & Description */}
         <div>
           <Link to="/" className="flex items-center gap-2 mb-3">
@@ -22,57 +23,29 @@ const Footer = () => {
               <FaBus className="text-white w-5 h-5" />
             </div>
           </Link>
+
           <p className="text-gray-400 text-sm leading-6">
             Book bus, train, launch, and flight tickets easily from one trusted
-            platform. Enjoy a seamless experience, best prices, and reliable
-            customer support for all your travel needs.
+            platform. Best prices, fast booking & reliable support for your
+            travel.
           </p>
         </div>
 
-        {/*  Quick Links */}
+        {/* Quick Links */}
         <div>
-          <h3 className="text-white text-lg font-semibold mb-3 border-b border-gray-700 pb-1">
-            Quick Links
-          </h3>
-          <ul className="space-y-2 text-sm mt-2">
-            <li>
-              <Link to="/" className="hover:text-[#E56F61] transition-colors">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/allTickets"
-                className="hover:text-[#E56F61] transition-colors"
-              >
-                All Tickets
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/ContactUs"
-                className="hover:text-[#E56F61] transition-colors"
-              >
-                Contact Us
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/aboutUs"
-                className="hover:text-[#E56F61] transition-colors"
-              >
-                About
-              </Link>
-            </li>
+          <h3 className="footer-title">Quick Links</h3>
+          <ul className="footer-list">
+            <li><Link to="/" className="footer-link">Home</Link></li>
+            <li><Link to="/allTickets" className="footer-link">All Tickets</Link></li>
+            <li><Link to="/ContactUs" className="footer-link">Contact Us</Link></li>
+            <li><Link to="/aboutUs" className="footer-link">About</Link></li>
           </ul>
         </div>
 
-        {/*  Contact Info */}
+        {/* Contact Info */}
         <div>
-          <h3 className="text-white text-lg font-semibold mb-3 border-b border-gray-700 pb-1">
-            Contact Info
-          </h3>
-          <ul className="space-y-3 text-sm mt-2">
+          <h3 className="footer-title">Contact Info</h3>
+          <ul className="footer-list space-y-3">
             <li className="flex items-center gap-2">
               <FaEnvelope className="text-[#E56F61]" />
               <span>support@ticketbari.com</span>
@@ -95,24 +68,22 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/*Payment Methods */}
+        {/* Payment Methods */}
         <div>
-          <h3 className="text-white text-lg font-semibold mb-3 border-b border-gray-700 pb-1">
-            Payment Methods
-          </h3>
+          <h3 className="footer-title">Payment Methods</h3>
           <div className="flex items-center gap-4 mt-2">
-            <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gray-800 hover:bg-[#E56F61] transition-colors duration-300 shadow-md">
+            <div className="footer-pay-icon">
               <FaCcStripe className="text-white text-3xl md:text-4xl" />
             </div>
-            {/*  payment icon */}
           </div>
           <p className="text-gray-400 text-xs mt-2">
             Secure & reliable online payments
           </p>
         </div>
+
       </div>
 
-     
+      {/* Bottom */}
       <div className="border-t border-gray-700 mt-10 pt-4 text-center text-gray-400 text-sm">
         © 2025 TicketBari. All rights reserved.
       </div>

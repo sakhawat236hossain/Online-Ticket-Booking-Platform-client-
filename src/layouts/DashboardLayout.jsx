@@ -1,7 +1,10 @@
 import React from "react";
 import { FiMenu, FiHome, FiSettings, FiUser } from "react-icons/fi";
+import { NavLink } from "react-router-dom"; // make sure it's react-router-dom
 
 const DashboardLayout = () => {
+  const activeClass = "bg-base-300 font-semibold rounded-md";
+
   return (
     <div className="drawer lg:drawer-open min-h-screen">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
@@ -34,13 +37,18 @@ const DashboardLayout = () => {
           {/* Top menu items */}
           <ul className="menu w-full grow overflow-y-auto">
             <li>
-              <button
-                className="flex items-center gap-3 px-4 py-2 hover:bg-base-300 rounded-md transition-all duration-200 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-2 transition-all duration-200 is-drawer-close:tooltip is-drawer-close:tooltip-right ${
+                    isActive ? activeClass : ""
+                  }`
+                }
                 data-tip="Homepage"
               >
                 <FiHome className="w-5 h-5" />
                 <span className="is-drawer-close:hidden">Homepage</span>
-              </button>
+              </NavLink>
             </li>
             {/* Add more top menu items here */}
           </ul>
@@ -48,22 +56,32 @@ const DashboardLayout = () => {
           {/* Bottom section: Settings / Profile */}
           <ul className="menu w-full flex-none border-t border-base-300">
             <li>
-              <button
-                className="flex items-center gap-3 px-4 py-2 hover:bg-base-300 transition-all duration-200 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+              <NavLink
+                to="/settings"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-2 transition-all duration-200 is-drawer-close:tooltip is-drawer-close:tooltip-right ${
+                    isActive ? activeClass : ""
+                  }`
+                }
                 data-tip="Settings"
               >
                 <FiSettings className="w-5 h-5" />
                 <span className="is-drawer-close:hidden">Settings</span>
-              </button>
+              </NavLink>
             </li>
             <li>
-              <button
-                className="flex items-center gap-3 px-4 py-2 hover:bg-base-300 transition-all duration-200 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+              <NavLink
+                to="/profile"
+                className={({ isActive }) =>
+                  `flex items-center gap-3 px-4 py-2 transition-all duration-200 is-drawer-close:tooltip is-drawer-close:tooltip-right ${
+                    isActive ? activeClass : ""
+                  }`
+                }
                 data-tip="Profile"
               >
                 <FiUser className="w-5 h-5" />
                 <span className="is-drawer-close:hidden">Profile</span>
-              </button>
+              </NavLink>
             </li>
           </ul>
         </div>
