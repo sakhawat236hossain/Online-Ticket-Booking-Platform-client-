@@ -3,14 +3,18 @@ import Banner from './HomeComponents/Banner/Banner';
 import WhyChooseUs from './HomeComponents/Banner/WhyChooseUs/WhyChooseUs';
 import PopularRoutes from './HomeComponents/PopularRoutes/PopularRoutes';
 import TravelServices from './HomeComponents/TravelServices/TravelServices';
+import Advertisement from './Advertisement/Advertisement';
+import LatestTickets from './LatestTickets/LatestTickets';
 
 const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <PopularRoutes></PopularRoutes>
+            <Advertisement></Advertisement>
+            <LatestTickets></LatestTickets>
             <WhyChooseUs></WhyChooseUs>
             <TravelServices></TravelServices>
+            <PopularRoutes></PopularRoutes>
         </div>
     );
 };

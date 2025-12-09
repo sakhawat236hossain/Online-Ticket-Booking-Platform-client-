@@ -1,11 +1,7 @@
-import React from 'react';
+import axios from "axios";
 
-const useAxios = () => {
-    return (
-        <div>
-            
-        </div>
-    );
-};
+const axiosPublic = axios.create({
+  baseURL: import.meta.env.VITE_API_URL
+});
 
-export default useAxios;
+export default axiosPublic;
