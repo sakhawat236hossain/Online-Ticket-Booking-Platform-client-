@@ -34,25 +34,7 @@ const NavBar = () => {
         </NavLink>
       </li>
 
-      <li>
-        <NavLink
-          to="/aboutUs"
-          className={({ isActive }) => getActiveClass(isActive)}
-        >
-          <FaInfoCircle className="text-lg" /> About
-        </NavLink>
-      </li>
-
-      <li>
-        <NavLink
-          to="/ContactUs"
-          className={({ isActive }) => getActiveClass(isActive)}
-        >
-          <FaPhoneAlt className="text-lg" /> Contact Us
-        </NavLink>
-      </li>
-
-      {/* Private */}
+         {/* Private */}
       {user && (
         <>
           <li>
@@ -74,6 +56,26 @@ const NavBar = () => {
           </li>
         </>
       )}
+
+      <li>
+        <NavLink
+          to="/aboutUs"
+          className={({ isActive }) => getActiveClass(isActive)}
+        >
+          <FaInfoCircle className="text-lg" /> About
+        </NavLink>
+      </li>
+
+      <li>
+        <NavLink
+          to="/ContactUs"
+          className={({ isActive }) => getActiveClass(isActive)}
+        >
+          <FaPhoneAlt className="text-lg" /> Contact Us
+        </NavLink>
+      </li>
+
+   
     </>
   );
 

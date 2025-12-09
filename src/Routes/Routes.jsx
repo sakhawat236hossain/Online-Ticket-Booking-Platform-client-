@@ -1,7 +1,6 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layouts/RootLayout/RootLayout";
 import Home from "../pages/Home/Home";
-import AllTickets from "../tickets/AllTickets/AllTickets";
 import ContactUs from "../pages/ContactUs/ContactUs";
 import AboutUs from "../pages/AboutUs/AboutUs";
 import Login from "../pages/AuthenticationbPges/Login/Login";
@@ -10,6 +9,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import AddTicket from "../pages/Dashboard/Vendor/AddTicket/AddTicket";
+import AllTickets from "../pages/Alltickets/AllTickets";
 
 export const router = createBrowserRouter([
   {
