@@ -16,7 +16,7 @@ const Advertisement = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <div className="px-6 py-10">
+    <div className="px-6 ">
       
       {/* ======= SECTION TITLE ======= */}
       <div className="text-center mb-10">
