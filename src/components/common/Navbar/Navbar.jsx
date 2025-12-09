@@ -90,10 +90,8 @@ const NavBar = () => {
   return (
     <nav className="w-full sticky top-0 z-50 bg-white shadow-sm glass-card">
       <div className="max-w-6xl mx-auto px-5 py-3 flex items-center justify-between">
-        
         {/* LEFT */}
         <div className="flex items-center gap-4">
-          
           {/* MOBILE MENU */}
           <div className="dropdown md:hidden">
             <div
@@ -140,7 +138,6 @@ const NavBar = () => {
 
         {/* RIGHT SIDE */}
         <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3">
-          
           {/* PROFILE */}
           <div className="dropdown dropdown-end relative group cursor-pointer">
             <div
@@ -174,7 +171,7 @@ const NavBar = () => {
                 <li className="text-sm font-bold">
                   {user?.displayName || "Guest User"}
                 </li>
-                <li className="text-xs text-gray-500">{user?.email}</li>
+                <p className="text-xs text-gray-500">{user?.email}</p>
               </div>
 
               {/* MOBILE LOGIN/REGISTER */}
@@ -196,27 +193,29 @@ const NavBar = () => {
                 </div>
               )}
 
-             
-           
-              {
-                user?.email &&    <li className="mt-2">
-                   {/* LOGOUT */}
-              <li className="mt-2">
-                <button
-                  onClick={handleLogOut}
-                  className="w-full px-3 py-1 text-sm rounded-md bg-[#E56F61] text-white border border-[#E56F61] hover:bg-white hover:text-[#E56F61] flex justify-center gap-1"
-                >
-                  <BiSolidLogOut /> Logout
-                </button>
-              </li>
-                <Link
-                  to="/profile"
-                  className="w-full mt-2 px-3 py-1 text-sm rounded-md bg-[#E56F61] text-white border border-[#E56F61] hover:bg-white hover:text-[#E56F61] flex justify-center gap-1"
-                >
-                  <BiSolidLogOut /> My Profile
-                </Link>
-              </li>
-              }
+              {user?.email && (
+                <>
+                  {/* LOGOUT */}
+                  <li className="mt-2">
+                    <button
+                      onClick={handleLogOut}
+                      className="w-full px-3 py-1 text-sm rounded-md bg-[#E56F61] text-white border border-[#E56F61] hover:bg-white hover:text-[#E56F61] flex justify-center gap-1"
+                    >
+                      <BiSolidLogOut /> Logout
+                    </button>
+                  </li>
+
+                  {/* PROFILE */}
+                  <li className="mt-2">
+                    <Link
+                      to="/profile"
+                      className="w-full px-3 py-1 text-sm rounded-md bg-[#E56F61] text-white border border-[#E56F61] hover:bg-white hover:text-[#E56F61] flex justify-center gap-1"
+                    >
+                      <FaUser /> My Profile
+                    </Link>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
 

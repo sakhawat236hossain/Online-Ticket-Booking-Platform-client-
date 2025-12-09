@@ -10,7 +10,7 @@ import Spinner from "../../../components/common/Spinner/Spinner";
 import { useLocation } from "react-router";
 
 const Login = () => {
-  const { signInUser,loading} = UseAuth(); 
+  const { signInUser} = UseAuth(); 
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const location = useLocation();
@@ -44,9 +44,7 @@ const Login = () => {
     }
   };
 
-if(loading){
-    return <Spinner></Spinner>
-}
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 p-4">

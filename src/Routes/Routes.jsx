@@ -9,6 +9,7 @@ import Register from "../pages/AuthenticationbPges/Register/Register";
 import DashboardLayout from "../layouts/DashboardLayout";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import Profile from "../pages/Dashboard/Profile/Profile";
+import AddTicket from "../pages/Dashboard/Vendor/AddTicket/AddTicket";
 
 export const router = createBrowserRouter([
   {
@@ -56,6 +57,10 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <Profile></Profile>
+          },
+          {
+            path: 'addTicket',
+            element:<AddTicket></AddTicket>
           }
         ],
       },
