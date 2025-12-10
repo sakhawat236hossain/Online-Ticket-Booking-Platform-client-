@@ -23,3 +23,11 @@
          rounded-full bg-gray-800 hover:bg-[#E56F61] 
          transition-colors duration-300 shadow-md;
 }
+
+
+
+@keyframes glow {
+  0% { box-shadow: 0 0 10px #7f5eff; }
+  100% { box-shadow: 0 0 26px #b983ff; }
+}
+.glow { animation: glow 1.5s infinite alternate; }

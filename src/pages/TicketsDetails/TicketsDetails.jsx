@@ -16,8 +16,7 @@ const TicketsDetails = () => {
   const [ticket, setTicket] = useState({});
   const [quantity, setQuantity] = useState(0);
   const { user } = UseAuth();
-
-  //  Countdown object state
+console.log(ticket);
   const [countdown, setCountdown] = useState({
     days: "00",
     hours: "00",
@@ -25,7 +24,7 @@ const TicketsDetails = () => {
     seconds: "00",
   });
 
-  //  Fetch Ticket
+  // Fetch Ticket
   useEffect(() => {
     const fetchTicket = async () => {
       try {
@@ -39,7 +38,7 @@ const TicketsDetails = () => {
     fetchTicket();
   }, [id]);
 
-  //  Countdown Logic
+  // Countdown
   useEffect(() => {
     if (!ticket?.departure) return;
 
@@ -88,33 +87,33 @@ const TicketsDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-black to-purple-950 py-14">
-      <div className="max-w-7xl mx-auto px-6">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-black to-purple-950 py-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-        <div className="bg-white/10 backdrop-blur-2xl shadow-[0_30px_80px_rgba(0,0,0,0.45)] rounded-[2.5rem] p-10 min-h-[600px]">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="bg-white/10 backdrop-blur-2xl shadow-[0_30px_80px_rgba(0,0,0,0.45)] rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
 
-            {/* LEFT IMAGE */}
+            {/* IMAGE */}
             {ticket?.image && (
-              <div className="overflow-hidden rounded-3xl shadow-xl">
+              <div className="overflow-hidden rounded-2xl shadow-xl">
                 <img
                   src={ticket.image}
                   alt={ticket.title}
-                  className="w-full h-[520px] object-cover hover:scale-110 transition duration-700"
+                  className="w-full h-[260px] sm:h-[340px] md:h-[420px] lg:h-[520px] object-cover hover:scale-110 transition duration-700"
                 />
               </div>
             )}
 
-            {/* RIGHT CONTENT */}
-            <div className="flex flex-col justify-between min-h-[520px]">
+            {/* CONTENT */}
+            <div className="flex flex-col justify-between">
 
-              {/* TITLE */}
-              <h2 className="text-5xl font-extrabold tracking-tight text-white mb-6">
+              {/* Title */}
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 sm:mb-6">
                 {ticket?.title}
               </h2>
 
               {/* INFO GRID */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-lg text-white">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 text-sm sm:text-base md:text-lg text-white">
 
                 <div className="info-box">
                   <FiMap className="icon text-indigo-400" />
@@ -134,7 +133,7 @@ const TicketsDetails = () => {
                 <div className="info-box">
                   <span>Price:</span>
                   <span className="ml-2 text-green-400 font-bold">
-                    {ticket?.price} ৳
+                    {ticket?.price} 💰
                   </span>
                 </div>
 
@@ -153,13 +152,13 @@ const TicketsDetails = () => {
                   </span>
                 </div>
 
-                {/*  AI STYLE COUNTDOWN */}
+                {/* Countdown */}
                 <div className="col-span-full mt-4">
-                  <p className="font-semibold mb-3 text-indigo-300">
+                  <p className="font-semibold mb-2 text-indigo-300">
                     AI Departure Countdown
                   </p>
 
-                  <div className="flex gap-3 bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] p-4 rounded-2xl shadow-2xl">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] p-3 sm:p-4 rounded-2xl shadow-2xl">
 
                     {["Days", "Hours", "Minutes", "Seconds"].map((label, i) => {
                       const values = [
@@ -172,12 +171,12 @@ const TicketsDetails = () => {
                       return (
                         <div
                           key={label}
-                          className="flex-1 flex flex-col items-center justify-center bg-gradient-to-b from-fuchsia-700 to-indigo-900 rounded-xl py-4 shadow-xl animate-pulse"
+                          className="flex flex-col items-center justify-center bg-gradient-to-b from-fuchsia-700 to-indigo-900 rounded-xl py-3 sm:py-4 shadow-xl animate-pulse"
                         >
-                          <span className="text-4xl font-extrabold text-white tracking-wider">
+                          <span className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">
                             {values[i]}
                           </span>
-                          <span className="text-xs mt-1 uppercase tracking-widest text-indigo-200">
+                          <span className="text-[10px] sm:text-xs mt-1 uppercase tracking-widest text-indigo-200">
                             {label}
                           </span>
                         </div>
@@ -186,7 +185,7 @@ const TicketsDetails = () => {
                   </div>
                 </div>
 
-                {/* PERKS */}
+                {/* Perks */}
                 <div className="col-span-full">
                   <span className="block font-semibold text-indigo-300 mb-2">
                     Perks
@@ -195,7 +194,7 @@ const TicketsDetails = () => {
                     {ticket?.perks?.map((perk) => (
                       <span
                         key={perk}
-                        className="inline-flex items-center bg-green-500/20 text-green-300 px-4 py-1 rounded-full shadow"
+                        className="inline-flex items-center bg-green-500/20 text-green-300 px-3 sm:px-4 py-1 rounded-full shadow text-xs sm:text-sm"
                       >
                         <FiCheck className="mr-1" /> {perk}
                       </span>
@@ -205,24 +204,24 @@ const TicketsDetails = () => {
               </div>
 
               {/* USER INFO */}
-              <div className="flex items-center gap-4 mt-8 p-4 bg-white/10 rounded-xl shadow">
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-4 mt-6 sm:mt-8 p-3 sm:p-4 bg-white/10 rounded-xl shadow">
                 {user?.photoURL && (
                   <img
                     src={user.photoURL}
                     alt={user.displayName}
-                    className="w-14 h-14 rounded-full border-2 border-indigo-400"
+                    className="w-12 sm:w-14 h-12 sm:h-14 rounded-full border-2 border-indigo-400"
                   />
                 )}
                 <div className="text-white">
                   <p className="font-bold">{user?.displayName}</p>
-                  <p className="text-sm text-gray-300">{user?.email}</p>
+                  <p className="text-xs sm:text-sm text-gray-300">{user?.email}</p>
                 </div>
               </div>
 
-              {/* BOOK BUTTON */}
+              {/* BUTTON */}
               <button
                 disabled={isBookDisabled}
-                className={`mt-8 py-4 rounded-2xl text-xl font-bold tracking-wide transition-all duration-300 w-full ${
+                className={`mt-6 sm:mt-8 py-3 sm:py-4 rounded-2xl text-base sm:text-lg md:text-xl font-bold tracking-wide transition-all duration-300 w-full ${
                   isBookDisabled
                     ? "bg-gray-500 cursor-not-allowed"
                     : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 hover:scale-105 hover:shadow-2xl text-white"

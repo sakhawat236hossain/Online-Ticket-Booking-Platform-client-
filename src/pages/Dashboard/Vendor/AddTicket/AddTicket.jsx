@@ -5,6 +5,7 @@ import { FiPlusCircle } from "react-icons/fi";
 import { uploadImageToImgBB } from "../../../../Utils";
 import UseAuth from "../../../../Hooks/UseAuth";
 import { useAddTicket } from "../../../../Hooks/useAddTicket";
+import Swal from "sweetalert2";
 
 const AddTicket = () => {
   const { user } = UseAuth();
@@ -40,6 +41,13 @@ const AddTicket = () => {
       await mutateAsync(ticketInfo);
 
       reset();
+      Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Ticket added successfully!",
+  showConfirmButton: false,
+  timer: 1500
+});
     } catch (error) {
       console.error(error);
     }
@@ -55,6 +63,7 @@ const AddTicket = () => {
 
         {/* TITLE */}
         <div>
+          <label className="font-semibold block mb-1">Title</label>
           <input
             {...register("title", { required: "Title is required" })}
             placeholder="Title"
@@ -68,6 +77,7 @@ const AddTicket = () => {
         {/* FROM / TO */}
         <div className="grid grid-cols-2 gap-4">
           <div>
+            <label className="font-semibold block mb-1">From</label>
             <input
               {...register("from", { required: "From location is required" })}
               placeholder="From"
@@ -77,6 +87,7 @@ const AddTicket = () => {
           </div>
 
           <div>
+            <label className="font-semibold block mb-1">To</label>
             <input
               {...register("to", { required: "Destination is required" })}
               placeholder="To"
@@ -88,6 +99,7 @@ const AddTicket = () => {
 
         {/* TRANSPORT */}
         <div>
+          <label className="font-semibold block mb-1">Transport</label>
           <select
             {...register("transport", { required: "Select a transport type" })}
             className="select select-bordered w-full"
@@ -104,6 +116,7 @@ const AddTicket = () => {
         {/* PRICE / QUANTITY */}
         <div className="grid grid-cols-2 gap-4">
           <div>
+            <label className="font-semibold block mb-1">Price</label>
             <input
               type="number"
               {...register("price", {
@@ -117,6 +130,7 @@ const AddTicket = () => {
           </div>
 
           <div>
+            <label className="font-semibold block mb-1">Quantity</label>
             <input
               type="number"
               {...register("quantity", {
@@ -130,27 +144,27 @@ const AddTicket = () => {
           </div>
         </div>
 
-    {/* CUSTOM DATE INPUT */}
-<div>
-  <input
-    type="text"
-    {...register("departure", {
-      required: "Departure time is required",
-      validate: (value) =>
-        !isNaN(new Date(value).getTime()) || "Invalid date format",
-    })}
-    placeholder="Enter departure date (e.g. 2025-12-25 14:30)"
-    className="input input-bordered w-full"
-  />
-  {errors.departure && (
-    <p className="text-red-500 text-sm">{errors.departure.message}</p>
-  )}
-</div>
-
+        {/* CUSTOM DATE INPUT */}
+        <div>
+          <label className="font-semibold block mb-1">Departure Time</label>
+          <input
+            type="text"
+            {...register("departure", {
+              required: "Departure time is required",
+              validate: (value) =>
+                !isNaN(new Date(value).getTime()) || "Invalid date format",
+            })}
+            placeholder="Enter departure date (e.g. 2025-12-25 14:30)"
+            className="input input-bordered w-full"
+          />
+          {errors.departure && (
+            <p className="text-red-500 text-sm">{errors.departure.message}</p>
+          )}
+        </div>
 
         {/* PERKS */}
         <div>
-          <p className="font-semibold">Perks</p>
+          <label className="font-semibold block mb-1">Perks</label>
           {["AC", "WiFi", "Breakfast", "TV"].map((p) => (
             <label key={p} className="mr-4">
               <input type="checkbox" {...register("perks")} value={p} /> {p}
@@ -160,6 +174,7 @@ const AddTicket = () => {
 
         {/* IMAGE */}
         <div>
+          <label className="font-semibold block mb-1">Upload Image</label>
           <input
             type="file"
             {...register("image", { required: "Image is required" })}
