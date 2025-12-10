@@ -3,39 +3,31 @@ import { useParams } from "react-router-dom";
 import { FiClock, FiMap, FiCheck } from "react-icons/fi";
 import { FaBus, FaPlane, FaShip, FaTrain } from "react-icons/fa";
 import UseAuth from "../../Hooks/UseAuth";
+import Swal from "sweetalert2";
+import { useBookingTicket } from "../../Hooks/useBookingTicket";
 
 const transportIcons = {
-  Bus: <FaBus className="inline-block text-blue-500 text-xl" />,
-  Train: <FaTrain className="inline-block text-purple-500 text-xl" />,
-  Air: <FaPlane className="inline-block text-red-500 text-xl" />,
-  Ship: <FaShip className="inline-block text-green-500 text-xl" />,
+  Bus: <FaBus className="text-blue-400 inline" />,
+  Train: <FaTrain className="text-purple-400 inline" />,
+  Air: <FaPlane className="text-red-400 inline" />,
+  Ship: <FaShip className="text-green-400 inline" />,
 };
 
 const TicketsDetails = () => {
   const { id } = useParams();
-  const [ticket, setTicket] = useState({});
-  const [quantity, setQuantity] = useState(0);
   const { user } = UseAuth();
-console.log(ticket);
-  const [countdown, setCountdown] = useState({
-    days: "00",
-    hours: "00",
-    minutes: "00",
-    seconds: "00",
-  });
+  const [ticket, setTicket] = useState({});
+  const [countdown, setCountdown] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { mutateAsync, isPending,reset } = useBookingTicket();
 
   // Fetch Ticket
   useEffect(() => {
-    const fetchTicket = async () => {
-      try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/tickets/${id}`);
-        const data = await res.json();
-        setTicket(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchTicket();
+    fetch(`${import.meta.env.VITE_API_URL}/tickets/${id}`)
+      .then(res => res.json())
+      .then(data => setTicket(data));
   }, [id]);
 
   // Countdown
@@ -43,7 +35,7 @@ console.log(ticket);
     if (!ticket?.departure) return;
 
     const interval = setInterval(() => {
-      const diff = new Date(ticket.departure).getTime() - Date.now();
+      const diff = new Date(ticket.departure) - new Date();
 
       if (diff <= 0) {
         setCountdown({ days: "00", hours: "00", minutes: "00", seconds: "00" });
@@ -53,16 +45,16 @@ console.log(ticket);
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const minutes = Math.floor((diff / 60000) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      const format = (num) => num.toString().padStart(2, "0");
+      const pad = n => n.toString().padStart(2, "0");
 
       setCountdown({
-        days: format(days),
-        hours: format(hours),
-        minutes: format(minutes),
-        seconds: format(seconds),
+        days: pad(days),
+        hours: pad(hours),
+        minutes: pad(minutes),
+        seconds: pad(seconds)
       });
     }, 1000);
 
@@ -71,169 +63,168 @@ console.log(ticket);
 
   const isExpired = new Date(ticket?.departure) < new Date();
   const noStock = ticket?.quantity === 0;
-  const isBookDisabled = isExpired || noStock || quantity > ticket?.quantity;
+  const isInvalidQty = quantity > ticket?.quantity || quantity < 1;
+  const isDisabled = isExpired || noStock;
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleString("en-US", {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    });
-  };
+const handleBooking = async () => {
+const totalPrice = ticket.price * quantity;
+
+const bookingInfo = {
+ticketId: ticket._id,
+ title: ticket.title,
+ from: ticket.from,
+to: ticket.to,
+transport: ticket.transport,
+ price: ticket.price,
+ quantity,
+ totalPrice,
+image: ticket.image,
+ departure: ticket.departure,
+ status: "pending",
+ user: {
+ name: user?.displayName,
+email: user?.email,
+ photo: user?.photoURL,
+ },
+ };
+
+ try {
+
+ const data = await mutateAsync(bookingInfo);
+
+      if(data.success){
+     Swal.fire("Success!", "Ticket booked successfully", "success");
+  setIsModalOpen(false);
+    
+          
+    setTicket(prevTicket => ({
+     ...prevTicket, 
+   quantity: data.updatedQuantity 
+  }));
+          
+reset();
+      }
+
+} catch (err) {
+console.log(err);
+ Swal.fire("Error!", "Booking failed", "error");
+}
+ };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-black to-purple-950 py-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-black to-purple-950 py-12">
+      <div className="max-w-6xl mx-auto px-4">
 
-        <div className="bg-white/10 backdrop-blur-2xl shadow-[0_30px_80px_rgba(0,0,0,0.45)] rounded-3xl p-4 sm:p-6 md:p-8 lg:p-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
+        <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-5 md:p-10 shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            {/* IMAGE */}
-            {ticket?.image && (
-              <div className="overflow-hidden rounded-2xl shadow-xl">
-                <img
-                  src={ticket.image}
-                  alt={ticket.title}
-                  className="w-full h-[260px] sm:h-[340px] md:h-[420px] lg:h-[520px] object-cover hover:scale-110 transition duration-700"
-                />
-              </div>
-            )}
+          {/* IMAGE */}
+          <img
+            src={ticket?.image}
+            className="rounded-3xl w-full h-[280px] md:h-[450px] object-cover hover:scale-105 duration-700"
+          />
 
-            {/* CONTENT */}
-            <div className="flex flex-col justify-between">
+          {/* INFO */}
+          <div className="flex flex-col justify-between text-white space-y-5">
 
-              {/* Title */}
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4 sm:mb-6">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
                 {ticket?.title}
               </h2>
 
-              {/* INFO GRID */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 text-sm sm:text-base md:text-lg text-white">
+              <p className="flex items-center gap-2"><FiMap /> From: {ticket?.from}</p>
+              <p className="flex items-center gap-2"><FiMap /> To: {ticket?.to}</p>
 
-                <div className="info-box">
-                  <FiMap className="icon text-indigo-400" />
-                  <span className="ml-2">From:</span> {ticket?.from}
-                </div>
+              <p className="flex items-center gap-2">
+                {transportIcons[ticket?.transport]} Transport: {ticket?.transport}
+              </p>
 
-                <div className="info-box">
-                  <FiMap className="icon text-pink-400" />
-                  <span className="ml-2">To:</span> {ticket?.to}
-                </div>
+              <p>💰 Price: <span className="text-green-400">{ticket?.price}</span></p>
+              <p>🎟 Available: <span className="text-indigo-400">{ticket?.quantity}</span></p>
 
-                <div className="info-box">
-                  {transportIcons[ticket?.transport]}
-                  <span className="ml-2">Transport:</span> {ticket?.transport}
-                </div>
-
-                <div className="info-box">
-                  <span>Price:</span>
-                  <span className="ml-2 text-green-400 font-bold">
-                    {ticket?.price} 💰
-                  </span>
-                </div>
-
-                <div className="info-box">
-                  <span>Available:</span>
-                  <span className="ml-2 text-indigo-400 font-bold">
-                    {ticket?.quantity}
-                  </span>
-                </div>
-
-                <div className="info-box">
-                  <FiClock className="icon text-red-400" />
-                  <span className="ml-2">Departure:</span>
-                  <span className="ml-1 text-red-400 font-bold">
-                    {formatDate(ticket?.departure)}
-                  </span>
-                </div>
-
-                {/* Countdown */}
-                <div className="col-span-full mt-4">
-                  <p className="font-semibold mb-2 text-indigo-300">
-                    AI Departure Countdown
-                  </p>
-
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-gradient-to-br from-[#0f0c29] via-[#302b63] to-[#24243e] p-3 sm:p-4 rounded-2xl shadow-2xl">
-
-                    {["Days", "Hours", "Minutes", "Seconds"].map((label, i) => {
-                      const values = [
-                        countdown.days,
-                        countdown.hours,
-                        countdown.minutes,
-                        countdown.seconds,
-                      ];
-
-                      return (
-                        <div
-                          key={label}
-                          className="flex flex-col items-center justify-center bg-gradient-to-b from-fuchsia-700 to-indigo-900 rounded-xl py-3 sm:py-4 shadow-xl animate-pulse"
-                        >
-                          <span className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white">
-                            {values[i]}
-                          </span>
-                          <span className="text-[10px] sm:text-xs mt-1 uppercase tracking-widest text-indigo-200">
-                            {label}
-                          </span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Perks */}
-                <div className="col-span-full">
-                  <span className="block font-semibold text-indigo-300 mb-2">
-                    Perks
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {ticket?.perks?.map((perk) => (
-                      <span
-                        key={perk}
-                        className="inline-flex items-center bg-green-500/20 text-green-300 px-3 sm:px-4 py-1 rounded-full shadow text-xs sm:text-sm"
-                      >
-                        <FiCheck className="mr-1" /> {perk}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* USER INFO */}
-              <div className="flex flex-wrap sm:flex-nowrap items-center gap-3 sm:gap-4 mt-6 sm:mt-8 p-3 sm:p-4 bg-white/10 rounded-xl shadow">
-                {user?.photoURL && (
-                  <img
-                    src={user.photoURL}
-                    alt={user.displayName}
-                    className="w-12 sm:w-14 h-12 sm:h-14 rounded-full border-2 border-indigo-400"
-                  />
-                )}
-                <div className="text-white">
-                  <p className="font-bold">{user?.displayName}</p>
-                  <p className="text-xs sm:text-sm text-gray-300">{user?.email}</p>
-                </div>
-              </div>
-
-              {/* BUTTON */}
-              <button
-                disabled={isBookDisabled}
-                className={`mt-6 sm:mt-8 py-3 sm:py-4 rounded-2xl text-base sm:text-lg md:text-xl font-bold tracking-wide transition-all duration-300 w-full ${
-                  isBookDisabled
-                    ? "bg-gray-500 cursor-not-allowed"
-                    : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 hover:scale-105 hover:shadow-2xl text-white"
-                }`}
-              >
-                {isExpired ? "Expired" : noStock ? "Sold Out" : "Book Ticket"}
-              </button>
-
+              <p className="flex items-center gap-2">
+                <FiClock className="text-red-400" />
+                Departure: {new Date(ticket?.departure).toLocaleString()}
+              </p>
             </div>
+
+            {/* COUNTDOWN */}
+            <div className="grid grid-cols-4 gap-3 text-center mt-4">
+              {["days", "hours", "minutes", "seconds"].map(t => (
+                <div
+                  key={t}
+                  className="bg-gradient-to-b from-fuchsia-700 to-indigo-900 p-3 rounded-xl shadow-lg animate-pulse"
+                >
+                  <p className="text-xl md:text-2xl font-bold">{countdown[t]}</p>
+                  <p className="uppercase text-[10px]">{t}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* PERKS */}
+            <div className="flex flex-wrap gap-2">
+              {ticket?.perks?.map(p => (
+                <span key={p} className="bg-green-500/20 px-3 py-1 rounded-full text-sm flex items-center">
+                  <FiCheck className="mr-1" /> {p}
+                </span>
+              ))}
+            </div>
+
+            {/* BUTTON */}
+            <button
+              disabled={isDisabled}
+              onClick={() => setIsModalOpen(true)}
+              className={`py-3 rounded-xl text-lg font-bold transition ${
+                isDisabled
+                  ? "bg-gray-600 cursor-not-allowed"
+                  : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 hover:scale-105"
+              }`}
+            >
+              {isExpired ? "Expired" : noStock ? "Sold Out" : "Book Now"}
+            </button>
+
           </div>
         </div>
       </div>
+
+      {/* MODAL */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+
+          <div className="bg-white p-6 rounded-2xl w-[320px] space-y-4">
+
+            <h3 className="text-xl font-bold">Confirm Booking</h3>
+
+            <input
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              className="input input-bordered w-full"
+              min={1}
+              max={ticket?.quantity}
+            />
+
+            <p className="text-xs text-red-500">Max: {ticket?.quantity}</p>
+
+            <div className="flex gap-3">
+              <button
+                onClick={handleBooking}
+                disabled={isInvalidQty || isPending}
+                className="btn btn-success flex-1"
+              >
+                {isPending ? "Booking..." : "Confirm"}
+              </button>
+
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="btn btn-error flex-1"
+              >
+                Cancel
+              </button>
+            </div>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 };
