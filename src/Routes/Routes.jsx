@@ -10,6 +10,7 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import Profile from "../pages/Dashboard/Profile/Profile";
 import AddTicket from "../pages/Dashboard/Vendor/AddTicket/AddTicket";
 import AllTickets from "../pages/Alltickets/AllTickets";
+import TicketsDetails from "../pages/TicketsDetails/TicketsDetails";
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ export const router = createBrowserRouter([
       {
         path: '/register',
         element: <Register></Register>,
+      },
+      {
+path: '/ticket/:id',
+element: <TicketsDetails></TicketsDetails>,
       },
 
       //  Dashboard Route

@@ -130,15 +130,23 @@ const AddTicket = () => {
           </div>
         </div>
 
-        {/* DATE */}
-        <div>
-          <input
-            type="datetime-local"
-            {...register("departure", { required: "Departure time is required" })}
-            className="input input-bordered w-full"
-          />
-          {errors.departure && <p className="text-red-500 text-sm">{errors.departure.message}</p>}
-        </div>
+    {/* CUSTOM DATE INPUT */}
+<div>
+  <input
+    type="text"
+    {...register("departure", {
+      required: "Departure time is required",
+      validate: (value) =>
+        !isNaN(new Date(value).getTime()) || "Invalid date format",
+    })}
+    placeholder="Enter departure date (e.g. 2025-12-25 14:30)"
+    className="input input-bordered w-full"
+  />
+  {errors.departure && (
+    <p className="text-red-500 text-sm">{errors.departure.message}</p>
+  )}
+</div>
+
 
         {/* PERKS */}
         <div>
