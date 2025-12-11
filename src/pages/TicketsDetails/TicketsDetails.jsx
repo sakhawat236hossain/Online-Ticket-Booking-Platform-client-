@@ -81,10 +81,10 @@ transport: ticket.transport,
 image: ticket.image,
  departure: ticket.departure,
  status: "pending",
- user: {
- name: user?.displayName,
-email: user?.email,
- photo: user?.photoURL,
+ buyer: {
+ buyerName: user?.displayName,
+buyerEmail: user?.email,
+ buyerPhoto: user?.photoURL,
  },
  };
 

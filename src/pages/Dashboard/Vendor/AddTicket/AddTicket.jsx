@@ -31,9 +31,9 @@ const AddTicket = () => {
         image: imageUrl,
         status: "pending",
         Vendor: {
-          name: user?.displayName,
-          email: user?.email,
-          image: user?.photoURL,
+          VendorName: user?.displayName,
+          VendorEmail: user?.email,
+          VendorImage: user?.photoURL,
         },
       };
 
@@ -109,6 +109,7 @@ const AddTicket = () => {
             <option>Train</option>
             <option>Air</option>
             <option>Ship</option>
+            <option>Car</option>
           </select>
           {errors.transport && <p className="text-red-500 text-sm">{errors.transport.message}</p>}
         </div>
@@ -146,7 +147,9 @@ const AddTicket = () => {
 
         {/* CUSTOM DATE INPUT */}
         <div>
-          <label className="font-semibold block mb-1">Departure Time</label>
+         <label className="font-semibold block mb-1">
+  Departure Time (YYYY-MM-DD HH:mm)
+</label>
           <input
             type="text"
             {...register("departure", {
