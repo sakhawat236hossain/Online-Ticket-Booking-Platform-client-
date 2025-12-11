@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { uploadImageToImgBB } from "../../../Utils";
 import Spinner from "../../../components/common/Spinner/Spinner";
 import { useLocation } from "react-router";
+import axiosPublic from "../../../Hooks/useAxios";
 
 const Register = () => {
   const { createUser, updateUserProfile, setUser, loading } = UseAuth();
@@ -34,6 +35,8 @@ const Register = () => {
       const result = await createUser(email, password);
       const user = result.user;
 
+
+
       //  Update profile
       await updateUserProfile({
         displayName: name,
@@ -41,6 +44,22 @@ const Register = () => {
       });
 
       setUser({ ...user, displayName: name, photoURL: photoURL || "" });
+
+         const userInfo = {
+        name,
+        email,
+        photoURL: photoURL || "",
+        
+      };
+
+      // save data to database
+      axiosPublic.post("/users",userInfo)
+      .then((data) => {
+        console.log("User saved to database", data.data);
+      })
+      .catch((error) => {
+        console.error("Error saving user to database", error);
+      });
 
       toast.success("Registration successful! ");
 

@@ -1,16 +1,14 @@
+import { FcGoogle } from "react-icons/fc";
+import UseAuth from "../../../Hooks/UseAuth";
 
-import { FcGoogle } from 'react-icons/fc';
-import UseAuth from '../../../Hooks/UseAuth';
-
-import toast from 'react-hot-toast';
-import { useLocation, useNavigate } from 'react-router';
+import toast from "react-hot-toast";
+import { useLocation, useNavigate } from "react-router";
+import axiosPublic from "../../../Hooks/useAxios";
 
 const SocialLogin = () => {
   const { googleLogin } = UseAuth();
-    const location = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
-
-
 
   const handleGoogleLogin = () => {
     googleLogin()
@@ -18,6 +16,23 @@ const SocialLogin = () => {
         toast.success("Logged in successfully!");
         console.log(result);
         navigate(location?.state || "/");
+
+        // save user to database
+        const user = result.user;
+        const userInfo = {
+          name: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL || "",
+        };
+
+        axiosPublic.post("/users", userInfo)
+          .then((data) => {
+            console.log("User saved to database", data.data);
+          })
+          .catch((error) => {
+            console.error("Error saving user to database", error);
+          });
+
       })
       .catch((error) => {
         toast.error(error.message);

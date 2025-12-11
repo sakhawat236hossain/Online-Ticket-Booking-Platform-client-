@@ -2,7 +2,7 @@ import { LucideTicketsPlane } from "lucide-react";
 import React from "react";
 import {  FiHome, FiSettings, FiUser } from "react-icons/fi";
 import { TbBrandBooking } from "react-icons/tb";
-import { MdAdd } from "react-icons/md";
+import { MdAdd, MdManageAccounts } from "react-icons/md";
 import { Outlet } from "react-router";
 import { NavLink } from "react-router-dom";
 import { FaInbox } from "react-icons/fa";
@@ -99,6 +99,23 @@ const DashboardLayout = () => {
              
               <FaInbox className="w-5 h-5"/>
               <span className="hidden group-hover:inline">Requested Tickets</span>
+            </NavLink>
+          </li>
+
+          {/* manage Users */}
+          <li className="mt-2">
+            <NavLink
+              to="/dashboard/manageUsers"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-300 ${
+                  isActive ? activeClass : ""
+                }`
+              }
+            >
+              
+             
+              <MdManageAccounts />
+              <span className="hidden group-hover:inline">Manage Users</span>
             </NavLink>
           </li>
         </ul>
