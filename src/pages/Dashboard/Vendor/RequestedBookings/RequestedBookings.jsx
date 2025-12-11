@@ -19,7 +19,15 @@ const RequestedBookings = () => {
     },
   });
 
- 
+  // Accept Booking
+  const handleAccept = async (id) => {
+    const res = await axiosPublic.patch(`/accept-booking/${id}`);
+    if (res.data.modifiedCount > 0) {
+      Swal.fire("Accepted!", "Booking request accepted.", "success");
+      refetch();
+    }
+  };
+
   // Reject Booking
   const handleReject = async (id) => {
     const res = await axiosPublic.patch(`/reject-booking/${id}`);
@@ -96,7 +104,7 @@ const RequestedBookings = () => {
 
                       {/* Accept Button */}
                       <button
-                       
+                        onClick={() => handleAccept(b._id)}
                         className="flex items-center gap-1 px-3 py-1 cursor-pointer bg-green-600 hover:bg-green-700 text-white rounded transition"
                       >
                         <FiCheckCircle /> Accept
