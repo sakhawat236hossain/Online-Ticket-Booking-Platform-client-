@@ -11,10 +11,11 @@ import Profile from "../pages/Dashboard/Profile/Profile";
 import AddTicket from "../pages/Dashboard/Vendor/AddTicket/AddTicket";
 import AllTickets from "../pages/Alltickets/AllTickets";
 import TicketsDetails from "../pages/TicketsDetails/TicketsDetails";
+import MyAddedTickets from "../pages/Dashboard/Vendor/MyAddedTickets/MyAddedTickets";
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <RootLayout></RootLayout>,
     children: [
       {
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: '/allTickets',
+        path: "/allTickets",
         element: (
           <PrivateRoute>
             <AllTickets></AllTickets>
@@ -30,43 +31,51 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/ContactUs',
+        path: "/ContactUs",
         element: <ContactUs></ContactUs>,
       },
       {
-        path: '/aboutUs',
+        path: "/aboutUs",
         element: <AboutUs></AboutUs>,
       },
       {
-        path: '/profile',
+        path: "/profile",
         element: <Profile></Profile>,
       },
       {
-        path: '/login',
+        path: "/login",
         element: <Login></Login>,
       },
       {
-        path: '/register',
+        path: "/register",
         element: <Register></Register>,
       },
       {
-path: '/ticket/:id',
-element: <TicketsDetails></TicketsDetails>,
+        path: "/ticket/:id",
+        element: <TicketsDetails></TicketsDetails>,
       },
 
       //  Dashboard Route
       {
-        path: '/dashboard',
-        element:<PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+        path: "/dashboard",
+        element: (
+          <PrivateRoute>
+            <DashboardLayout></DashboardLayout>
+          </PrivateRoute>
+        ),
         children: [
           {
             index: true,
-            element: <Profile></Profile>
+            element: <Profile></Profile>,
           },
           {
-            path: 'addTicket',
-            element:<AddTicket></AddTicket>
-          }
+            path: "addTicket",
+            element: <AddTicket></AddTicket>,
+          },
+          {
+              path: "myAddedTickets",
+              element: <MyAddedTickets></MyAddedTickets>,
+          },
         ],
       },
     ],

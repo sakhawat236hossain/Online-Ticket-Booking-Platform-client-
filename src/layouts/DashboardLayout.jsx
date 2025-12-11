@@ -1,3 +1,4 @@
+import { LucideTicketsPlane } from "lucide-react";
 import React from "react";
 import { FiMenu, FiHome, FiSettings, FiUser } from "react-icons/fi";
 import { MdAdd } from "react-icons/md";
@@ -48,7 +49,22 @@ const DashboardLayout = () => {
               }
             >
               <MdAdd className="w-5 h-5" />
+             
               <span className="hidden group-hover:inline">Add Ticket</span>
+            </NavLink>
+          </li>
+           {/* My Added Tickets */}
+          <li className="mt-2">
+            <NavLink
+              to="/dashboard/myAddedTickets"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-300 ${
+                  isActive ? activeClass : ""
+                }`
+              }
+            >
+              <LucideTicketsPlane className="w-5 h-5"/>
+              <span className="hidden group-hover:inline">My Added Tickets</span>
             </NavLink>
           </li>
         </ul>
