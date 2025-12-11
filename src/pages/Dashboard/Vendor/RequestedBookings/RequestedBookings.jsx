@@ -11,29 +11,61 @@ import { FiCheckCircle, FiXCircle, FiClock } from "react-icons/fi";
 const RequestedBookings = () => {
   const { user } = UseAuth();
 
-  const { data: bookings = [], isLoading, refetch } = useQuery({
+  const {
+    data: bookings = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["requestedBookings", user?.email],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/requested-tickets?email=${user?.email}`);
+      const res = await axiosPublic.get(
+        `/requested-tickets?email=${user?.email}`
+      );
       return res.data;
     },
   });
 
   // Accept Booking
   const handleAccept = async (id) => {
-    const res = await axiosPublic.patch(`/accept-booking/${id}`);
-    if (res.data.modifiedCount > 0) {
-      Swal.fire("Accepted!", "Booking request accepted.", "success");
-      refetch();
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You are going to ACCEPT this booking request.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#16a34a",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, Accept",
+      cancelButtonText: "Cancel",
+    });
+
+    if (result.isConfirmed) {
+      const res = await axiosPublic.patch(`/accept-booking/${id}`);
+      if (res.data.modifiedCount > 0) {
+        Swal.fire("Accepted!", "Booking request accepted.", "success");
+        refetch();
+      }
     }
   };
 
   // Reject Booking
   const handleReject = async (id) => {
-    const res = await axiosPublic.patch(`/reject-booking/${id}`);
-    if (res.data.modifiedCount > 0) {
-      Swal.fire("Rejected!", "Booking request rejected.", "error");
-      refetch();
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You are going to REJECT this booking request.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, Reject",
+      cancelButtonText: "Cancel",
+    });
+
+    if (result.isConfirmed) {
+      const res = await axiosPublic.patch(`/reject-booking/${id}`);
+      if (res.data.modifiedCount > 0) {
+        Swal.fire("Rejected!", "Booking request rejected.", "error");
+        refetch();
+      }
     }
   };
 
@@ -62,12 +94,13 @@ const RequestedBookings = () => {
           <tbody>
             {bookings.map((b) => (
               <tr key={b._id} className="border hover:bg-gray-50 transition">
-
                 {/* User Name */}
                 <td className="p-3 border font-medium">{b.buyer.buyerName}</td>
 
                 {/* User Email */}
-                <td className="p-3 border text-gray-600">{b.buyer.buyerEmail}</td>
+                <td className="p-3 border text-gray-600">
+                  {b.buyer.buyerEmail}
+                </td>
 
                 {/* Ticket Title */}
                 <td className="p-3 border">{b.title}</td>
@@ -101,7 +134,6 @@ const RequestedBookings = () => {
                 <td className="p-3 border text-center">
                   {b.status === "pending" && (
                     <div className="flex justify-center gap-2">
-
                       {/* Accept Button */}
                       <button
                         onClick={() => handleAccept(b._id)}
@@ -126,11 +158,9 @@ const RequestedBookings = () => {
                     </p>
                   )}
                 </td>
-
               </tr>
             ))}
           </tbody>
-
         </table>
       </div>
     </div>
