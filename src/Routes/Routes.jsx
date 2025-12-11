@@ -15,6 +15,7 @@ import MyAddedTickets from "../pages/Dashboard/Vendor/MyAddedTickets/MyAddedTick
 import MyBookingTickets from "../pages/Dashboard/User/MyBookingTickets";
 import RequestedBookings from "../pages/Dashboard/Vendor/RequestedBookings/RequestedBookings";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
+import ManageTickets from "../pages/Dashboard/Admin/ManageTickets/ManageTickets";
 
 export const router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ export const router = createBrowserRouter([
           {
             path: "manageUsers",
             element: <ManageUsers></ManageUsers>
+          },
+          {
+            path: "manageTickets",
+            element: <ManageTickets></ManageTickets>
           }
         ],
       },

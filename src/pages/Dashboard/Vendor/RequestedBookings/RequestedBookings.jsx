@@ -6,7 +6,7 @@ import Spinner from "../../../../components/common/Spinner/Spinner";
 import UseAuth from "../../../../Hooks/UseAuth";
 
 // Icons
-import { FiCheckCircle, FiXCircle, FiClock } from "react-icons/fi";
+import { FiCheckCircle, FiXCircle } from "react-icons/fi";
 
 const RequestedBookings = () => {
   const { user } = UseAuth();
@@ -72,97 +72,99 @@ const RequestedBookings = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <div className="p-6">
+    <div className="overflow-x-auto w-full p-6">
       <h2 className="text-2xl md:text-3xl font-bold mb-5 text-gray-800">
         Requested Ticket Bookings
       </h2>
 
-      <div className="overflow-x-auto bg-white shadow-md rounded-lg">
-        <table className="w-full text-left border-collapse">
-          <thead>
-            <tr className="bg-gray-100 text-gray-700">
-              <th className="p-3 border">User Name</th>
-              <th className="p-3 border">User Email</th>
-              <th className="p-3 border">Ticket Title</th>
-              <th className="p-3 border">Quantity</th>
-              <th className="p-3 border">Total Price</th>
-              <th className="p-3 border">Status</th>
-              <th className="p-3 border text-center">Actions</th>
+      <table className="table">
+        {/* Head */}
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>User Info</th>
+            <th>Ticket Details</th>
+            <th>Price & Status</th>
+            <th className="text-center">Actions</th>
+          </tr>
+        </thead>
+
+        {/* Body */}
+        <tbody>
+          {bookings.map((b, index) => (
+            <tr key={b._id}>
+              {/* Index */}
+              <th>{index + 1}</th>
+
+              {/* User Info (Merged Name & Email) */}
+              <td>
+                <div className="font-bold">{b.buyer.buyerName}</div>
+                <div className="text-sm opacity-50">{b.buyer.buyerEmail}</div>
+              </td>
+
+              {/* Ticket Details (Merged Title & Quantity) */}
+              <td>
+                <div className="font-semibold">{b.title}</div>
+                <span className="badge badge-ghost badge-sm mt-1">
+                  Qty: {b.quantity}
+                </span>
+              </td>
+
+              {/* Price & Status */}
+              <td>
+                <div className="font-bold mb-1">{b.totalPrice} 💰</div>
+                
+                {b.status === "pending" && (
+                  <span className="badge badge-warning text-white badge-sm">Pending</span>
+                )}
+                {b.status === "accepted" && (
+                  <span className="badge badge-success text-white badge-sm">Accepted</span>
+                )}
+                {b.status === "rejected" && (
+                  <span className="badge badge-error text-white badge-sm">Rejected</span>
+                )}
+              </td>
+
+              {/* Actions */}
+              <th className="text-center">
+                {b.status === "pending" ? (
+                  <div className="flex items-center justify-center gap-2">
+                    <button
+                      onClick={() => handleAccept(b._id)}
+                      className="btn btn-success btn-xs text-white tooltip"
+                      data-tip="Accept"
+                    >
+                      <FiCheckCircle size={14} /> Accept
+                    </button>
+                    <button
+                      onClick={() => handleReject(b._id)}
+                      className="btn btn-error btn-xs text-white tooltip"
+                      data-tip="Reject"
+                    >
+                      <FiXCircle size={14} /> Reject
+                    </button>
+                  </div>
+                ) : (
+                  <span className="text-gray-400 text-xs italic font-normal">
+                    Action Completed
+                  </span>
+                )}
+              </th>
             </tr>
-          </thead>
+          ))}
+        </tbody>
 
-          <tbody>
-            {bookings.map((b) => (
-              <tr key={b._id} className="border hover:bg-gray-50 transition">
-                {/* User Name */}
-                <td className="p-3 border font-medium">{b.buyer.buyerName}</td>
-
-                {/* User Email */}
-                <td className="p-3 border text-gray-600">
-                  {b.buyer.buyerEmail}
-                </td>
-
-                {/* Ticket Title */}
-                <td className="p-3 border">{b.title}</td>
-
-                {/* Quantity */}
-                <td className="p-3 border">{b.quantity}</td>
-
-                {/* Total Price */}
-                <td className="p-3 border font-semibold">{b.totalPrice} 💰</td>
-
-                {/* Status */}
-                <td className="p-3 border">
-                  {b.status === "pending" && (
-                    <span className="flex items-center gap-1 px-2 py-1 rounded bg-yellow-200 text-yellow-800 text-xs font-semibold">
-                      <FiClock /> Pending
-                    </span>
-                  )}
-                  {b.status === "accepted" && (
-                    <span className="flex items-center gap-1 px-2 py-1 rounded bg-blue-200 text-blue-800 text-xs font-semibold">
-                      <FiCheckCircle /> Accepted
-                    </span>
-                  )}
-                  {b.status === "rejected" && (
-                    <span className="flex items-center gap-1 px-2 py-1 rounded bg-red-200 text-red-800 text-xs font-semibold">
-                      <FiXCircle /> Rejected
-                    </span>
-                  )}
-                </td>
-
-                {/* Action Buttons */}
-                <td className="p-3 border text-center">
-                  {b.status === "pending" && (
-                    <div className="flex justify-center gap-2">
-                      {/* Accept Button */}
-                      <button
-                        onClick={() => handleAccept(b._id)}
-                        className="flex items-center gap-1 px-3 py-1 cursor-pointer bg-green-600 hover:bg-green-700 text-white rounded transition"
-                      >
-                        <FiCheckCircle /> Accept
-                      </button>
-
-                      {/* Reject Button */}
-                      <button
-                        onClick={() => handleReject(b._id)}
-                        className="flex items-center gap-1 px-3 py-1 cursor-pointer bg-red-600 hover:bg-red-700 text-white rounded transition"
-                      >
-                        <FiXCircle /> Reject
-                      </button>
-                    </div>
-                  )}
-
-                  {(b.status === "accepted" || b.status === "rejected") && (
-                    <p className="text-gray-600 text-sm italic">
-                      Action Completed
-                    </p>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+        {/* Foot */}
+        <tfoot>
+          <tr>
+            <th>#</th>
+            <th>User Info</th>
+            <th>Ticket Details</th>
+            <th>Price & Status</th>
+            <th className="text-center">Actions</th>
+          </tr>
+        </tfoot>
+      </table>
     </div>
   );
 };

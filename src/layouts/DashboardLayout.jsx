@@ -118,6 +118,23 @@ const DashboardLayout = () => {
               <span className="hidden group-hover:inline">Manage Users</span>
             </NavLink>
           </li>
+
+          {/* manage tickets */}
+          <li className="mt-2">
+            <NavLink
+              to="/dashboard/manageTickets"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-300 ${
+                  isActive ? activeClass : ""
+                }`
+              }
+            >
+              
+             
+              <MdManageAccounts />
+              <span className="hidden group-hover:inline">Manage Tickets</span>
+            </NavLink>
+          </li>
         </ul>
 
         {/* BOTTOM MENU */}
