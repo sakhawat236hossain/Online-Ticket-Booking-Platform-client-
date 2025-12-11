@@ -19,7 +19,15 @@ const RequestedBookings = () => {
     },
   });
 
-
+ 
+  // Reject Booking
+  const handleReject = async (id) => {
+    const res = await axiosPublic.patch(`/reject-booking/${id}`);
+    if (res.data.modifiedCount > 0) {
+      Swal.fire("Rejected!", "Booking request rejected.", "error");
+      refetch();
+    }
+  };
 
   if (isLoading) return <Spinner />;
 
@@ -88,7 +96,7 @@ const RequestedBookings = () => {
 
                       {/* Accept Button */}
                       <button
-                        
+                       
                         className="flex items-center gap-1 px-3 py-1 cursor-pointer bg-green-600 hover:bg-green-700 text-white rounded transition"
                       >
                         <FiCheckCircle /> Accept
@@ -96,7 +104,7 @@ const RequestedBookings = () => {
 
                       {/* Reject Button */}
                       <button
-                       
+                        onClick={() => handleReject(b._id)}
                         className="flex items-center gap-1 px-3 py-1 cursor-pointer bg-red-600 hover:bg-red-700 text-white rounded transition"
                       >
                         <FiXCircle /> Reject
