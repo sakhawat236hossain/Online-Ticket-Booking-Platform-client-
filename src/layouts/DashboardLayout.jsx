@@ -1,6 +1,7 @@
 import { LucideTicketsPlane } from "lucide-react";
 import React from "react";
-import { FiMenu, FiHome, FiSettings, FiUser } from "react-icons/fi";
+import {  FiHome, FiSettings, FiUser } from "react-icons/fi";
+import { TbBrandBooking } from "react-icons/tb";
 import { MdAdd } from "react-icons/md";
 import { Outlet } from "react-router";
 import { NavLink } from "react-router-dom";
@@ -65,6 +66,22 @@ const DashboardLayout = () => {
             >
               <LucideTicketsPlane className="w-5 h-5"/>
               <span className="hidden group-hover:inline">My Added Tickets</span>
+            </NavLink>
+          </li>
+
+          {/* my booking tickets */}
+          <li className="mt-2">
+            <NavLink
+              to="/dashboard/myBookingTickets"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-300 ${
+                  isActive ? activeClass : ""
+                }`
+              }
+            >
+              
+              <TbBrandBooking  className="w-5 h-5" />
+              <span className="hidden group-hover:inline">My Booking Tickets</span>
             </NavLink>
           </li>
         </ul>
