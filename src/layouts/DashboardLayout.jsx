@@ -1,11 +1,14 @@
-import { LucideTicketsPlane } from "lucide-react";
 import React from "react";
-import {  FiHome, FiSettings, FiUser } from "react-icons/fi";
-import { TbBrandBooking } from "react-icons/tb";
-import { MdAdd, MdManageAccounts } from "react-icons/md";
 import { Outlet } from "react-router";
 import { NavLink } from "react-router-dom";
+
+// Icons
+import { FiHome, FiSettings, FiUser } from "react-icons/fi";
+import { TbBrandBooking } from "react-icons/tb";
+import { MdAdd, MdManageAccounts } from "react-icons/md";
 import { FaInbox } from "react-icons/fa";
+import { LucideTicketsPlane } from "lucide-react";
+import { RiAdvertisementLine } from "react-icons/ri";
 
 const DashboardLayout = () => {
   const activeClass = "bg-base-300 font-semibold rounded-md";
@@ -19,14 +22,14 @@ const DashboardLayout = () => {
           bg-base-200
           h-screen
           transition-all duration-300
-          w-16 hover:w-50
+          w-16 hover:w-[12.5rem]
           flex flex-col justify-between
           shadow-md
         "
       >
         {/* TOP MENU */}
         <ul className="menu p-2 grow overflow-y-auto">
-          {/* home */}
+          {/* Home */}
           <li>
             <NavLink
               to="/"
@@ -40,7 +43,8 @@ const DashboardLayout = () => {
               <span className="hidden group-hover:inline">Homepage</span>
             </NavLink>
           </li>
-          {/* Add Tickets */}
+
+          {/* Add Ticket */}
           <li className="mt-2">
             <NavLink
               to="/dashboard/addTicket"
@@ -51,11 +55,11 @@ const DashboardLayout = () => {
               }
             >
               <MdAdd className="w-5 h-5" />
-             
               <span className="hidden group-hover:inline">Add Ticket</span>
             </NavLink>
           </li>
-           {/* My Added Tickets */}
+
+          {/* My Added Tickets */}
           <li className="mt-2">
             <NavLink
               to="/dashboard/myAddedTickets"
@@ -65,12 +69,12 @@ const DashboardLayout = () => {
                 }`
               }
             >
-              <LucideTicketsPlane className="w-5 h-5"/>
+              <LucideTicketsPlane className="w-5 h-5" />
               <span className="hidden group-hover:inline">My Added Tickets</span>
             </NavLink>
           </li>
 
-          {/* my booking tickets */}
+          {/* My Booking Tickets */}
           <li className="mt-2">
             <NavLink
               to="/dashboard/myBookingTickets"
@@ -80,12 +84,12 @@ const DashboardLayout = () => {
                 }`
               }
             >
-              
-              <TbBrandBooking  className="w-5 h-5" />
+              <TbBrandBooking className="w-5 h-5" />
               <span className="hidden group-hover:inline">My Booking Tickets</span>
             </NavLink>
           </li>
-          {/* Request booking tickets */}
+
+          {/* Requested Tickets */}
           <li className="mt-2">
             <NavLink
               to="/dashboard/requestedBookingsTickets"
@@ -95,14 +99,12 @@ const DashboardLayout = () => {
                 }`
               }
             >
-              
-             
-              <FaInbox className="w-5 h-5"/>
+              <FaInbox className="w-5 h-5" />
               <span className="hidden group-hover:inline">Requested Tickets</span>
             </NavLink>
           </li>
 
-          {/* manage Users */}
+          {/* Manage Users */}
           <li className="mt-2">
             <NavLink
               to="/dashboard/manageUsers"
@@ -112,14 +114,12 @@ const DashboardLayout = () => {
                 }`
               }
             >
-              
-             
-              <MdManageAccounts />
+              <MdManageAccounts className="w-5 h-5" />
               <span className="hidden group-hover:inline">Manage Users</span>
             </NavLink>
           </li>
 
-          {/* manage tickets */}
+          {/* Manage Tickets */}
           <li className="mt-2">
             <NavLink
               to="/dashboard/manageTickets"
@@ -129,10 +129,23 @@ const DashboardLayout = () => {
                 }`
               }
             >
-              
-             
-              <MdManageAccounts />
+              <MdManageAccounts className="w-5 h-5" />
               <span className="hidden group-hover:inline">Manage Tickets</span>
+            </NavLink>
+          </li>
+
+          {/* Advertise Tickets */}
+          <li className="mt-2">
+            <NavLink
+              to="/dashboard/advertiseTickets"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-300 ${
+                  isActive ? activeClass : ""
+                }`
+              }
+            >
+              <RiAdvertisementLine className="w-5 h-5" />
+              <span className="hidden group-hover:inline">Advertise Tickets</span>
             </NavLink>
           </li>
         </ul>
@@ -170,17 +183,18 @@ const DashboardLayout = () => {
       </div>
 
       {/* MAIN CONTENT AREA */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col transition-all duration-300 group-hover:ml-[12.5rem] ml-16">
         {/* NAVBAR */}
         <nav className="navbar w-full bg-base-300 px-4 shadow-sm">
           <button className="btn btn-ghost btn-square">
-           
+         
           </button>
           <div className="ml-4 text-lg font-semibold">Dashboard</div>
         </nav>
 
-        <div className="p-6 bg-base-100 flex-grow rounded-md shadow-sm">
-          <Outlet></Outlet>
+        {/* CONTENT */}
+        <div className="p-6 bg-base-100 flex-grow rounded-md shadow-sm mt-4">
+          <Outlet />
         </div>
       </div>
     </div>

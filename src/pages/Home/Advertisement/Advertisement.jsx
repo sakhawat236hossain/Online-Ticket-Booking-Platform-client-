@@ -1,14 +1,15 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import axiosPublic from "../../../Hooks/useAxios";
 import { Link } from "react-router-dom";
 import Spinner from "../../../components/common/Spinner/Spinner";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const Advertisement = () => {
+  const axiosSecure =useAxiosSecure()
   const { data: tickets = [], isLoading } = useQuery({
     queryKey: ["advertisementTickets"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/advertisement-tickets");
+   const res= await axiosSecure.get("/ticketsAdvertised");
       return res.data;
     },
   });

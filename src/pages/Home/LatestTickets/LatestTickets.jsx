@@ -1,14 +1,15 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import axiosPublic from "../../../Hooks/useAxios";
 import { Link } from "react-router-dom";
 import Spinner from "../../../components/common/Spinner/Spinner";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const LatestTickets = () => {
+  const axiosSecure=useAxiosSecure()
   const { data: tickets = [], isLoading } = useQuery({
     queryKey: ["latestTickets"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/latest-tickets");
+      const res = await axiosSecure.get("/latest-tickets");
       return res.data;
     },
   });
