@@ -4,15 +4,22 @@ import { useForm } from "react-hook-form";
 import { FiPlusCircle } from "react-icons/fi";
 import { uploadImageToImgBB } from "../../../../Utils";
 import UseAuth from "../../../../Hooks/UseAuth";
-import { useAddTicket } from "../../../../Hooks/useAddTicket";
+// import { useAddTicket } from "../../../../Hooks/useAddTicket";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const AddTicket = () => {
   const { user } = UseAuth();
-  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
   // React Query Mutation
-  const { mutateAsync, isPending } = useAddTicket();
+  // const { mutateAsync, isPending } = useAddTicket();
+  const axiosSecure = useAxiosSecure();
 
   const onSubmit = async (data) => {
     try {
@@ -37,17 +44,19 @@ const AddTicket = () => {
         },
       };
 
-      //  Send data 
-      await mutateAsync(ticketInfo);
+      //  Send data
+     
+      axiosSecure.post('/tickets', ticketInfo);
+
 
       reset();
       Swal.fire({
-  position: "top-end",
-  icon: "success",
-  title: "Ticket added successfully!",
-  showConfirmButton: false,
-  timer: 1500
-});
+        position: "top-end",
+        icon: "success",
+        title: "Ticket added successfully!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
       console.error(error);
     }
@@ -60,7 +69,6 @@ const AddTicket = () => {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-
         {/* TITLE */}
         <div>
           <label className="font-semibold block mb-1">Title</label>
@@ -83,7 +91,9 @@ const AddTicket = () => {
               placeholder="From"
               className="input input-bordered w-full"
             />
-            {errors.from && <p className="text-red-500 text-sm">{errors.from.message}</p>}
+            {errors.from && (
+              <p className="text-red-500 text-sm">{errors.from.message}</p>
+            )}
           </div>
 
           <div>
@@ -93,7 +103,9 @@ const AddTicket = () => {
               placeholder="To"
               className="input input-bordered w-full"
             />
-            {errors.to && <p className="text-red-500 text-sm">{errors.to.message}</p>}
+            {errors.to && (
+              <p className="text-red-500 text-sm">{errors.to.message}</p>
+            )}
           </div>
         </div>
 
@@ -111,7 +123,9 @@ const AddTicket = () => {
             <option>Ship</option>
             <option>Car</option>
           </select>
-          {errors.transport && <p className="text-red-500 text-sm">{errors.transport.message}</p>}
+          {errors.transport && (
+            <p className="text-red-500 text-sm">{errors.transport.message}</p>
+          )}
         </div>
 
         {/* PRICE / QUANTITY */}
@@ -122,12 +136,14 @@ const AddTicket = () => {
               type="number"
               {...register("price", {
                 required: "Price is required",
-                min: { value: 1, message: "Price must be greater than 0" }
+                min: { value: 1, message: "Price must be greater than 0" },
               })}
               placeholder="Price"
               className="input input-bordered w-full"
             />
-            {errors.price && <p className="text-red-500 text-sm">{errors.price.message}</p>}
+            {errors.price && (
+              <p className="text-red-500 text-sm">{errors.price.message}</p>
+            )}
           </div>
 
           <div>
@@ -136,20 +152,22 @@ const AddTicket = () => {
               type="number"
               {...register("quantity", {
                 required: "Quantity is required",
-                min: { value: 1, message: "Quantity must be at least 1" }
+                min: { value: 1, message: "Quantity must be at least 1" },
               })}
               placeholder="Quantity"
               className="input input-bordered w-full"
             />
-            {errors.quantity && <p className="text-red-500 text-sm">{errors.quantity.message}</p>}
+            {errors.quantity && (
+              <p className="text-red-500 text-sm">{errors.quantity.message}</p>
+            )}
           </div>
         </div>
 
         {/* CUSTOM DATE INPUT */}
         <div>
-         <label className="font-semibold block mb-1">
-  Departure Time (YYYY-MM-DD HH:mm)
-</label>
+          <label className="font-semibold block mb-1">
+            Departure Time (YYYY-MM-DD HH:mm)
+          </label>
           <input
             type="text"
             {...register("departure", {
@@ -183,19 +201,19 @@ const AddTicket = () => {
             {...register("image", { required: "Image is required" })}
             className="file-input w-full"
           />
-          {errors.image && <p className="text-red-500 text-sm">{errors.image.message}</p>}
+          {errors.image && (
+            <p className="text-red-500 text-sm">{errors.image.message}</p>
+          )}
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className="btn btn-error w-full text-white"
-          disabled={isPending}
-        >
-          {isPending ? "Adding..." : <>
-            <FiPlusCircle /> Add Ticket
-          </>}
+          >
+            
+              <FiPlusCircle /> Add Ticket
+           
         </button>
-
       </form>
     </div>
   );

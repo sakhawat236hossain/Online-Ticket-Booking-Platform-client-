@@ -34,7 +34,7 @@ const NavBar = () => {
         </NavLink>
       </li>
 
-         {/* Private */}
+      {/* Private */}
       {user && (
         <>
           <li>
@@ -74,8 +74,6 @@ const NavBar = () => {
           <FaPhoneAlt className="text-lg" /> Contact Us
         </NavLink>
       </li>
-
-   
     </>
   );
 
@@ -142,17 +140,41 @@ const NavBar = () => {
         <div className="flex flex-col md:flex-row items-center gap-2 md:gap-3">
           {/* PROFILE */}
           <div className="dropdown dropdown-end relative group cursor-pointer">
-            <div
-              tabIndex={0}
-              role="button"
-              className="w-9 h-9 rounded-full border-2 border-gray-300 overflow-hidden"
-            >
-              <img
-                src={user?.photoURL ? user.photoURL : profile}
-                alt="User"
-                className="w-full h-full object-cover"
-              />
-            </div>
+
+{/* Profile Image + Active Badge */}
+<div className="relative group cursor-pointer">
+  <div
+    tabIndex={0}
+    role="button"
+    className="w-10 h-10 rounded-full border-2 border-gray-300 overflow-hidden shadow-md
+               group-hover:scale-105 transition-all duration-300"
+  >
+    <img
+      src={user?.photoURL ? user.photoURL : profile}
+      alt="User"
+      className="w-full h-full object-cover"
+    />
+  </div>
+
+  {/* Active Green Dot (Pulse + Solid) */}
+  {user && (
+    <>
+      {/* Smooth pulse shadow */}
+      <span
+        className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full
+                   border-[6px] border-white animate-ping opacity-100"
+      ></span>
+
+      {/* Main active dot */}
+      <span
+        className="absolute bottom-0 right-0 w-3.5 h-3.5 bg-green-500 rounded-full
+                   border-[2px] border-white shadow-md"
+      ></span>
+    </>
+  )} 
+</div>
+
+
 
             {/* Tooltip */}
             <div

@@ -3,12 +3,13 @@ import UseAuth from "../../../Hooks/UseAuth";
 
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router";
-import axiosPublic from "../../../Hooks/useAxios";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const SocialLogin = () => {
   const { googleLogin } = UseAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosSecure=useAxiosSecure()
 
   const handleGoogleLogin = () => {
     googleLogin()
@@ -25,7 +26,7 @@ const SocialLogin = () => {
           photoURL: user.photoURL || "",
         };
 
-        axiosPublic.post("/users", userInfo)
+        axiosSecure.post("/users", userInfo)
           .then((data) => {
             console.log("User saved to database", data.data);
           })

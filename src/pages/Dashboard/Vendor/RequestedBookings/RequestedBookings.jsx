@@ -7,23 +7,19 @@ import UseAuth from "../../../../Hooks/UseAuth";
 
 // Icons
 import { FiCheckCircle, FiXCircle } from "react-icons/fi";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const RequestedBookings = () => {
   const { user } = UseAuth();
+  const axiosSecure =useAxiosSecure()
 
-  const {
-    data: bookings = [],
-    isLoading,
-    refetch,
-  } = useQuery({
-    queryKey: ["requestedBookings", user?.email],
-    queryFn: async () => {
-      const res = await axiosPublic.get(
-        `/requested-tickets?email=${user?.email}`
-      );
-      return res.data;
-    },
-  });
+const { data: bookings = [], isLoading, refetch } = useQuery({
+  queryKey: ["requestedBookings", user?.email],
+  queryFn: async () => {
+    const res = await axiosSecure.get(`/requested-tickets?email=${user?.email}`);
+    return res?.data
+  },
+});
 
   // Accept Booking
   const handleAccept = async (id) => {
@@ -154,16 +150,7 @@ const RequestedBookings = () => {
           ))}
         </tbody>
 
-        {/* Foot */}
-        <tfoot>
-          <tr>
-            <th>#</th>
-            <th>User Info</th>
-            <th>Ticket Details</th>
-            <th>Price & Status</th>
-            <th className="text-center">Actions</th>
-          </tr>
-        </tfoot>
+       
       </table>
     </div>
   );
