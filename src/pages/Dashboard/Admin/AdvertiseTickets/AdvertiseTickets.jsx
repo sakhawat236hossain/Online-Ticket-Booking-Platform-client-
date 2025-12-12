@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 const AdvertiseTickets = () => {
   const axiosSecure = useAxiosSecure();
 
+  // Fetch approved tickets
   const { data: tickets = [], isLoading, refetch } = useQuery({
     queryKey: ["approvedTickets"],
     queryFn: async () => {
@@ -17,15 +18,29 @@ const AdvertiseTickets = () => {
 
   if (isLoading) return <Spinner />;
 
+  const advertisedCount = tickets.filter(t => t.advertised).length;
+
   // Toggle advertise
   const handleAdvertiseToggle = async (ticket) => {
     try {
+      // Prevent toggling on if already 6 advertised tickets
+      if (!ticket.advertised && advertisedCount >= 6) {
+        Swal.fire({
+          title: "Maximum Limit Reached!",
+          text: "You cannot advertise more than 6 tickets",
+          icon: "warning",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+        return;
+      }
+
       await axiosSecure.patch(`/ticketsAdvertise/${ticket._id}`, {
         advertised: !ticket.advertised,
       });
 
       Swal.fire({
-        title: ticket.advertised ? "Unadvertised!" : "Advertised!",
+        title: !ticket.advertised ? "Advertised!" : "Unadvertised!",
         icon: "success",
         timer: 1200,
         showConfirmButton: false,
@@ -36,9 +51,9 @@ const AdvertiseTickets = () => {
       console.error(err);
       Swal.fire({
         title: "Error!",
-        text: "Something went wrong",
+        text: err.response?.data?.message || "Something went wrong",
         icon: "error",
-        timer: 1200,
+        timer: 1500,
         showConfirmButton: false,
       });
     }
@@ -92,11 +107,11 @@ const AdvertiseTickets = () => {
               <td>
                 <div className="flex items-center gap-2">
                   <img
-                    src={ticket.Vendor.VendorImage}
-                    alt={ticket.Vendor.VendorName}
+                    src={ticket.Vendor?.VendorImage}
+                    alt={ticket.Vendor?.VendorName}
                     className="w-8 h-8 rounded-full"
                   />
-                  <span className="text-sm">{ticket.Vendor.VendorName}</span>
+                  <span className="text-sm">{ticket.Vendor?.VendorName}</span>
                 </div>
               </td>
 
@@ -107,6 +122,8 @@ const AdvertiseTickets = () => {
                   className="toggle toggle-success"
                   checked={ticket.advertised || false}
                   onChange={() => handleAdvertiseToggle(ticket)}
+                  // Disable if trying to toggle on and already 6 tickets advertised
+                  disabled={!ticket.advertised && advertisedCount >= 6}
                 />
               </td>
             </tr>
