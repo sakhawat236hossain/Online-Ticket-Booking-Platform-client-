@@ -18,6 +18,7 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUsers/ManageUsers";
 import ManageTickets from "../pages/Dashboard/Admin/ManageTickets/ManageTickets";
 import AdvertiseTickets from "../pages/Dashboard/Admin/AdvertiseTickets/AdvertiseTickets";
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
+import TransactionHistory from "../pages/Dashboard/User/TransactionHistory";
 
 export const router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ export const router = createBrowserRouter([
           {
             path:"advertiseTickets",
             element:<AdvertiseTickets></AdvertiseTickets>
+          },
+          {
+            path:"transactionsPge",
+            element:<TransactionHistory></TransactionHistory>
           }
         ],
       },

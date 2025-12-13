@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 // Icons
 import { FiHome, FiSettings, FiUser } from "react-icons/fi";
 import { TbBrandBooking } from "react-icons/tb";
-import { MdAdd, MdManageAccounts } from "react-icons/md";
+import { MdAdd, MdManageAccounts, MdPayments } from "react-icons/md";
 import { FaInbox } from "react-icons/fa";
 import { LucideTicketsPlane } from "lucide-react";
 import { RiAdvertisementLine } from "react-icons/ri";
@@ -146,6 +146,21 @@ const DashboardLayout = () => {
             >
               <RiAdvertisementLine className="w-5 h-5" />
               <span className="hidden group-hover:inline">Advertise Tickets</span>
+            </NavLink>
+          </li>
+          {/* Transactions Pge*/}
+          <li className="mt-2">
+            <NavLink
+              to="/dashboard/transactionsPge"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-300 ${
+                  isActive ? activeClass : ""
+                }`
+              }
+            >
+              
+              <MdPayments className="w-5 h-5" />
+              <span className="hidden group-hover:inline">Transactions ID</span>
             </NavLink>
           </li>
         </ul>
