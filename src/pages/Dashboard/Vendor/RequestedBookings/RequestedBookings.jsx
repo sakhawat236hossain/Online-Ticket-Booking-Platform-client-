@@ -16,10 +16,13 @@ const RequestedBookings = () => {
 const { data: bookings = [], isLoading, refetch } = useQuery({
   queryKey: ["requestedBookings", user?.email],
   queryFn: async () => {
-    const res = await axiosSecure.get(`/requested-tickets?email=${user?.email}`);
-    return res?.data
+    console.log("Fetching requested tickets for:", user?.email);
+const res = await axiosSecure.get(`/requested-tickets?email=${user?.email}`);
+    console.log("Server response:", res.data);
+    return res.data;
   },
 });
+
 
   // Accept Booking
   const handleAccept = async (id) => {

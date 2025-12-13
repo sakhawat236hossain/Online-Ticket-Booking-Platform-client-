@@ -36,14 +36,26 @@ const MyBookingTickets = () => {
         const pad = (n) => n.toString().padStart(2, "0");
 
         if (diff <= 0) {
-          updates[ticket._id] = { days: "00", hours: "00", minutes: "00", seconds: "00", expired: true };
+          updates[ticket._id] = {
+            days: "00",
+            hours: "00",
+            minutes: "00",
+            seconds: "00",
+            expired: true,
+          };
         } else {
           const d = Math.floor(diff / (1000 * 60 * 60 * 24));
           const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
           const m = Math.floor((diff / 60000) % 60);
           const s = Math.floor((diff / 1000) % 60);
 
-          updates[ticket._id] = { days: pad(d), hours: pad(h), minutes: pad(m), seconds: pad(s), expired: false };
+          updates[ticket._id] = {
+            days: pad(d),
+            hours: pad(h),
+            minutes: pad(m),
+            seconds: pad(s),
+            expired: false,
+          };
         }
       });
 
@@ -53,14 +65,53 @@ const MyBookingTickets = () => {
     return () => clearInterval(interval);
   }, [tickets]);
 
+  const handlePayment = async (ticket) => {
+    const bookingInfo = {
+      ticketId: ticket.ticketId,
+      bookingId:ticket._id,
+      title: ticket.title,
+      from: ticket.from,
+      to: ticket.to,
+      transport: ticket.transport,
+      price: Number(ticket.price),
+      quantity: Number(ticket.quantity),
+      image: ticket.image,
+      departure: ticket.departure,
+
+      buyer: {
+        buyerName: user?.displayName,
+        buyerEmail: user?.email,
+        buyerPhoto: user?.photoURL,
+      },
+      Vendor: {
+        VendorName: ticket.vendor?.VendorName,
+        VendorEmail: ticket.vendor?.VendorEmail,
+        VendorImage: ticket.vendor?.VendorImage,
+      },
+    };
+
+    try {
+      const res = await axiosPublic.post(
+        "/create-checkout-session",
+        bookingInfo
+      );
+      window.location.href=res.data.url
+      // console.log("Payment Response:", res.data.url);
+    } catch (error) {
+      console.error("Payment Error:", error);
+    }
+  };
+
   if (isLoading) return <Spinner />;
 
   return (
     <div className="px-3 py-4 md:px-5 lg:px-8">
       {/* Page Title */}
-      <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-center text-gray-900
+      <h2
+        className="text-2xl sm:text-3xl font-bold mb-4 text-center text-gray-900
                      bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500
-                     bg-clip-text text-transparent animate-bounce">
+                     bg-clip-text text-transparent animate-bounce"
+      >
         My Booked Tickets
       </h2>
 
@@ -89,8 +140,12 @@ const MyBookingTickets = () => {
 
                 {/* Transport */}
                 <div className="flex items-center gap-1.5">
-                  <div className="p-1 bg-blue-50 rounded-full shadow">{transportIcons[ticket.transport]}</div>
-                  <p className="text-gray-700 text-xs sm:text-sm font-medium">{ticket.transport}</p>
+                  <div className="p-1 bg-blue-50 rounded-full shadow">
+                    {transportIcons[ticket.transport]}
+                  </div>
+                  <p className="text-gray-700 text-xs sm:text-sm font-medium">
+                    {ticket.transport}
+                  </p>
                 </div>
 
                 {/* From - To */}
@@ -107,8 +162,14 @@ const MyBookingTickets = () => {
 
                 {/* Quantity + Price */}
                 <div className="text-gray-700 text-xs sm:text-sm space-y-0.5">
-                  <p><span className="font-semibold">Qty:</span> {ticket.quantity}</p>
-                  <p><span className="font-semibold">Total:</span> {ticket.totalPrice} 💰</p>
+                  <p>
+                    <span className="font-semibold">Qty:</span>{" "}
+                    {ticket.quantity}
+                  </p>
+                  <p>
+                    <span className="font-semibold">Total:</span>{" "}
+                    {ticket.totalPrice} 💰
+                  </p>
                 </div>
 
                 {/* Status badge */}
@@ -146,7 +207,9 @@ const MyBookingTickets = () => {
                                    transform hover:scale-105 transition-all"
                       >
                         <p className="text-xs sm:text-sm font-bold">{cd[t]}</p>
-                        <p className="text-[7px] sm:text-[8px] uppercase opacity-90">{t}</p>
+                        <p className="text-[7px] sm:text-[8px] uppercase opacity-90">
+                          {t}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -154,9 +217,12 @@ const MyBookingTickets = () => {
 
                 {/* Pay Button */}
                 {ticket.status === "accepted" && !cd?.expired && (
-                  <button className="w-full mt-1.5 bg-gradient-to-r from-blue-600 to-indigo-700
+                  <button
+                    onClick={() => handlePayment(ticket)}
+                    className="w-full mt-1.5 bg-gradient-to-r from-blue-600 to-indigo-700
                                      hover:from-blue-700 hover:to-indigo-800 text-white py-1.5
-                                     rounded-md font-semibold transition-all shadow-sm hover:shadow-md text-xs sm:text-sm cursor-pointer">
+                                     rounded-md font-semibold transition-all shadow-sm hover:shadow-md text-xs sm:text-sm cursor-pointer"
+                  >
                     Pay Now
                   </button>
                 )}
