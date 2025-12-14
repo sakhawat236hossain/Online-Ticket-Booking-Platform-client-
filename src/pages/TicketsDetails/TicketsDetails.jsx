@@ -230,17 +230,17 @@ const TicketsDetails = () => {
 
       {/* MODAL (Enhanced Styling) */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-          <div className="bg-white p-8 rounded-2xl w-full max-w-md shadow-2xl space-y-6 transform transition-all duration-300 scale-100">
-            <h3 className="text-2xl font-extrabold text-gray-900 border-b pb-3">
+        <div className="fixed inset-0   flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+          <div className=" p-8 rounded-2xl w-full max-w-md shadow-2xl space-y-6 transform transition-all duration-300 scale-100">
+            <h3 className="text-2xl font-extrabold border-b pb-3">
               Confirm Booking
             </h3>
 
-            <p className="text-sm text-gray-600">
+            <p className="text-sm ">
               Booking: **{ticket?.title}** | Price: **${ticket?.price}**
             </p>
 
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-sm font-medium  mb-1">
               Select Quantity (Max: {ticket?.quantity})
             </label>
             <input
@@ -267,10 +267,10 @@ const TicketsDetails = () => {
               <button
                 onClick={handleBooking}
                 disabled={isInvalidQty || isPending}
-                className={`flex-1 py-3 rounded-lg text-white font-bold transition duration-300 ${
+                className={`flex-1 py-3 rounded-lg  font-bold transition duration-300 ${
                   isInvalidQty || isPending
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-green-500 hover:bg-green-600 shadow-md shadow-green-500/30"
+                    ? " cursor-not-allowed"
+                    : " bg-green-600 shadow-md shadow-green-500/30 cursor-pointer"
                 }`}
               >
                 {isPending ? (
@@ -286,7 +286,7 @@ const TicketsDetails = () => {
 
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="flex-1 py-3 rounded-lg font-bold text-red-600 border border-red-300 bg-white hover:bg-red-50 transition duration-300"
+                className="flex-1 py-3 rounded-lg font-bold text-red-600 border border-red-300  hover:transition duration-300 cursor-pointer"
               >
                 Cancel
               </button>
