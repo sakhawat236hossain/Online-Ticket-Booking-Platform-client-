@@ -27,9 +27,9 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <div className="py-16 bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="py-16dark:text-white">
       {/* Section Title */}
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-10 text-gray-800">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-10">
         Why Choose Us?
       </h2>
 
@@ -38,7 +38,7 @@ const WhyChooseUs = () => {
         {features.map((f, i) => (
           <div
             key={i}
-            className="mx-6 p-6 min-w-[270px] rounded-2xl bg-white/70 backdrop-blur-md 
+            className="mx-6 p-6 min-w-[270px] rounded-2xl backdrop-blur-md 
             shadow-lg border border-gray-200 hover:shadow-2xl hover:bg-white 
             transition-all duration-300 cursor-pointer relative overflow-hidden group"
           >

@@ -13,7 +13,7 @@ const routes = [
 
 const PopularRoutes = () => {
   return (
-    <div className="py-5 bg-gray-100">
+    <div className="py-5 ">
       <div className="max-w-6xl mx-auto px-4">
 
         {/* Section Title */}
@@ -21,7 +21,7 @@ const PopularRoutes = () => {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-3xl md:text-4xl font-extrabold text-center text-gray-900 mb-12"
+          className="text-3xl md:text-4xl font-extrabold text-center  mb-12"
         >
           Popular Bus Routes
         </motion.h2>
@@ -35,7 +35,7 @@ const PopularRoutes = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               whileHover={{ scale: 1.07, y: -5 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="relative overflow-hidden rounded-xl bg-white shadow-md hover:shadow-xl cursor-pointer"
+              className="relative overflow-hidden rounded-xl  shadow-md hover:shadow-xl cursor-pointer"
             >
               {/* TOP STRIP */}
               <div className="h-2 w-full bg-gradient-to-r from-blue-600 to-indigo-500"></div>
@@ -47,12 +47,12 @@ const PopularRoutes = () => {
                     <MapPin className="w-6 h-6 text-blue-700" />
                   </div>
 
-                  <h3 className="text-xl font-bold text-gray-900">
+                  <h3 className="text-xl font-bold">
                     {route.from} → {route.to}
                   </h3>
                 </div>
 
-                <p className="text-gray-500 mb-4">
+                <p className=" mb-4">
                   A popular and frequently traveled route in Bangladesh.
                 </p>
 

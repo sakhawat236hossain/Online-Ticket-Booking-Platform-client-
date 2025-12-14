@@ -17,12 +17,12 @@ const LatestTickets = () => {
   if (isLoading) return <Spinner />;
 
   return (
-    <div className="px-6 py-12 bg-gray-50">
+    <div className="px-6 py-12 ">
       
       {/* SECTION TITLE */}
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold text-gray-800">Latest Tickets</h1>
-        <p className="text-gray-500 mt-2">Newly added tickets available for booking</p>
+        <h1 className="text-4xl font-bold dark:text-white">Latest Tickets</h1>
+        <p className="dark:text-white mt-2">Newly added tickets available for booking</p>
         <div className="w-20 h-1 bg-red-500 mx-auto mt-4 rounded"></div>
       </div>
 
@@ -38,7 +38,7 @@ const LatestTickets = () => {
           return (
             <div
               key={ticket._id}
-              className="border p-5 rounded-xl shadow-lg bg-white hover:-translate-y-1 hover:shadow-2xl transition-all duration-300"
+              className="border p-5 rounded-xl shadow-lg  hover:-translate-y-1 hover:shadow-2xl transition-all duration-300"
             >
               <img
                 src={ticket.image}

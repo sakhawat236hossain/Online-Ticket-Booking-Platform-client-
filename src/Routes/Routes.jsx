@@ -19,11 +19,13 @@ import ManageTickets from "../pages/Dashboard/Admin/ManageTickets/ManageTickets"
 import AdvertiseTickets from "../pages/Dashboard/Admin/AdvertiseTickets/AdvertiseTickets";
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import TransactionHistory from "../pages/Dashboard/User/TransactionHistory";
+import Error from "../components/common/Error/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
+    errorElement:<Error></Error>,
     children: [
       {
         index: true,

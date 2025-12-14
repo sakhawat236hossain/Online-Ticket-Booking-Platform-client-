@@ -27,8 +27,8 @@ const services = [
 
 const TravelServices = () => {
   return (
-    <div className="py-20 bg-gray-50">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 text-gray-800">
+    <div className="py-20 ">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-12 dark:text-white">
         Our Travel Services
       </h2>
 
@@ -38,7 +38,7 @@ const TravelServices = () => {
             key={i}
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 200 }}
-            className="bg-white rounded-3xl shadow-xl overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-300"
+            className="rounded-3xl shadow-xl overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-300"
           >
             <div className="w-full h-56 relative overflow-hidden">
               <img
