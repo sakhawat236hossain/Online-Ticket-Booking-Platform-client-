@@ -45,10 +45,10 @@ const BookingFAQ = () => {
     <section className="px-6 py-16 dark:bg-gray-900">
       {/* Section Header */}
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-gray-800 dark:text-white">
+        <h2 className="text-4xl font-bold  dark:text-white">
           How to Book a Ticket?
         </h2>
-        <p className="mt-2 text-gray-500 dark:text-gray-300">
+        <p className="mt-2 dark:text-gray-300">
           Follow these simple steps to book your travel tickets
         </p>
         <div className="w-24 h-1 bg-red-500 mx-auto mt-4 rounded-full"></div>

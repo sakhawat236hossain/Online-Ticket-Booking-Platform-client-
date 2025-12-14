@@ -38,7 +38,7 @@ const TravelServices = () => {
             key={i}
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 200 }}
-            className="rounded-3xl shadow-xl overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-300"
+            className=" rounded-3xl shadow-xl overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-300"
           >
             <div className="w-full h-56 relative overflow-hidden">
               <img
@@ -48,8 +48,8 @@ const TravelServices = () => {
               />
             </div>
             <div className="p-6 text-center">
-              <h3 className="text-xl font-bold text-gray-800 mb-2">{s.title}</h3>
-              <p className="text-gray-600 text-sm">{s.desc}</p>
+              <h3 className="text-xl font-bold  mb-2">{s.title}</h3>
+              <p className=" text-sm">{s.desc}</p>
             </div>
           </motion.div>
         ))}

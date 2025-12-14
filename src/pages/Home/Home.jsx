@@ -6,6 +6,7 @@ import TravelServices from './HomeComponents/TravelServices/TravelServices';
 import Advertisement from './Advertisement/Advertisement';
 import LatestTickets from './LatestTickets/LatestTickets';
 import BookingFAQ from './BookingFAQ/BookingFAQ';
+import FeedbackForm from './FeedbackForm/FeedbackForm';
 
 const Home = () => {
     return (
@@ -17,6 +18,7 @@ const Home = () => {
             <TravelServices></TravelServices>
             <PopularRoutes></PopularRoutes>
             <BookingFAQ></BookingFAQ>
+            <FeedbackForm></FeedbackForm>
         </div>
     );
 };

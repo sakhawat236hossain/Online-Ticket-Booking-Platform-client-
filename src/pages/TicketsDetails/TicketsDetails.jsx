@@ -6,11 +6,12 @@ import UseAuth from "../../Hooks/UseAuth";
 import Swal from "sweetalert2";
 import { useBookingTicket } from "../../Hooks/useBookingTicket";
 
+// Existing Transport Icons
 const transportIcons = {
-  Bus: <FaBus className="text-blue-500" />,
-  Train: <FaTrain className="text-purple-500" />,
-  Air: <FaPlane className="text-red-500" />,
-  Ship: <FaShip className="text-green-500" />,
+  Bus: <FaBus className="text-blue-500" size={20} />,
+  Train: <FaTrain className="text-purple-500" size={20} />,
+  Air: <FaPlane className="text-red-500" size={20} />,
+  Ship: <FaShip className="text-green-500" size={20} />,
 };
 
 const TicketsDetails = () => {
@@ -18,19 +19,19 @@ const TicketsDetails = () => {
   const { user } = UseAuth();
   const [ticket, setTicket] = useState({});
   const [countdown, setCountdown] = useState({});
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(1); 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { mutateAsync, isPending, reset } = useBookingTicket();
 
-  // Fetch Ticket
+  // Fetch Ticket (Fnc remains same)
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/tickets/${id}`)
       .then((res) => res.json())
       .then((data) => setTicket(data));
   }, [id]);
 
-  // Countdown
+  // Countdown Logic (Fnc remains same)
   useEffect(() => {
     if (!ticket?.departure) return;
 
@@ -63,9 +64,10 @@ const TicketsDetails = () => {
 
   const isExpired = new Date(ticket?.departure) < new Date();
   const noStock = ticket?.quantity === 0;
-  const isInvalidQty = quantity > ticket?.quantity || quantity < 1;
+  const isInvalidQty = quantity > ticket?.quantity || quantity < 1 || !quantity;
   const isDisabled = isExpired || noStock;
 
+  // Booking Handler (Fnc remains same)
   const handleBooking = async () => {
     const totalPrice = ticket.price * quantity;
 
@@ -99,7 +101,6 @@ const TicketsDetails = () => {
       if (data.success) {
         Swal.fire("Success!", "Ticket booked successfully", "success");
         setIsModalOpen(false);
-
         reset();
       }
     } catch (err) {
@@ -109,122 +110,183 @@ const TicketsDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-black to-purple-900 py-12 px-4 md:px-8">
-      <div className="max-w-5xl mx-auto">
-        <div className="bg-white/10 backdrop-blur-xl rounded-3xl shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-6 p-5 md:p-10">
-          {/* IMAGE */}
-          <img
-            src={ticket?.image}
-            alt={ticket?.title}
-            className="w-full h-64 md:h-[450px] object-cover rounded-3xl hover:scale-105 transition-transform duration-700"
-          />
+    <div className="min-h-screen py-16 px-4 md:px-8 ">
+      <div className="max-w-6xl mx-auto">
+        <div className="rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 md:p-12">
+          
+          {/* IMAGE SECTION */}
+          <div className="relative">
+            <img
+              src={ticket?.image}
+              alt={ticket?.title}
+              className="w-full h-80 md:h-full object-cover rounded-3xl shadow-xl transition-transform duration-500 hover:scale-[1.02]"
+            />
+            {/* Price Badge */}
+            <div className="absolute top-4 right-4 bg-indigo-600 font-extrabold text-xl px-4 py-2 rounded-full shadow-lg">
+              ${ticket?.price}
+            </div>
+          </div>
 
-          {/* INFO */}
-          <div className="flex flex-col justify-between text-white space-y-4 md:space-y-6">
+          {/* INFO SECTION */}
+          <div className="flex flex-col justify-between space-y-6">
             <div>
               {/* TITLE */}
-              <h2 className="text-2xl md:text-4xl font-extrabold mb-4 text-gradient bg-gradient-to-r from-purple-400 via-pink-500 to-indigo-400 bg-clip-text text-transparent">
+              <h2 className="text-4xl md:text-5xl font-extrabold mb-4  leading-tight">
                 {ticket?.title}
               </h2>
 
-              {/* FROM & TO */}
-              <p className="flex items-center gap-2 text-sm md:text-base">
-                <FiMap /> From: <span className="font-semibold">{ticket?.from}</span>
-              </p>
-              <p className="flex items-center gap-2 text-sm md:text-base">
-                <FiMap /> To: <span className="font-semibold">{ticket?.to}</span>
-              </p>
+              {/* ROUTE */}
+              <div className="bg-gray-50 p-4 rounded-xl border border-gray-100 shadow-inner mb-4">
+                <div className="flex items-center justify-between text-lg font-semibold text-gray-700">
+                  <div className="flex items-center gap-2">
+                    <FiMap className="text-green-500" />
+                    <span className="text-gray-500 text-sm uppercase">From:</span>
+                    <span className="text-gray-900">{ticket?.from}</span>
+                  </div>
+                  <div className="text-2xl font-light text-gray-300">|</div>
+                  <div className="flex items-center gap-2">
+                    <FiMap className="text-red-500" />
+                    <span className="text-gray-500 text-sm uppercase">To:</span>
+                    <span className="text-gray-900">{ticket?.to}</span>
+                  </div>
+                </div>
+              </div>
 
-              {/* TRANSPORT */}
-              <p className="flex items-center gap-2 text-sm md:text-base mt-2">
-                {transportIcons[ticket?.transport]} Transport:{" "}
-                <span className="font-semibold">{ticket?.transport}</span>
-              </p>
+              {/* DETAILS ROW */}
+              <div className="grid grid-cols-2 gap-4 text-sm md:text-base">
+                {/* Transport */}
+                <p className="flex items-center gap-3 p-3 rounded-lg bg-blue-50 text-blue-800 font-medium">
+                  {transportIcons[ticket?.transport]} 
+                  <span className="text-gray-500 font-normal">Mode:</span>
+                  <span className="font-semibold">{ticket?.transport}</span>
+                </p>
 
-              {/* PRICE & QUANTITY */}
-              <p className="mt-2 text-sm md:text-base">
-                💰 Price: <span className="text-green-400 font-semibold">{ticket?.price}</span>
-              </p>
-              <p className="text-sm md:text-base">
-                🎟 Available: <span className="text-indigo-400 font-semibold">{ticket?.quantity}</span>
-              </p>
+                {/* Available Quantity */}
+                <p className="flex items-center gap-3 p-3 rounded-lg bg-indigo-50 text-indigo-800 font-medium">
+                  <span className="text-xl">🎟</span> 
+                  <span className="text-gray-500 font-normal">Available:</span>
+                  <span className="font-semibold text-xl">{ticket?.quantity}</span>
+                </p>
+              </div>
 
               {/* DEPARTURE */}
-              <p className="flex items-center gap-2 text-sm md:text-base mt-2">
-                <FiClock className="text-red-400" /> Departure:{" "}
-                <span className="font-semibold">{new Date(ticket?.departure).toLocaleString()}</span>
-              </p>
+              <div className="mt-4 p-4 rounded-xl bg-red-50 border border-red-200">
+                <p className="flex items-center gap-3 text-lg font-bold text-red-700">
+                  <FiClock size={24} /> 
+                  Departure: 
+                  <span className="font-extrabold ml-1">
+                    {new Date(ticket?.departure).toLocaleString()}
+                  </span>
+                </p>
+              </div>
             </div>
 
-            {/* COUNTDOWN */}
-            <div className="grid grid-cols-4 gap-2 text-center mt-4">
-              {["days", "hours", "minutes", "seconds"].map((t) => (
-                <div
-                  key={t}
-                  className="bg-gradient-to-br from-purple-700 to-indigo-900 p-2 md:p-3 rounded-xl shadow-md hover:scale-105 transition-transform"
-                >
-                  <p className="text-lg md:text-xl font-bold">{countdown[t]}</p>
-                  <p className="uppercase text-[9px] md:text-[10px]">{t}</p>
-                </div>
-              ))}
+            {/* COUNTDOWN TIMER */}
+            <div className="border-t border-gray-100 pt-6 mt-6">
+              <p className="text-lg font-bold text-gray-700 mb-3">Time Until Departure:</p>
+              <div className="grid grid-cols-4 gap-4 text-center">
+                {["days", "hours", "minutes", "seconds"].map((t) => (
+                  <div
+                    key={t}
+                    className="p-3 md:p-5 rounded-xl bg-gray-800 text-white shadow-xl transform hover:scale-105 transition-transform duration-300"
+                  >
+                    <p className="text-2xl md:text-4xl font-extrabold">{countdown[t]}</p>
+                    <p className="uppercase text-xs font-medium mt-1 text-gray-300">{t}</p>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* PERKS */}
-            <div className="flex flex-wrap gap-2 mt-3">
-              {ticket?.perks?.map((p) => (
-                <span
-                  key={p}
-                  className="bg-green-500/20 px-3 py-1 rounded-full text-sm flex items-center hover:bg-green-500/30 transition"
-                >
-                  <FiCheck className="mr-1" /> {p}
-                </span>
-              ))}
+            {/* PERKS / FEATURES */}
+            <div className="border-t border-gray-100 pt-6 mt-6">
+              <p className="text-lg font-bold text-gray-700 mb-3">Ticket Perks:</p>
+              <div className="flex flex-wrap gap-2">
+                {ticket?.perks?.map((p) => (
+                  <span
+                    key={p}
+                    className="px-4 py-1.5 rounded-full text-sm font-medium bg-green-100 text-green-700 flex items-center shadow-sm hover:bg-green-200 transition"
+                  >
+                    <FiCheck className="mr-2 text-green-500" /> {p}
+                  </span>
+                ))}
+              </div>
             </div>
 
             {/* BOOK BUTTON */}
             <button
               disabled={isDisabled}
               onClick={() => setIsModalOpen(true)}
-              className={`py-3 rounded-xl text-lg font-bold w-full transition ${
+              className={`py-4 rounded-xl text-xl font-bold w-full transition duration-300 transform shadow-lg ${
                 isDisabled
-                  ? "bg-gray-600 cursor-not-allowed"
-                  : "bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 hover:scale-105"
+                  ? "bg-gray-400 text-gray-700 cursor-not-allowed shadow-none"
+                  : "text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 hover:scale-[1.02] hover:shadow-xl hover:shadow-purple-500/40"
               }`}
             >
-              {isExpired ? "Expired" : noStock ? "Sold Out" : "Book Now"}
+              {isExpired ? "Ticket Expired" : noStock ? "Sold Out" : "Book Your Ticket Now"}
             </button>
           </div>
         </div>
       </div>
 
-      {/* MODAL */}
+      {/* MODAL (Enhanced Styling) */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-          <div className="bg-white p-6 rounded-2xl w-[90%] max-w-sm space-y-4">
-            <h3 className="text-xl font-bold text-gray-800">Confirm Booking</h3>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+          <div className="bg-white p-8 rounded-2xl w-full max-w-md shadow-2xl space-y-6 transform transition-all duration-300 scale-100">
+            <h3 className="text-2xl font-extrabold text-gray-900 border-b pb-3">
+              Confirm Booking
+            </h3>
 
+            <p className="text-sm text-gray-600">
+              Booking: **{ticket?.title}** | Price: **${ticket?.price}**
+            </p>
+
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Select Quantity (Max: {ticket?.quantity})
+            </label>
             <input
               type="number"
               value={quantity}
               onChange={(e) => setQuantity(Number(e.target.value))}
-              className="input input-bordered w-full"
+              className={`w-full p-3 border-2 rounded-lg text-lg font-semibold focus:ring-indigo-500 focus:border-indigo-500 transition ${
+                isInvalidQty ? "border-red-500" : "border-gray-300"
+              }`}
               min={1}
               max={ticket?.quantity}
+              placeholder="Enter quantity"
             />
-            <p className="text-xs text-green-500">Max: {ticket?.quantity}</p>
+            
+            {isInvalidQty && quantity > 0 && (
+                <p className="text-red-500 text-sm">Quantity must be between 1 and {ticket?.quantity}.</p>
+            )}
 
-            <div className="flex gap-3">
+            <div className="text-xl font-bold pt-2">
+                Total Price: <span className="text-indigo-600">${(ticket.price * quantity).toFixed(2)}</span>
+            </div>
+
+            <div className="flex gap-4 pt-4">
               <button
                 onClick={handleBooking}
                 disabled={isInvalidQty || isPending}
-                className="btn btn-success flex-1"
+                className={`flex-1 py-3 rounded-lg text-white font-bold transition duration-300 ${
+                  isInvalidQty || isPending
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-green-500 hover:bg-green-600 shadow-md shadow-green-500/30"
+                }`}
               >
-                {isPending ? "Booking..." : "Confirm"}
+                {isPending ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <FaBus className="animate-spin" /> Confirming...
+                  </span>
+                ) : (
+                  <span className="flex items-center justify-center gap-2">
+                    <FiCheck /> Confirm Booking
+                  </span>
+                )}
               </button>
 
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="btn btn-error flex-1"
+                className="flex-1 py-3 rounded-lg font-bold text-red-600 border border-red-300 bg-white hover:bg-red-50 transition duration-300"
               >
                 Cancel
               </button>

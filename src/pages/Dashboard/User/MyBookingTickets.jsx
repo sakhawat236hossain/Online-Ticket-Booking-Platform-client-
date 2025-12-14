@@ -108,7 +108,7 @@ const MyBookingTickets = () => {
     <div className="px-3 py-4 md:px-5 lg:px-8">
       {/* Page Title */}
       <h2
-        className="text-2xl sm:text-3xl font-bold mb-4 text-center text-gray-900
+        className="text-2xl sm:text-3xl font-bold mb-4 text-center 
                      bg-gradient-to-r from-purple-500 via-pink-500 to-indigo-500
                      bg-clip-text text-transparent animate-bounce"
       >
@@ -122,7 +122,7 @@ const MyBookingTickets = () => {
           return (
             <div
               key={ticket._id}
-              className="bg-white/80 backdrop-blur-sm shadow-md rounded-lg overflow-hidden border border-gray-200
+              className=" backdrop-blur-sm shadow-md rounded-lg overflow-hidden border border-gray-200
                          hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
             >
               {/* Image */}
@@ -134,7 +134,7 @@ const MyBookingTickets = () => {
 
               <div className="p-3 space-y-1.5">
                 {/* Ticket Title */}
-                <h3 className="text-base sm:text-lg font-semibold text-gray-900 truncate">
+                <h3 className="text-base sm:text-lg font-semibold  truncate">
                   {ticket.title}
                 </h3>
 
@@ -149,19 +149,19 @@ const MyBookingTickets = () => {
                 </div>
 
                 {/* From - To */}
-                <div className="flex items-center gap-1 text-gray-800 text-xs sm:text-sm font-medium">
+                <div className="flex items-center gap-1  text-xs sm:text-sm font-medium">
                   <FiMapPin className="text-blue-600" />
                   {ticket.from} → {ticket.to}
                 </div>
 
                 {/* Departure */}
-                <div className="flex items-center gap-1 text-gray-700 text-xs sm:text-sm">
+                <div className="flex items-center gap-1  text-xs sm:text-sm">
                   <FiClock className="text-indigo-600" />
                   {new Date(ticket.departure).toLocaleString()}
                 </div>
 
                 {/* Quantity + Price */}
-                <div className="text-gray-700 text-xs sm:text-sm space-y-0.5">
+                <div className=" text-xs sm:text-sm space-y-0.5">
                   <p>
                     <span className="font-semibold">Qty:</span>{" "}
                     {ticket.quantity}

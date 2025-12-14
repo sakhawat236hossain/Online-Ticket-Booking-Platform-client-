@@ -28,13 +28,13 @@ const TransactionHistory = () => {
       </h2>
 
       {transactions.length === 0 ? (
-        <p className="text-center text-gray-500">
+        <p className="text-center">
           No transactions found
         </p>
       ) : (
         <div className="overflow-x-auto">
           <table className="table w-full border">
-            <thead className="bg-gray-100">
+            <thead className="">
               <tr>
                 <th>#</th>
                 <th>Transaction ID</th>
