@@ -1,9 +1,11 @@
 import React from "react";
 import { FaUser, FaEnvelope, FaUserTag } from "react-icons/fa";
 import UseAuth from "../../../Hooks/UseAuth";
+import useRole from "../../../Hooks/useRole";
 
 const Profile = () => {
   const { user } = UseAuth();
+  const {role, isLoading}=useRole()
 
   return (
     <div className="max-w-4xl mx-auto mt-12 px-6">
@@ -68,7 +70,7 @@ const Profile = () => {
             </div>
             <div>
               <p className="text-xs uppercase text-gray-500">Role</p>
-              <p className="text-lg font-semibold text-gray-800">User</p>
+              <p className="text-lg font-semibold text-gray-800">{role}</p>
             </div>
           </div>
 
