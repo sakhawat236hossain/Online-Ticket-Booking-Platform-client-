@@ -112,7 +112,7 @@ const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
     flex items-center justify-center gap-2`;
 
   return (
-    <nav className="w-full sticky top-0 z-50 border-r-gray-400  dark:text-white  shadow-md">
+    <nav className="w-full sticky top-0 z-50  dark:text-white  shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between">
         
         {/* LEFT Section: Logo and Mobile Menu */}

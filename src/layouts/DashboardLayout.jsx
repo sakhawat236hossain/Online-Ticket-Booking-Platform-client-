@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { FiHome, FiSettings, FiUser } from "react-icons/fi";
 import { TbBrandBooking } from "react-icons/tb";
 import { MdAdd, MdManageAccounts, MdPayments } from "react-icons/md";
-import { FaInbox } from "react-icons/fa";
+import { FaInbox, FaTicketAlt } from "react-icons/fa";
 import { LucideTicketsPlane } from "lucide-react";
 import { RiAdvertisementLine } from "react-icons/ri";
 import useRole from "../Hooks/useRole";
@@ -162,19 +162,21 @@ if(isLoading){
 
           {/* Manage Tickets */}
         
-          {role==="admin"&&  <li className="mt-2">
-            <NavLink
-              to="/dashboard/manageTickets"
-              className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-300 ${
-                  isActive ? activeClass : ""
-                }`
-              }
-            >
-              <MdManageAccounts className="w-5 h-5" />
-              <span className="hidden group-hover:inline">Manage Tickets</span>
-            </NavLink>
-          </li>}
+        {role === "admin" && (
+  <li className="mt-2">
+    <NavLink
+      to="/dashboard/manageTickets"
+      className={({ isActive }) =>
+        `flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-300 ${
+          isActive ? activeClass : ""
+        }`
+      }
+    >
+      <FaTicketAlt className="w-5 h-5" /> {/* Updated icon */}
+      <span className="hidden group-hover:inline">Manage Tickets</span>
+    </NavLink>
+  </li>
+)}
 
         
           {role==="admin"&&  <li className="mt-2">
