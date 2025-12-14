@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { FiPlusCircle } from "react-icons/fi";
 import { uploadImageToImgBB } from "../../../../Utils";
 import UseAuth from "../../../../Hooks/UseAuth";
-// import { useAddTicket } from "../../../../Hooks/useAddTicket";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
@@ -63,7 +62,7 @@ const AddTicket = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white shadow-xl rounded-xl mt-5 border">
+    <div className="max-w-3xl mx-auto p-6  shadow-xl rounded-xl mt-5 border">
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-700">
         Add New Ticket
       </h2>

@@ -14,7 +14,7 @@ const ManageUsers = () => {
 
   if (isLoading) return <Spinner />;
 
-  // Action Handlers (dummy example)
+  // Action Handlers 
   const handleMakeAdmin = async (id) => {
     axiosPublic.patch(`makeAdmin/${id}`);
     refetch();
@@ -33,7 +33,7 @@ const ManageUsers = () => {
   return (
     <div className="overflow-x-auto p-4">
       <table className="table w-full min-w-[700px] border border-gray-200 rounded-lg shadow-lg">
-        <thead className="bg-gray-100 text-gray-700 uppercase text-sm">
+        <thead className=" uppercase text-sm">
           <tr>
             <th>#</th>
             <th>Name</th>
@@ -45,9 +45,9 @@ const ManageUsers = () => {
 
         <tbody>
           {users.map((user, index) => (
-            <tr key={user._id} className="hover:bg-gray-50 transition">
+            <tr key={user._id} className="hover: transition">
               {/* Index No */}
-              <th className="text-gray-600">{index + 1}</th>
+              <th className="">{index + 1}</th>
 
               {/* User Info */}
               <td>
@@ -74,7 +74,7 @@ const ManageUsers = () => {
                 {user.role !== "admin" && (
                   <button
                     onClick={() => handleMakeAdmin(user._id)}
-                    className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded text-sm transition cursor-pointer"
+                    className="px-3 py-1 bg-blue-600 hover:bg-blue-700  rounded text-sm transition cursor-pointer"
                   >
                     Make Admin
                   </button>
@@ -83,7 +83,7 @@ const ManageUsers = () => {
                 {user.role !== "vendor" && (
                   <button
                     onClick={() => handleMakeVendor(user._id)}
-                    className="px-3 py-1 bg-purple-600 hover:bg-purple-700 text-white rounded text-sm transition cursor-pointer"
+                    className="px-3 py-1 bg-purple-600 hover:bg-purple-700 rounded text-sm transition cursor-pointer"
                   >
                     Make Vendor
                   </button>
@@ -92,7 +92,7 @@ const ManageUsers = () => {
                 {user.role === "vendor" && (
                   <button
                     onClick={() => handleMarkFraud(user._id)}
-                    className="px-3 py-1 bg-red-600 hover:bg-red-700 text-white rounded text-sm transition cursor-pointer"
+                    className="px-3 py-1 bg-red-600 hover:bg-red-700  rounded text-sm transition cursor-pointer"
                   >
                     Mark as Fraud
                   </button>

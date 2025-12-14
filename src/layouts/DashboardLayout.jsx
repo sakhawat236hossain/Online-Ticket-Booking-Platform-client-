@@ -9,6 +9,8 @@ import { MdAdd, MdManageAccounts, MdPayments } from "react-icons/md";
 import { FaInbox, FaTicketAlt } from "react-icons/fa";
 import { LucideTicketsPlane } from "lucide-react";
 import { RiAdvertisementLine } from "react-icons/ri";
+import { GrOverview } from "react-icons/gr";
+
 import useRole from "../Hooks/useRole";
 import Spinner from "../components/common/Spinner/Spinner";
 
@@ -116,7 +118,8 @@ if(isLoading){
                 }`
               }
             >
-              <FaInbox className="w-5 h-5" />
+              
+              <GrOverview className="w-5 h-5" />
               <span className="hidden group-hover:inline">
                 Vendor Revenue
               </span>
