@@ -33,7 +33,7 @@ const ManageTickets = () => {
     }
   };
 
-  // ✅ DELETE HANDLER
+  //  DELETE HANDLER
   const handleDelete = async (id) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",

@@ -20,6 +20,7 @@ import AdvertiseTickets from "../pages/Dashboard/Admin/AdvertiseTickets/Advertis
 import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import TransactionHistory from "../pages/Dashboard/User/TransactionHistory";
 import Error from "../components/common/Error/Error";
+import VendorRevenue from "../pages/Dashboard/Vendor/VendorRevenue/VendorRevenue";
 
 export const router = createBrowserRouter([
   {
@@ -112,6 +113,10 @@ export const router = createBrowserRouter([
           {
             path:"transactionsPge",
             element:<TransactionHistory></TransactionHistory>
+          },
+          {
+            path:"VendorRevenue",
+            element:<VendorRevenue></VendorRevenue>
           }
         ],
       },

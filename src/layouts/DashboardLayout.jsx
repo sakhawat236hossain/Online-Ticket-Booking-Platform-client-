@@ -106,6 +106,22 @@ if(isLoading){
               </span>
             </NavLink>
           </li>}
+          {/* VendorRevenue */}
+          {role==="vendor"&&  <li className="mt-2">
+            <NavLink
+              to="/dashboard/VendorRevenue"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-300 ${
+                  isActive ? activeClass : ""
+                }`
+              }
+            >
+              <FaInbox className="w-5 h-5" />
+              <span className="hidden group-hover:inline">
+                Vendor Revenue
+              </span>
+            </NavLink>
+          </li>}
 {/* =============================USER MENU================================================ */}
           {/* My Booking Tickets */}
          
