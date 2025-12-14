@@ -123,7 +123,7 @@ const handleDelete = (ticketId) => {
         {tickets.map((item) => (
           <div 
             key={item._id} 
-            className="relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition-transform duration-300 cursor-pointer"
+            className="relative rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:scale-105 transition-transform duration-300 cursor-pointer"
           >
             <span className={`absolute top-3 right-3 px-3 py-1 rounded-full text-sm font-semibold ${statusColor[item.status]}`}>
               {item.status}
@@ -133,24 +133,24 @@ const handleDelete = (ticketId) => {
             </div>
             <div className="p-5">
               <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-              <p className="text-gray-600 mb-1 capitalize">From: <span className="font-medium">{item.from}</span> → To: <span className="font-medium">{item.to}</span></p>
-              <p className="text-gray-600 mb-1">Transport: <span className="font-medium">{item.transport}</span></p>
-              <p className="text-gray-600 mb-1">Price: <span className="font-medium">${item.price}</span></p>
-              <p className="text-gray-600 mb-1">Quantity: <span className="font-medium">{item.quantity}</span></p>
-              <p className="text-gray-600 mb-3">Departure: <span className="font-medium">{new Date(item.departure).toLocaleString()}</span></p>
+              <p className=" mb-1 capitalize">From: <span className="font-medium">{item.from}</span> → To: <span className="font-medium">{item.to}</span></p>
+              <p className=" mb-1">Transport: <span className="font-medium">{item.transport}</span></p>
+              <p className=" mb-1">Price: <span className="font-medium">${item.price}</span></p>
+              <p className=" mb-1">Quantity: <span className="font-medium">{item.quantity}</span></p>
+              <p className=" mb-3">Departure: <span className="font-medium">{new Date(item.departure).toLocaleString()}</span></p>
 
               <div className="flex justify-center gap-4 mt-3">
                 <button
                   onClick={() => openUpdateModal(item)}
                   disabled={item.status === "rejected"}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${item.status === "rejected" ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"}`}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${item.status === "rejected" ? " cursor-not-allowed" : "bg-blue-600  hover:bg-blue-700 cursor-pointer"}`}
                 >
                   <FiEdit /> Update
                 </button>
                 <button
                   onClick={() => handleDelete(item._id)}
                   disabled={item.status === "rejected"}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${item.status === "rejected" ? "bg-gray-300 text-gray-500 cursor-not-allowed" : "bg-red-600 text-white hover:bg-red-700 cursor-pointer"}`}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium ${item.status === "rejected" ? " cursor-not-allowed" : "bg-red-600  hover:bg-red-700 cursor-pointer"}`}
                 >
                   <FiTrash2 /> Delete
                 </button>
@@ -161,11 +161,11 @@ const handleDelete = (ticketId) => {
       </div>
 
       {selectedTicket && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div ref={modalRef} className="bg-white rounded-2xl w-11/12 md:w-2/3 lg:w-1/2 p-6 relative shadow-2xl overflow-y-auto max-h-[90vh]">
+        <div className="fixed inset-0 bg  bg-opacity-50 flex justify-center items-center z-50">
+          <div ref={modalRef} className="rounded-2xl w-11/12 md:w-2/3 lg:w-1/2 p-6 relative shadow-2xl overflow-y-auto max-h-[90vh] bg-gray-500 text-white">
             <button 
               onClick={() => { setSelectedTicket(null); setPreview(null); }} 
-              className="absolute top-4 right-4 text-gray-600 hover:text-gray-900 cursor-pointer"
+              className="absolute top-4 right-4  hover: cursor-pointer"
             >
               <FiX size={24} />
             </button>
@@ -185,7 +185,7 @@ const handleDelete = (ticketId) => {
                 <input type="file" accept="image/*" {...register("imageFile")} className="w-full border px-3 py-2 rounded-lg cursor-pointer" />
                 {preview && <img src={preview} alt="preview" className="w-full h-48 object-cover rounded-lg mt-2" />}
               </div>
-              <button type="submit" className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 mt-2 cursor-pointer">Save Changes</button>
+              <button type="submit" className="w-full  px-4 py-2 rounded-lg hover: mt-2 cursor-pointer bg-green-600">Save Changes</button>
             </form>
           </div>
         </div>
