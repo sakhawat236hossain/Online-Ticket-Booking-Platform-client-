@@ -16,84 +16,107 @@ const Advertisement = () => {
 
   if (isLoading) return <Spinner />;
 
+  if (tickets.length === 0) {
+    return (
+      <div className="px-6 py-12  text-center">
+        <h2 className="text-2xl font-semibold text-gray-500 dark:text-gray-400">
+          No featured tickets are available right now.
+        </h2>
+      </div>
+    );
+  }
+
   return (
-    <div className="px-6 py-1 dark:bg-gray-900 dark:text-white">
+    <div className="px-6 py-16  dark:text-white">
       
       {/* SECTION TITLE */}
-      <div className="text-center mb-10">
-        <h1 className="text-4xl font-bold  dark:text-white">
-          Featured Advertised Tickets
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-extrabold  dark:text-white">
+          ✨ Featured Deals & Offers
         </h1>
-        <p className=" dark:text-white mt-2">
-          Top 6 exclusive tickets selected by our admins
+        <p className=" dark:text-gray-300 mt-3">
+          Grab your tickets now! Top 6 exclusive offers selected by our admins.
         </p>
-        <div className="w-20 h-1 bg-red-500 mx-auto mt-4 rounded"></div>
+        <div className="w-24 h-1 bg-red-500 mx-auto mt-4 rounded-full"></div>
       </div>
 
-      {/* TICKET GRID */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {tickets.map((ticket) => (
+      {/* TICKET GRID - 3 columns for better look with 6 items */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {tickets.slice(0, 6).map((ticket) => (
           <div
             key={ticket._id}
-            className="border p-5 rounded-xl shadow-lg  dark:bg-gray-800 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300"
+            className="group relative  dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] flex flex-col justify-between"
           >
             {/* IMAGE */}
-            <img
-              src={ticket.image}
-              className="w-full h-44 object-cover rounded-lg"
-              alt={ticket.title}
-            />
-
-            {/* TITLE */}
-            <h2 className="text-xl font-bold mt-3 text-gray-800 dark:text-white">
-              {ticket.title}
-            </h2>
-
-            {/* ROUTE */}
-            <p className="text-gray-600 dark:text-gray-300 mt-1">
-              {ticket.from} → {ticket.to}
-            </p>
-
-            {/* TRANSPORT */}
-            <p className="text-blue-600 font-semibold mt-1 dark:text-blue-400">
-              Transport: {ticket.transport}
-            </p>
-
-            {/* PRICE + QUANTITY */}
-            <div className="mt-3 flex justify-between items-center">
-              <p className="text-red-600 font-bold text-lg dark:text-red-400">
-                ${ticket.price}
-              </p>
-              <p className="text-gray-700 font-semibold dark:text-gray-200">
-                Qty: {ticket.quantity}
-              </p>
+            <div className="relative overflow-hidden">
+              <img
+                src={ticket.image}
+                className="w-full h-52 object-cover transition-transform duration-500 group-hover:scale-110"
+                alt={ticket.title}
+              />
+              {/* Transport Type Badge (Upper Right) */}
+              <div className="absolute top-3 right-3 bg-red-600  px-3 py-1 rounded-full text-xs font-bold uppercase shadow-lg">
+                {ticket.transport}
+              </div>
             </div>
 
-            {/* PERKS */}
-            {ticket.perks?.length > 0 && (
-              <div className="mt-3">
-                <p className="font-semibold text-gray-800 dark:text-white">
-                  Perks:
-                </p>
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {ticket.perks.map((perk) => (
-                    <span
-                      key={perk}
-                      className="px-2 py-1 bg-gray-200 text-gray-700 rounded text-xs dark:bg-gray-700 dark:text-gray-200"
-                    >
-                      {perk}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
+            <div className="p-5 flex flex-col flex-grow">
+              
+              {/* TICKET TITLE */}
+              <h2 className="text-2xl font-bold  dark:text-white truncate mb-1" title={ticket.title}>
+                {ticket.title}
+              </h2>
+              
+              {/* ROUTE */}
+              <p className="text-sm dark:text-gray-300 mb-3">
+                <span className="font-medium  dark:text-gray-100">{ticket.from}</span> → <span className="font-medium  dark:text-gray-100">{ticket.to}</span>
+              </p>
 
-            {/* DETAILS BUTTON */}
-            <Link to={`/ticket/${ticket._id}`}>
-              <button className="btn btn-error w-full mt-4 text-white">
-                See Details
-              </button>
-            </Link>
+              {/* PERKS */}
+              {ticket.perks?.length > 0 && (
+                <div className="mb-3">
+                  <p className="font-semibold text-xs uppercase  dark:text-gray-400 mb-1">
+                    Amenities:
+                  </p>
+                  <div className="flex flex-wrap gap-1">
+                    {ticket.perks.slice(0, 3).map((perk, index) => (
+                      <span
+                        key={index}
+                        className="px-2 py-0.5 bg-green-100 dark:bg-green-700 text-green-700 dark:text-green-200 rounded text-xs font-medium"
+                      >
+                        {perk}
+                      </span>
+                    ))}
+                    {ticket.perks.length > 3 && (
+                        <span className="text-xs  dark:text-gray-400 self-center">
+                            +{ticket.perks.length - 3}
+                        </span>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* PRICE + QUANTITY + BUTTON */}
+            <div className="px-5 pb-5 pt-3 border-t dark:border-gray-700 flex justify-between items-center">
+                
+                {/* PRICE & QUANTITY */}
+                <div>
+                    <p className="text-3xl font-extrabold text-red-600 dark:text-red-400 leading-none">
+                        ${ticket.price}
+                    </p>
+                    <p className="text-sm  dark:text-gray-400 mt-1">
+                        Available Qty: {ticket.quantity || 0}
+                    </p>
+                </div>
+                
+                {/* DETAILS BUTTON */}
+                <Link to={`/ticket/${ticket._id}`}>
+                    <button className="btn btn-error  font-semibold px-6 shadow-md hover:shadow-lg transition-shadow duration-300">
+                      See Details
+                    </button>
+                </Link>
+            </div>
           </div>
         ))}
       </div>
