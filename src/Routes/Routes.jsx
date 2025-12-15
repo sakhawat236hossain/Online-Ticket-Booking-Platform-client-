@@ -21,6 +21,7 @@ import PaymentSuccess from "../pages/Payment/PaymentSuccess";
 import TransactionHistory from "../pages/Dashboard/User/TransactionHistory";
 import Error from "../components/common/Error/Error";
 import VendorRevenue from "../pages/Dashboard/Vendor/VendorRevenue/VendorRevenue";
+import Feedback from "../pages/Dashboard/Admin/Feedback/Feedback";
 
 export const router = createBrowserRouter([
   {
@@ -117,6 +118,10 @@ export const router = createBrowserRouter([
           {
             path:"VendorRevenue",
             element:<VendorRevenue></VendorRevenue>
+          },
+          {
+            path:"feedback",
+            element:<Feedback></Feedback>
           }
         ],
       },

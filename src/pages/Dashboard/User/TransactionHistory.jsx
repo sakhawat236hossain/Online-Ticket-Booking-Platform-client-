@@ -1,18 +1,19 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import UseAuth from "../../../Hooks/UseAuth";
-import axiosPublic from "../../../Hooks/useAxios";
 import Spinner from "../../../components/common/Spinner/Spinner";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 
 const TransactionHistory = () => {
   const { user } = UseAuth();
+  const axiosSecure=useAxiosSecure()
 
   const { data: transactions = [], isLoading } = useQuery({
     queryKey: ["transactions", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosPublic.get(
+      const res = await axiosSecure.get(
         `/transactions?email=${user.email}`
       );
       return res.data;

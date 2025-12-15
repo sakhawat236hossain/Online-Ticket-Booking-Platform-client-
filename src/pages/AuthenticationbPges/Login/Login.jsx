@@ -47,12 +47,12 @@ const Login = () => {
 
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 p-4">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-8">
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+    <div className="min-h-screen flex items-center justify-center  p-4">
+      <div className="w-full max-w-md  rounded-2xl shadow-2xl p-8">
+        <h2 className="text-3xl font-bold mb-6 text-center ">
           Welcome Back!
         </h2>
-        <p className="text-center text-gray-500 mb-6">
+        <p className="text-center  mb-6">
           Please login to your account to continue
         </p>
 
@@ -63,7 +63,7 @@ const Login = () => {
             <input
               type="email"
               placeholder="Enter your email"
-              className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E56F61] transition"
+              className="px-4 py-2 border 0 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E56F61] transition"
               {...register("email", { required: "Email is required" })}
             />
             {errors.email && (
@@ -83,7 +83,7 @@ const Login = () => {
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-2 top-9 text-gray-700"
+              className="absolute right-2 top-9 "
             >
               {showPassword ? <FaEye /> : <IoEyeOff />}
             </button>
@@ -102,7 +102,7 @@ const Login = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full cursor-pointer flex items-center justify-center gap-2 px-4 py-2 bg-[#E56F61] text-white rounded-lg hover:bg-white hover:text-[#E56F61] border border-[#E56F61] font-semibold transition-colors"
+            className="w-full cursor-pointer flex items-center justify-center gap-2 px-4 py-2 bg-[#E56F61]  rounded-lg hover:bg-white hover:text-[#E56F61] border border-[#E56F61] font-semibold transition-colors"
           >
             <IoLogIn /> Login
           </button>
@@ -110,14 +110,14 @@ const Login = () => {
 
         {/* Social Login */}
         <div className="my-3 flex items-center">
-          <div className="flex-1 h-px bg-gray-300"></div>
-          <p className="px-3 text-gray-400 text-sm">Or login with</p>
-          <div className="flex-1 h-px bg-gray-300"></div>
+          <div className="flex-1 h-px "></div>
+          <p className="px-3  text-sm">Or login with</p>
+          <div className="flex-1 h-px "></div>
         </div>
         <SocialLogin />
 
         {/* Register Link */}
-        <p className="mt-3 text-center text-gray-500 text-sm">
+        <p className="mt-3 text-center  text-sm">
           Don't have an account?
           <Link
             to="/register"

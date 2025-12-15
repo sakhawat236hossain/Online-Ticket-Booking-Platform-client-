@@ -10,6 +10,8 @@ import { FaInbox, FaTicketAlt } from "react-icons/fa";
 import { LucideTicketsPlane } from "lucide-react";
 import { RiAdvertisementLine } from "react-icons/ri";
 import { GrOverview } from "react-icons/gr";
+import { VscFeedback } from "react-icons/vsc";
+
 
 import useRole from "../Hooks/useRole";
 import Spinner from "../components/common/Spinner/Spinner";
@@ -213,7 +215,23 @@ if(isLoading){
               </span>
             </NavLink>
           </li>}
-          {/* Transactions Pge*/}
+{/* feedback */}
+          {role==="admin"&&  <li className="mt-2">
+            <NavLink
+              to="/dashboard/feedback"
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-3 py-2 rounded-md transition-all duration-300 ${
+                  isActive ? activeClass : ""
+                }`
+              }
+            >
+                          <VscFeedback  className="w-5 h-5" />
+              <span className="hidden group-hover:inline">
+                Feedback
+              </span>
+            </NavLink>
+          </li>}
+        
         
         </ul>
 

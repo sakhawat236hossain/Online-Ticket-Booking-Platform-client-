@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import toast from "react-hot-toast";
-import axiosPublic from "../../../Hooks/useAxios";
 import Swal from "sweetalert2";
 import UseAuth from "../../../Hooks/UseAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 // Single Feedback Card
 const FeedbackCard = ({ review }) => (
@@ -28,6 +28,7 @@ const FeedbackForm = ({ onSubmit }) => {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState("");
+  const axiosSecure=useAxiosSecure()
 
   //  Hook MUST be here (top level)
   const { user } = UseAuth();
@@ -48,7 +49,7 @@ const FeedbackForm = ({ onSubmit }) => {
     };
 
     try {
-      const res = await axiosPublic.post("/feedback", newReview);
+      const res = await axiosSecure.post("/feedback", newReview);
 
       if (res.data?.acknowledged) {
         onSubmit(newReview);

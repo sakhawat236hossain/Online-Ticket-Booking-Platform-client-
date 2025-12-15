@@ -9,18 +9,19 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import UseAuth from "../../../../Hooks/UseAuth";
-import axiosPublic from "../../../../Hooks/useAxios";
 import Spinner from "../../../../components/common/Spinner/Spinner";
 import { FaMoneyBillWave, FaTicketAlt, FaPlusCircle } from "react-icons/fa";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const VendorRevenue = () => {
   const { user } = UseAuth();
+  const axiosSecure=useAxiosSecure()
 
   const { data = {}, isLoading } = useQuery({
     queryKey: ["vendor-overview", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
-      const res = await axiosPublic.get(`/vendor-overview/${user.email}`);
+      const res = await axiosSecure.get(`/vendor-overview/${user.email}`);
       return res.data;
     },
   });

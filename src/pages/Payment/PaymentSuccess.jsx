@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import axiosPublic from "../../Hooks/useAxios";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const PaymentSuccess = () => {
   const [searchParams] = useSearchParams();
   const bookingId = searchParams.get("session_id");
   const navigate = useNavigate();
   const calledRef = useRef(false); 
+  const axiosSecure=useAxiosSecure()
 
   useEffect(() => {
     if (!bookingId || calledRef.current) return;
@@ -15,17 +16,17 @@ const PaymentSuccess = () => {
 
     const confirmPayment = async () => {
       try {
-        const res = await axiosPublic.post("/payment-success", { bookingId });
+        const res = await axiosSecure.post("/payment-success", { bookingId });
       } catch (error) {
         console.error(" Payment Failed:", error.response?.data || error.message);
       }
     };
 
     confirmPayment();
-  }, [bookingId]);
+  }, [bookingId,axiosSecure]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-50 to-green-100 px-4">
+    <div className="min-h-screen flex items-center justify-center  px-4">
       <div className="bg-white max-w-md w-full rounded-2xl shadow-xl p-8 text-center">
 
         {/* Success Icon */}

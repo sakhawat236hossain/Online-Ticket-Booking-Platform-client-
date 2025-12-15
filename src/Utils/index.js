@@ -3,6 +3,7 @@ import axios from "axios";
 export const uploadImageToImgBB = async (imgFile) => {
   const formData = new FormData();
   formData.append("image", imgFile);
+  
 
   try {
     const response = await axios.post(

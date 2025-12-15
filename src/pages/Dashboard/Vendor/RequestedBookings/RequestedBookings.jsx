@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import axiosPublic from "../../../../Hooks/useAxios";
 import Spinner from "../../../../components/common/Spinner/Spinner";
 import UseAuth from "../../../../Hooks/UseAuth";
 
@@ -38,7 +37,7 @@ const res = await axiosSecure.get(`/requested-tickets?email=${user?.email}`);
     });
 
     if (result.isConfirmed) {
-      const res = await axiosPublic.patch(`/accept-booking/${id}`);
+      const res = await axiosSecure.patch(`/accept-booking/${id}`);
       if (res.data.modifiedCount > 0) {
         Swal.fire("Accepted!", "Booking request accepted.", "success");
         refetch();
@@ -60,7 +59,7 @@ const res = await axiosSecure.get(`/requested-tickets?email=${user?.email}`);
     });
 
     if (result.isConfirmed) {
-      const res = await axiosPublic.patch(`/reject-booking/${id}`);
+      const res = await axiosSecure.patch(`/reject-booking/${id}`);
       if (res.data.modifiedCount > 0) {
         Swal.fire("Rejected!", "Booking request rejected.", "error");
         refetch();

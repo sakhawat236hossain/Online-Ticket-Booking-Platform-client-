@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { FiClock, FiMapPin } from "react-icons/fi";
 import { FaBus, FaPlane, FaShip, FaTrain } from "react-icons/fa";
-import axiosPublic from "../../../Hooks/useAxios";
 import { useQuery } from "@tanstack/react-query";
 import Spinner from "../../../components/common/Spinner/Spinner";
 import UseAuth from "../../../Hooks/UseAuth";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const transportIcons = {
   Bus: <FaBus className="text-lg text-blue-600" />,
@@ -17,10 +17,12 @@ const MyBookingTickets = () => {
   const { user } = UseAuth();
   const [countdowns, setCountdowns] = useState({});
 
+  const axiosSecure=useAxiosSecure()
+
   const { data: tickets = [], isLoading } = useQuery({
     queryKey: ["myBookingTickets"],
     queryFn: async () => {
-      const res = await axiosPublic.get(`/user-tickets?email=${user?.email}`);
+      const res = await axiosSecure.get(`/user-tickets?email=${user?.email}`);
       return res.data;
     },
   });
@@ -91,7 +93,7 @@ const MyBookingTickets = () => {
     };
 
     try {
-      const res = await axiosPublic.post(
+      const res = await axiosSecure.post(
         "/create-checkout-session",
         bookingInfo
       );

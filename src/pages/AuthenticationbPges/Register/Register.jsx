@@ -1,5 +1,5 @@
-import React from "react";
-import { FaUser } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaEye, FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../Social/SocialLogin";
 import { useForm } from "react-hook-form";
@@ -9,12 +9,16 @@ import toast from "react-hot-toast";
 import { uploadImageToImgBB } from "../../../Utils";
 import Spinner from "../../../components/common/Spinner/Spinner";
 import { useLocation } from "react-router";
-import axiosPublic from "../../../Hooks/useAxios";
+import { IoEyeOff } from "react-icons/io5";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const Register = () => {
   const { createUser, updateUserProfile, setUser, loading } = UseAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const [showPassword, setShowPassword] = useState(false);
+  const axiosSecure=useAxiosSecure()
+
 
   const {
     register,
@@ -35,8 +39,6 @@ const Register = () => {
       const result = await createUser(email, password);
       const user = result.user;
 
-
-
       //  Update profile
       await updateUserProfile({
         displayName: name,
@@ -45,21 +47,20 @@ const Register = () => {
 
       setUser({ ...user, displayName: name, photoURL: photoURL || "" });
 
-         const userInfo = {
+      const userInfo = {
         name,
         email,
         photoURL: photoURL || "",
-        
       };
 
       // save data to database
-      axiosPublic.post("/users",userInfo)
-      .then((data) => {
-        console.log("User saved to database", data.data);
-      })
-      .catch((error) => {
-        console.error("Error saving user to database", error);
-      });
+      axiosSecure.post("/users", userInfo)
+        .then((data) => {
+          console.log("User saved to database", data.data);
+        })
+        .catch((error) => {
+          console.error("Error saving user to database", error);
+        });
 
       toast.success("Registration successful! ");
 
@@ -76,11 +77,11 @@ const Register = () => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 p-4">
-      <div className="w-full bg-white rounded-2xl shadow-2xl p-6 max-w-lg">
+    <div className="min-h-screen flex items-center justify-center  p-4">
+      <div className="w-full  rounded-2xl shadow-2xl p-6 max-w-lg">
         <div className="mb-4 text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-1">Register</h1>
-          <p className="text-sm text-gray-500">Create your new account</p>
+          <h1 className="text-2xl font-bold  mb-1">Register</h1>
+          <p className="text-sm ">Create your new account</p>
         </div>
 
         <form onSubmit={handleSubmit(formSubmit)} className="space-y-4">
@@ -100,13 +101,13 @@ const Register = () => {
 
           {/* Image */}
           <div>
-            <label className="block mb-2 text-sm font-medium text-gray-700">
+            <label className="block mb-2 text-sm font-medium ">
               Profile Image
             </label>
             <input
               type="file"
               accept="image/*"
-              className="block w-full text-sm bg-gray-100 border border-dashed border-lime-300 rounded-md p-2"
+              className="block w-full text-sm  border border-dashed border-lime-300 rounded-md p-2"
               {...register("profileImage", {
                 required: "Profile Image is required",
               })}
@@ -131,39 +132,43 @@ const Register = () => {
           </div>
 
           {/* Password */}
-          <div>
-            <label className="text-sm font-medium mb-1">Password</label>
-            <input
-              type="password"
-              placeholder="Enter password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-400"
-              {...register("password", {
-                required: "Password is required",
-                minLength: { value: 6, message: "Minimum 6 characters" },
-              })}
-            />
-            {errors.password && (
-              <p className="text-red-500">{errors.password.message}</p>
-            )}
-          </div>
+         <div className="relative flex flex-col">
+                   <label className="text-sm font-medium mb-1">Password</label>
+                   <input
+                     type={showPassword ? "text" : "password"}
+                     placeholder="Enter your password"
+                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E56F61] transition"
+                     {...register("password", { required: "Password is required" })}
+                   />
+                   <button
+                     type="button"
+                     onClick={() => setShowPassword(!showPassword)}
+                     className="absolute right-2 top-9 cursor-pointer"
+                   >
+                     {showPassword ? <FaEye /> : <IoEyeOff />}
+                   </button>
+                   {errors.password && (
+                     <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>
+                   )}
+                 </div>
 
           <button
             type="submit"
-            className="w-full cursor-pointer flex items-center justify-center gap-2 px-4 py-2 bg-[#E56F61] text-white rounded-lg hover:bg-white hover:text-[#E56F61] border border-[#E56F61] font-semibold transition"
+            className="w-full cursor-pointer flex items-center justify-center gap-2 px-4 py-2 bg-[#E56F61]  rounded-lg hover:hover:text-white border border-[#E56F61] font-semibold transition"
           >
             <FaUser /> Register
           </button>
         </form>
 
         <div className="flex items-center my-3">
-          <div className="flex-1 h-px bg-gray-300"></div>
-          <p className="px-3 text-gray-400 text-sm">Or register with</p>
-          <div className="flex-1 h-px bg-gray-300"></div>
+          <div className="flex-1 h-px "></div>
+          <p className="px-3  text-sm">Or register with</p>
+          <div className="flex-1 h-px "></div>
         </div>
 
         <SocialLogin />
 
-        <p className="mt-3 text-center text-gray-500 text-sm">
+        <p className="mt-3 text-center  text-sm">
           Already have an account?
           <Link to="/login" className="text-lime-500 underline ml-1">
             Login

@@ -1,16 +1,17 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import axiosPublic from "../../../../Hooks/useAxios";
 import Spinner from "../../../../components/common/Spinner/Spinner";
 import Swal from "sweetalert2";
 import { FaTrash } from "react-icons/fa";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 const ManageTickets = () => {
+  const axiosSecure=useAxiosSecure()
 
   const { data: tickets = [], isLoading, refetch } = useQuery({
     queryKey: ["allTickets"],
     queryFn: async () => {
-      const res = await axiosPublic.get("/ticketsAdmin");
+      const res = await axiosSecure.get("/ticketsAdmin");
       return res.data;
     },
   });
@@ -18,7 +19,7 @@ const ManageTickets = () => {
   if (isLoading) return <Spinner />;
 
   const handleApprove = async (id) => {
-    const res = await axiosPublic.patch(`/approve/${id}`);
+    const res = await axiosSecure.patch(`/approve/${id}`);
     if (res.data.modifiedCount > 0) {
       Swal.fire("Approved!", "Ticket approved successfully", "success");
       refetch();
@@ -26,7 +27,7 @@ const ManageTickets = () => {
   };
 
   const handleReject = async (id) => {
-    const res = await axiosPublic.patch(`/reject/${id}`);
+    const res = await axiosSecure.patch(`/reject/${id}`);
     if (res.data.modifiedCount > 0) {
       Swal.fire("Rejected!", "Ticket rejected successfully", "error");
       refetch();
@@ -45,7 +46,7 @@ const ManageTickets = () => {
     });
 
     if (confirm.isConfirmed) {
-      const res = await axiosPublic.delete(`/ticketsAdmin/${id}`);
+      const res = await axiosSecure.delete(`/ticketsAdmin/${id}`);
       if (res.data.deletedCount > 0) {
         Swal.fire("Deleted!", "Ticket deleted successfully", "success");
         refetch();

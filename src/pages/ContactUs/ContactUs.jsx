@@ -19,16 +19,16 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-purple-100 via-pink-100 to-yellow-100 p-6 flex flex-col items-center">
-      <h1 className="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+    <div className="min-h-screen  p-6 flex flex-col items-center">
+      <h1 className="text-3xl md:text-4xl font-bold  mb-6">
         Contact Us
       </h1>
 
-      <div className="w-full max-w-5xl bg-white rounded-2xl shadow-lg p-6 md:p-10 flex flex-col md:flex-row gap-8">
+      <div className="w-full max-w-5xl rounded-2xl shadow-lg p-6 md:p-10 flex flex-col md:flex-row gap-8">
         {/* Contact Form */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex-1 space-y-5">
           <div className="flex flex-col">
-            <label className="mb-1 font-medium text-gray-700">Name</label>
+            <label className="mb-1 font-medium ">Name</label>
             <input
               type="text"
               placeholder="Your Name"
@@ -62,7 +62,7 @@ const ContactUs = () => {
           </div>
 
           <div className="flex flex-col">
-            <label className="mb-1 font-medium text-gray-700">Phone</label>
+            <label className="mb-1 font-medium ">Phone</label>
             <input
               type="text"
               placeholder="Your Phone"
@@ -77,7 +77,7 @@ const ContactUs = () => {
           </div>
 
           <div className="flex flex-col">
-            <label className="mb-1 font-medium text-gray-700">Message</label>
+            <label className="mb-1 font-medium ">Message</label>
             <textarea
               rows="4"
               placeholder="Your Message"
@@ -93,15 +93,15 @@ const ContactUs = () => {
 
           <button
             type="submit"
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#E56F61] text-white rounded-lg hover:bg-white hover:text-[#E56F61] border border-[#E56F61] font-semibold transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-[#E56F61]  rounded-lg font-semibold transition-colors"
           >
             Send Message <RiSendPlane2Fill />
           </button>
         </form>
 
         {/* Contact Info + Social Links */}
-        <div className="flex-1 flex flex-col gap-6 bg-purple-50 p-6 rounded-2xl shadow-lg">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+        <div className="flex-1 flex flex-col gap-6  p-6 rounded-2xl shadow-lg">
+          <h2 className="text-2xl font-bold  mb-2">
             Contact Info
           </h2>
           <p>
@@ -116,7 +116,7 @@ const ContactUs = () => {
             hmdsakhawat236@gmail.com
           </p>
 
-          <h2 className="text-2xl font-bold text-gray-800 mt-4">Follow Us</h2>
+          <h2 className="text-2xl font-bold  mt-4">Follow Us</h2>
           <div className="flex gap-4 mt-2">
             <a
               href="https://www.facebook.com/md.sakhawth.hosain"
