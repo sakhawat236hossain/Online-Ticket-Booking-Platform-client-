@@ -5,7 +5,7 @@ import UseAuth from "./UseAuth";
 
 // Create axios instance
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "https://onlin-ticke-booking-platform.vercel.app",
 });
 
 const useAxiosSecure = () => {

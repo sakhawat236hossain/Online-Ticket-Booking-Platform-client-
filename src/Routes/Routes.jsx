@@ -27,104 +27,38 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout></RootLayout>,
-    errorElement:<Error></Error>,
+    errorElement: <Error></Error>,
     children: [
-      {
-        index: true,
-        element: <Home></Home>,
-      },
-      {
-        path: "/allTickets",
-        element: (
-          <PrivateRoute>
-            <AllTickets></AllTickets>
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: "/ContactUs",
-        element: <ContactUs></ContactUs>,
-      },
-      {
-        path: "/aboutUs",
-        element: <AboutUs></AboutUs>,
-      },
-      {
-        path: "/profile",
-        element: <Profile></Profile>,
-      },
-      {
-        path: "/login",
-        element: <Login></Login>,
-      },
-      {
-        path: "/register",
-        element: <Register></Register>,
-      },
-      {
-        path: "/ticket/:id",
-        element: <TicketsDetails></TicketsDetails>,
-      },
-      {
-        path:'paymentSuccess',
-        element:<PaymentSuccess></PaymentSuccess>
-      },
-
-      //  Dashboard Route
-      {
-        path: "/dashboard",
-        element: (
-          <PrivateRoute>
-            <DashboardLayout></DashboardLayout>
-          </PrivateRoute>
-        ),
-        children: [
-          {
-            index: true,
-            element: <Profile></Profile>,
-          },
-          {
-            path: "addTicket",
-            element: <AddTicket></AddTicket>,
-          },
-          {
-            path: "myAddedTickets",
-            element: <MyAddedTickets></MyAddedTickets>,
-          },
-          {
-            path: "myBookingTickets",
-            element: <MyBookingTickets></MyBookingTickets>,
-          },
-          {
-            path: "requestedBookingsTickets",
-            element: <RequestedBookings></RequestedBookings>
-          },
-          {
-            path: "manageUsers",
-            element: <ManageUsers></ManageUsers>
-          },
-          {
-            path: "manageTickets",
-            element: <ManageTickets></ManageTickets>
-          },
-          {
-            path:"advertiseTickets",
-            element:<AdvertiseTickets></AdvertiseTickets>
-          },
-          {
-            path:"transactionsPge",
-            element:<TransactionHistory></TransactionHistory>
-          },
-          {
-            path:"VendorRevenue",
-            element:<VendorRevenue></VendorRevenue>
-          },
-          {
-            path:"feedback",
-            element:<Feedback></Feedback>
-          }
-        ],
-      },
+      { index: true, element: <Home></Home> },
+      { path: "/allTickets", element: <PrivateRoute><AllTickets /></PrivateRoute> },
+      { path: "/ContactUs", element: <ContactUs /> },
+      { path: "/aboutUs", element: <AboutUs /> },
+      { path: "/login", element: <Login /> },
+      { path: "/register", element: <Register /> },
+      { path: "/ticket/:id", element: <TicketsDetails /> },
+      { path: 'paymentSuccess', element: <PaymentSuccess /> },
+      { path: "/profile", element: <Profile /> }, 
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      { index: true, element: <Profile /> },
+      { path: "addTicket", element: <AddTicket /> },
+      { path: "myAddedTickets", element: <MyAddedTickets /> },
+      { path: "myBookingTickets", element: <MyBookingTickets /> },
+      { path: "requestedBookingsTickets", element: <RequestedBookings /> },
+      { path: "manageUsers", element: <ManageUsers /> },
+      { path: "manageTickets", element: <ManageTickets /> },
+      { path: "advertiseTickets", element: <AdvertiseTickets /> },
+      { path: "transactionsPge", element: <TransactionHistory /> },
+      { path: "VendorRevenue", element: <VendorRevenue /> },
+      { path: "feedback", element: <Feedback /> }
     ],
   },
 ]);

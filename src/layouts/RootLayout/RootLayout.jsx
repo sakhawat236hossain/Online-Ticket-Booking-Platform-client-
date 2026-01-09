@@ -4,10 +4,12 @@ import { Outlet } from 'react-router';
 import Footer from '../../components/common/Footer/Footer';
 
 const RootLayout = () => {
-    return (
-        <div className='max-w-[1400px] mx-auto '>
+ return (
+        <div className='max-w-[1400px] mx-auto'>
             <NavBar></NavBar>
-            <Outlet></Outlet>
+            <div className="min-h-[calc(100vh-200px)]"> 
+                <Outlet></Outlet>
+            </div>
             <Footer></Footer>
         </div>
     );
