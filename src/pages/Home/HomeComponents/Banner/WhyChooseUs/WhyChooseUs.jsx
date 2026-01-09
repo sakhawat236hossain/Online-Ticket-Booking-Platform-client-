@@ -39,7 +39,7 @@ const WhyChooseUs = () => {
           <div
             key={i}
             className="mx-6 p-6 min-w-[270px] rounded-2xl backdrop-blur-md 
-            shadow-lg border border-gray-200 hover:shadow-2xl hover:bg-white 
+            shadow-lg border border-gray-200 hover:shadow-2xl 
             transition-all duration-300 cursor-pointer relative overflow-hidden group"
           >
             {/* Glow Border Animation */}
@@ -51,12 +51,12 @@ const WhyChooseUs = () => {
             </div>
 
             {/* Title */}
-            <h3 className="text-xl font-semibold text-gray-800 text-center mb-2">
+            <h3 className="text-xl font-semibold  text-center mb-2">
               {f.title}
             </h3>
 
             {/* Description */}
-            <p className="text-gray-600 text-center text-sm">{f.desc}</p>
+            <p className="text-center text-sm">{f.desc}</p>
           </div>
         ))}
       </Marquee>

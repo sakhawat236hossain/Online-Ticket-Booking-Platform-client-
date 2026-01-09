@@ -48,21 +48,21 @@ const Footer = () => {
           <ul className="footer-list space-y-3">
             <li className="flex items-center gap-2">
               <FaEnvelope className="text-[#E56F61]" />
-              <span>support@ticketbari.com</span>
+              <span>hmdsakhawat236@gmail.com</span>
             </li>
             <li className="flex items-center gap-2">
               <FaPhone className="text-[#E56F61]" />
-              <span>+880 1700 000000</span>
+              <span>+880 1851121472</span>
             </li>
             <li className="flex items-center gap-2">
               <FaFacebook className="text-[#E56F61]" />
               <a
-                href="https://www.facebook.com/groups/758794404948932/"
+                href="https://www.facebook.com/md.sakhawth.hosain"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:underline"
               >
-                Facebook Page
+                Facebook 
               </a>
             </li>
           </ul>

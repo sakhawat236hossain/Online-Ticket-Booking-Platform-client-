@@ -8,21 +8,34 @@ import LatestTickets from './LatestTickets/LatestTickets';
 import BookingFAQ from './BookingFAQ/BookingFAQ';
 import FeedbackForm from './FeedbackForm/FeedbackForm';
 import Testimonials from './Testimonials/Testimonials';
+import StatsCounter from './StatsCounter/StatsCounter';
 
 const Home = () => {
+   
     return (
         <div>
-            <Banner></Banner>
-            <Advertisement></Advertisement>
-            <LatestTickets></LatestTickets>
-            <WhyChooseUs></WhyChooseUs>
-            <TravelServices></TravelServices>
-            <PopularRoutes></PopularRoutes>
-            <BookingFAQ></BookingFAQ>
-            <FeedbackForm></FeedbackForm>
-            <Testimonials></Testimonials>
+            <Banner />
+
+            <Advertisement />
+
+            <WhyChooseUs />
+
+            <StatsCounter />
+
+            <TravelServices />
+
+            <LatestTickets />
+
+            <PopularRoutes />
+
+            <Testimonials />
+
+            <BookingFAQ />
+
+            <FeedbackForm />
         </div>
     );
 };
+
 
 export default Home;

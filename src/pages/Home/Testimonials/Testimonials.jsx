@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import ReactStars from "react-stars";
+import axios from "axios";
 import axiosPublic from "../../../Hooks/useAxios";
 
 const Testimonials = () => {
@@ -35,7 +36,7 @@ const Testimonials = () => {
 
   return (
     <section className="py-16 bg-base-100">
-      <div className="">
+      <div className="px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-base-content mb-3">
             What Our <span className="text-[#E56F61]">Users Say</span>
