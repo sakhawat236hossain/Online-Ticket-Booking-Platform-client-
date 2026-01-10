@@ -22,6 +22,7 @@ import TransactionHistory from "../pages/Dashboard/User/TransactionHistory";
 import Error from "../components/common/Error/Error";
 import VendorRevenue from "../pages/Dashboard/Vendor/VendorRevenue/VendorRevenue";
 import Feedback from "../pages/Dashboard/Admin/Feedback/Feedback";
+import ManageMessages from "../pages/Dashboard/Admin/ManageMessages/ManageMessages";
 
 export const router = createBrowserRouter([
   {
@@ -58,7 +59,8 @@ export const router = createBrowserRouter([
       { path: "advertiseTickets", element: <AdvertiseTickets /> },
       { path: "transactionsPge", element: <TransactionHistory /> },
       { path: "VendorRevenue", element: <VendorRevenue /> },
-      { path: "feedback", element: <Feedback /> }
+      { path: "feedback", element: <Feedback /> },
+      {path: "manageMessages", element: <ManageMessages /> },
     ],
   },
 ]);

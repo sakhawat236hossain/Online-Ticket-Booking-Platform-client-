@@ -123,6 +123,7 @@ const DashboardLayout = () => {
                 {renderNavLink("/dashboard/manageTickets", <FaTicketAlt />, "Manage Tickets")}
                 {renderNavLink("/dashboard/advertiseTickets", <RiAdvertisementLine />, "Advertise")}
                 {renderNavLink("/dashboard/feedback", <VscFeedback />, "Feedback")}
+                {renderNavLink("/dashboard/manageMessages", <FaInbox />, "User Messages")}
               </div>
             )}
           </nav>
