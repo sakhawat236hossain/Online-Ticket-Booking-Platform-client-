@@ -23,6 +23,7 @@ import Error from "../components/common/Error/Error";
 import VendorRevenue from "../pages/Dashboard/Vendor/VendorRevenue/VendorRevenue";
 import Feedback from "../pages/Dashboard/Admin/Feedback/Feedback";
 import ManageMessages from "../pages/Dashboard/Admin/ManageMessages/ManageMessages";
+import AdminOverview from "../pages/Dashboard/Admin/AdminOverview/AdminOverview";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +62,7 @@ export const router = createBrowserRouter([
       { path: "VendorRevenue", element: <VendorRevenue /> },
       { path: "feedback", element: <Feedback /> },
       {path: "manageMessages", element: <ManageMessages /> },
+      {path: "adminOverview", element: <AdminOverview /> },
     ],
   },
 ]);
