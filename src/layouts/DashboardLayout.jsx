@@ -113,6 +113,7 @@ const DashboardLayout = () => {
                 <p className="px-4 text-[10px] font-bold opacity-50 uppercase mb-2">User Area</p>
                 {renderNavLink("/dashboard/myBookingTickets", <TbBrandBooking />, "My Bookings")}
                 {renderNavLink("/dashboard/transactionsPge", <MdPayments />, "Transactions")}
+                {renderNavLink("/dashboard/userOverview", <GrOverview />, "User Overview")}
               </div>
             )}
 
