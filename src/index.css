@@ -31,3 +31,10 @@
   100% { box-shadow: 0 0 26px #b983ff; }
 }
 .glow { animation: glow 1.5s infinite alternate; }
+
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+}
