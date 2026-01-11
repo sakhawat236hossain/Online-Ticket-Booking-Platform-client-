@@ -25,6 +25,7 @@ import Feedback from "../pages/Dashboard/Admin/Feedback/Feedback";
 import ManageMessages from "../pages/Dashboard/Admin/ManageMessages/ManageMessages";
 import AdminOverview from "../pages/Dashboard/Admin/AdminOverview/AdminOverview";
 import UserOverview from "../pages/Dashboard/User/UserOverview";
+import ManageReviews from "../pages/Dashboard/Admin/ManageReviews/ManageReviews";
 
 export const router = createBrowserRouter([
   {
@@ -64,7 +65,9 @@ export const router = createBrowserRouter([
       { path: "feedback", element: <Feedback /> },
       {path: "manageMessages", element: <ManageMessages /> },
       {path: "adminOverview", element: <AdminOverview /> },
-      {path:"userOverview", element: <UserOverview /> }
+      {path:"userOverview", element: <UserOverview /> },
+      {path: "manageReviews", element: <ManageReviews /> },
+
     ],
   },
 ]);

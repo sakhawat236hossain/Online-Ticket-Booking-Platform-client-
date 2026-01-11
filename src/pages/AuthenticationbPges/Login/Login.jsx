@@ -61,38 +61,38 @@ const Login = () => {
             onClick={() => handleQuickLogin("user@gmail.com", "Ab1234")}
             className="cursor-pointer flex flex-col items-center gap-1 p-3 rounded-xl border border-gray-200 hover:border-[#E56F61] hover:bg-[#E56F61]/5 transition group"
           >
-            <FaUser className="text-gray-400 group-hover:text-[#E56F61]" />
+            <FaUser className=" group-hover:text-[#E56F61]" />
             <span className="text-[10px] font-bold uppercase tracking-tighter">User</span>
           </button>
           <button
             onClick={() => handleQuickLogin("vendor@gmail.com", "Ab1234")}
             className="flex flex-col items-center cursor-pointer gap-1 p-3 rounded-xl border border-gray-200 hover:border-[#E56F61] hover:bg-[#E56F61]/5 transition group"
           >
-            <FaUserTie className="text-gray-400 group-hover:text-[#E56F61]" />
+            <FaUserTie className="group-hover:text-[#E56F61]" />
             <span className="text-[10px] font-bold uppercase tracking-tighter">Vendor</span>
           </button>
           <button
             onClick={() => handleQuickLogin("admin@gmail.com", "Ab1234")}
             className="flex flex-col items-center cursor-pointer gap-1 p-3 rounded-xl border border-gray-200 hover:border-[#E56F61] hover:bg-[#E56F61]/5 transition group"
           >
-            <FaUserShield className="text-gray-400 group-hover:text-[#E56F61]" />
+            <FaUserShield className=" group-hover:text-[#E56F61]" />
             <span className="text-[10px] font-bold uppercase tracking-tighter">Admin</span>
           </button>
         </div>
 
         <div className="relative mb-8">
           <div className="absolute inset-0 flex items-center"><span className="w-full border-t border-gray-200"></span></div>
-          <div className="relative flex justify-center text-xs uppercase"><span className="bg-white px-2 text-gray-400 font-bold">Or use credentials</span></div>
+          <div className="relative flex justify-center text-xs uppercase"><span className=" px-2 nt-bold">Or use credentials</span></div>
         </div>
 
         <form className="flex flex-col gap-5" onSubmit={handleSubmit(handleLogin)}>
           {/* Email */}
           <div className="flex flex-col">
-            <label className="text-sm font-bold text-gray-700 mb-1">Email</label>
+            <label className="text-sm font-bold  mb-1">Email</label>
             <input
               type="email"
               placeholder="Enter your email"
-              className="px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E56F61]/20 focus:border-[#E56F61] transition"
+              className="px-4 py-2.5  border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E56F61]/20 focus:border-[#E56F61] transition"
               {...register("email", { required: "Email is required" })}
             />
             {errors.email && <p className="text-red-500 text-xs mt-1 font-medium">{errors.email.message}</p>}
@@ -104,13 +104,13 @@ const Login = () => {
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Enter your password"
-              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E56F61]/20 focus:border-[#E56F61] transition"
+              className="w-full px-4 py-2.5  border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E56F61]/20 focus:border-[#E56F61] transition"
               {...register("password", { required: "Password is required" })}
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-10 text-gray-400 hover:text-[#E56F61]"
+              className="absolute right-3 top-10  hover:text-[#E56F61]"
             >
               {showPassword ? <FaEye /> : <IoEyeOff />}
             </button>
@@ -136,14 +136,14 @@ const Login = () => {
 
         {/* Social Login */}
         <div className="my-6 flex items-center">
-          <div className="flex-1 h-px bg-gray-100"></div>
-          <p className="px-3 text-gray-400 text-[10px] font-bold uppercase tracking-widest">Social Connect</p>
-          <div className="flex-1 h-px bg-gray-100"></div>
+          <div className="flex-1 h-px "></div>
+          <p className="px-3 text-[10px] font-bold uppercase tracking-widest">Social Connect</p>
+          <div className="flex-1 h-px "></div>
         </div>
         <SocialLogin />
 
         {/* Register Link */}
-        <p className="mt-8 text-center text-sm font-medium text-gray-500">
+        <p className="mt-8 text-center text-sm font-medium ">
           Don't have an account?
           <Link to="/register" className="text-[#E56F61] hover:underline font-bold ml-1">
             Create Account

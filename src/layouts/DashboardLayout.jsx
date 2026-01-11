@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 
 // Icons
-import { FiHome, FiSettings, FiUser, FiMenu, FiX } from "react-icons/fi";
+import { FiHome, FiSettings, FiUser, FiMenu, FiX, FiStar } from "react-icons/fi";
 import { TbBrandBooking } from "react-icons/tb";
 import { MdAdd, MdManageAccounts, MdPayments } from "react-icons/md";
 import { FaInbox, FaTicketAlt, FaBus } from "react-icons/fa";
@@ -126,6 +126,7 @@ const DashboardLayout = () => {
                 {renderNavLink("/dashboard/feedback", <VscFeedback />, "Feedback")}
                 {renderNavLink("/dashboard/manageMessages", <FaInbox />, "User Messages")}
                 {renderNavLink("/dashboard/adminOverview", <GrOverview />, "Admin Overview")}
+                {renderNavLink("/dashboard/manageReviews", <FiStar />, "Manage Reviews")}
               </div>
             )}
           </nav>
