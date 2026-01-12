@@ -36,6 +36,7 @@ const VendorRevenue = () => {
 
   return (
     <div className="p-4 md:p-6 space-y-8">
+      <title>Vendor Revenue Overview</title>
       <h2 className="text-3xl md:text-4xl font-bold text-center">
         📊 Revenue Overview
       </h2>

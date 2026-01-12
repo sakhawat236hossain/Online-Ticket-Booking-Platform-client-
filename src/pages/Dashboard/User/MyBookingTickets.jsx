@@ -108,6 +108,7 @@ const MyBookingTickets = () => {
 
   return (
     <div className="px-3 py-4 md:px-5 lg:px-8">
+      <title>My Booked Tickets - TravelEase</title>
       {/* Page Title */}
       <h2
         className="text-2xl sm:text-3xl font-bold mb-4 text-center 

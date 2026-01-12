@@ -56,6 +56,7 @@ const ManageMessages = () => {
 
     return (
         <div className="p-6 md:p-10 bg-base-100 min-h-screen">
+            <title>Manage User Messages | Dashboard</title>
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
                     <div>

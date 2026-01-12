@@ -132,6 +132,7 @@ const TicketsDetails = () => {
 
   return (
     <div className="min-h-screen py-16 px-4 md:px-8">
+      <title>Ticket Details</title>
       <div className="max-w-6xl mx-auto">
         <div className="rounded-3xl shadow-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 md:p-12 ">
           

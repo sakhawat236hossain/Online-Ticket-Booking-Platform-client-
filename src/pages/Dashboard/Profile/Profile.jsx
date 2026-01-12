@@ -23,6 +23,7 @@ const Profile = () => {
 
   return (
     <div className="max-w-5xl mx-auto my-16 px-4 sm:px-6 lg:px-8">
+      <title>Profile - Page</title>
       {/* Main Card Container: Added bg-white for visibility */}
       <div className=" shadow-2xl rounded-3xl border border-gray-100 p-8 sm:p-12 flex flex-col md:flex-row gap-10">
         

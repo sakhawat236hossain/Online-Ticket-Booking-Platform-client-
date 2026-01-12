@@ -61,6 +61,7 @@ const AdvertiseTickets = () => {
 
   return (
     <div className="overflow-x-auto p-4">
+      <title>Advertise Tickets - Admin Dashboard</title>
       <h2 className="text-2xl font-bold mb-4">Admin Approved Tickets</h2>
 
       <table className="table table-zebra w-full">

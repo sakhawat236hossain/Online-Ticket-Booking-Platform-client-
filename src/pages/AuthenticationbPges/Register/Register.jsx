@@ -78,6 +78,7 @@ const Register = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center  p-4">
+      <title>Register - TicketHub</title>
       <div className="w-full  rounded-2xl shadow-2xl p-6 max-w-lg">
         <div className="mb-4 text-center">
           <h1 className="text-2xl font-bold  mb-1">Register</h1>

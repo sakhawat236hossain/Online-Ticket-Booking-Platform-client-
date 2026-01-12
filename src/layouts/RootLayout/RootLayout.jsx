@@ -6,6 +6,7 @@ import Footer from '../../components/common/Footer/Footer';
 const RootLayout = () => {
  return (
         <div className='max-w-[1400px] mx-auto'>
+            <title>EduTech - Learn and Grow</title>
             <NavBar></NavBar>
             <div className="min-h-[calc(100vh-200px)]"> 
                 <Outlet></Outlet>

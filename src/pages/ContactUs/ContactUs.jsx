@@ -30,6 +30,7 @@ const ContactUs = () => {
 
     return (
         <div className="min-h-screen py-20 px-4 bg-gradient-to-b from-base-200/50 to-base-100 overflow-hidden">
+            <title>Contact Us - TravelEase</title>
             {/* Header Section */}
             <div className="max-w-7xl mx-auto text-center mb-20 relative">
                 <motion.div 

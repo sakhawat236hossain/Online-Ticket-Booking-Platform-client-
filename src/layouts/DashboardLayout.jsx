@@ -21,10 +21,9 @@ import profileImg from "../assets/profile.png"; // Profile Default Image
 
 const DashboardLayout = () => {
   const { role, isLoading } = useRole();
-  const { user, logOutUser } = UseAuth(); // ইউজার ডাটা এবং লগআউট ফাংশন
+  const { user, logOutUser } = UseAuth(); 
   const [isOpen, setIsOpen] = useState(false); 
 
-  // থিম স্টেট (মেইন ন্যাভবারের মতো)
   const [theme, setTheme] = useState(localStorage.getItem('theme') || "light");
 
   const handleTheme = (checked) => {
@@ -69,7 +68,7 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex h-screen bg-base-100 overflow-hidden"> 
-
+<title>Dashboard - Ticket Booking</title>
       {/* --- SIDEBAR --- */}
       <aside
         className={`

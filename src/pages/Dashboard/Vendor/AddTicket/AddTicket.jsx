@@ -63,6 +63,7 @@ const AddTicket = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6  shadow-xl rounded-xl mt-5 border">
+      <title>Add Ticket</title>
       <h2 className="text-3xl font-bold mb-6 text-center text-gray-700">
         Add New Ticket
       </h2>

@@ -44,6 +44,7 @@ const AdminOverview = () => {
 
   return (
     <div className="p-8  min-h-screen">
+      <title>Admin Dashboard Overview</title>
       {/* --- Header Section --- */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-4">
         <div>

@@ -10,6 +10,7 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-gray-300 pt-10 pb-5 px-5">
+      <title>TicketBari - Your Trusted Ticket Booking Platform</title>
       {/* Top Section */}
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
 

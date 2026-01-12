@@ -4,7 +4,7 @@ import { FaBus, FaTrain, FaPlane, FaShip, FaUsers, FaLaptopCode, FaMobileAlt, Fa
 const AboutUs = () => {
   return (
     <div className="min-h-screen p-6 flex flex-col items-center">
-      
+      <title>About Us - TicketBari</title>
       {/* Header Section */}
       <header className="text-center mb-16">
         <h1 className="text-5xl md:text-6xl font-extrabold  mb-4">About TicketBari</h1>

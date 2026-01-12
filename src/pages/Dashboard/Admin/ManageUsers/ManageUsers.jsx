@@ -76,6 +76,7 @@ const ManageUsers = () => {
 
     return (
         <div className="p-8  min-h-screen">
+            <title>Manage Users - Dashboard</title>
             <h2 className="text-3xl font-extrabold mb-8 text-center ">
                  (Manage All Users)
             </h2>

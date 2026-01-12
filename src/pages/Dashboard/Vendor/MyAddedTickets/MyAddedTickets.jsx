@@ -121,6 +121,7 @@ const MyAddedTickets = () => {
   if (tickets.length === 0) {
     return (
         <div className="py-20 px-4 text-center">
+          <title>My Added Tickets</title>
             <h2 className="text-3xl font-bold mb-4">No Tickets Added Yet</h2>
             <p className="text-lg">Looks like you haven't added any tickets. Use the 'Add Ticket' section to start listing!</p>
         </div>

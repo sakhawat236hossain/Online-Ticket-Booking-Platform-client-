@@ -39,6 +39,7 @@ const UserOverview = () => {
 
   return (
     <div className="p-4 md:p-8 min-h-screen">
+      <title>User Overview - Dashboard</title>
       {/* --- Header Section --- */}
       <div className="relative mb-12  p-8 rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden">
         <div className="absolute top-0 right-0 p-10 opacity-10 pointer-events-none">

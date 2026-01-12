@@ -56,6 +56,7 @@ const ManageTickets = () => {
 
   return (
     <div className="overflow-x-auto p-6">
+      <title>Manage Tickets - Admin Dashboard</title>
       <h2 className="text-3xl font-bold mb-5">
         Manage Tickets ({tickets.length})
       </h2>

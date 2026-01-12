@@ -24,6 +24,7 @@ const TransactionHistory = () => {
 
   return (
     <div className="p-4">
+      <title>User Transaction History</title>
       <h2 className="text-2xl font-bold mb-4 text-center">
         Transaction History
       </h2>

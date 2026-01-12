@@ -66,6 +66,7 @@ const ManageReviews = () => {
 
   return (
     <div className="p-4 sm:p-6 md:p-8 min-h-screen">
+      <title>Manage Reviews - Admin Dashboard</title>
       <div className="max-w-7xl mx-auto">
         
         {/* Header Section */}

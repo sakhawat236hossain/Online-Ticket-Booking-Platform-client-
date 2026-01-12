@@ -103,7 +103,7 @@ const AllTickets = () => {
     // ================= MAIN RENDER =================
     return (
         <div className="px-4 md:px-6 py-12  dark:text-white min-h-screen max-w-7xl mx-auto">
-
+<title>All Approved Tickets</title>
             {/* SECTION TITLE */}
             <div className="text-center mb-10">
                 <h1 className="text-4xl font-extrabold dark:text-white">All Approved Tickets</h1>

@@ -71,6 +71,7 @@ const res = await axiosSecure.get(`/requested-tickets?email=${user?.email}`);
 
   return (
     <div className="overflow-x-auto w-full p-6">
+      <title>Requested Bookings - Dashboard</title>
       <h2 className="text-2xl md:text-3xl font-bold mb-5 text-gray-800">
         Requested Ticket Bookings
       </h2>
