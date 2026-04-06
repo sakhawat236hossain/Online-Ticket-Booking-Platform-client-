@@ -8,7 +8,7 @@ The platform is designed with **three distinct roles** — **User**, **Vendor**,
 
 ## 🔗 Project Links
 
-* **Live Website:** *[[Insert Your Deployed Live Link Here](https://online-ticket-booking-platform.netlify.app/)]*
+* **Live Website:** *(https://online-ticket-booking-platform.netlify.app/*
 * **Client Repository:** [https://github.com/sakhawat236hossain/Online-Ticket-Booking-Platform-client-](https://github.com/sakhawat236hossain/Online-Ticket-Booking-Platform-client-)
 * **Server Repository:** [https://github.com/sakhawat236hossain/Online-Ticket-Booking-Platform-server](https://github.com/sakhawat236hossain/Online-Ticket-Booking-Platform-server)
 
