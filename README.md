@@ -1,4 +1,5 @@
 # 🎫 TicketBari – Online Ticket Booking Platform
+<img width="1289" height="709" alt="image" src="https://github.com/user-attachments/assets/b9eba93b-9d81-4808-856c-24e5012452ef" />
 
 A **fully responsive online ticket booking platform** built with the **MERN Stack (MongoDB, Express.js, React, Node.js)**. Users can easily discover, book, and manage tickets for various transportation services such as **Bus, Train, Launch, and Plane**.
 
@@ -8,7 +9,7 @@ The platform is designed with **three distinct roles** — **User**, **Vendor**,
 
 ## 🔗 Project Links
 
-* **Live Website:** *[Insert Your Deployed Live Link Here]*
+* **Live Website:** *(https://online-ticket-booking-platform.netlify.app/*
 * **Client Repository:** [https://github.com/sakhawat236hossain/Online-Ticket-Booking-Platform-client-](https://github.com/sakhawat236hossain/Online-Ticket-Booking-Platform-client-)
 * **Server Repository:** [https://github.com/sakhawat236hossain/Online-Ticket-Booking-Platform-server](https://github.com/sakhawat236hossain/Online-Ticket-Booking-Platform-server)
 
